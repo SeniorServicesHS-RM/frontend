@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import LandingPage from "../pages/LandingPage";
-import ShoppingPage from "../pages/ShoppingPage";
+import LandingPage from "./LandingPage";
+import ShoppingPage from "./ShoppingPage";
 
 const NavigationPage = () => {
   return (

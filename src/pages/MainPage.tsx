@@ -1,6 +1,6 @@
 import React from "react";
 import NavigationBar from "../components/NavigationBar";
-import NavigationPage from "../components/NavigationPage";
+import NavigationPage from "./NavigationPage";
 
 const MainPage = () => {
   return (
