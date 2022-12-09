@@ -2,11 +2,12 @@ import { Box, Grid } from "@mui/material";
 import React from "react";
 import ContentCard from "../components/ContentCard";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import FlexBox from "../components/FlexBox";
 
 const ServicesPage = () => {
   return (
     <>
-      <Box sx={{ flexGrow: 1 }} marginLeft="5rem" marginTop="1rem">
+      <FlexBox>
         <Grid container spacing={2}>
           <Grid item xs={2}>
             <ContentCard
@@ -34,7 +35,7 @@ const ServicesPage = () => {
             <p>poopoo</p>
           </Grid>
         </Grid>
-      </Box>
+      </FlexBox>
     </>
   );
 };
