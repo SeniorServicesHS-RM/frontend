@@ -5,6 +5,7 @@ import { createTheme } from "@mui/system";
 import React from "react";
 
 import MainPage from "./pages/MainPage";
+import { DataBaseProvider } from "./store/DataBaseContext";
 
 const theme = createTheme({
   palette: {
@@ -17,9 +18,11 @@ const theme = createTheme({
 function App() {
   return (
     <div>
-      <BrowserRouter>
-        <MainPage></MainPage>
-      </BrowserRouter>
+      <DataBaseProvider>
+        <BrowserRouter>
+          <MainPage></MainPage>
+        </BrowserRouter>
+      </DataBaseProvider>
     </div>
   );
 }
