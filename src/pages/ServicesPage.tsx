@@ -8,7 +8,7 @@ const ServicesPage = () => {
     <>
       <Box sx={{ flexGrow: 1 }} marginLeft="5rem" marginTop="1rem">
         <Grid container spacing={2}>
-          <Grid item xs={4}>
+          <Grid item xs={2}>
             <ContentCard
               title={"Shopping"}
               description={"Toller Shopping Kram fuer alte Saecke"}
@@ -16,13 +16,13 @@ const ServicesPage = () => {
               picture={<AddShoppingCartIcon />}
             ></ContentCard>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={2}>
             <p>poopoo</p>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={2}>
             <p>poopoo</p>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={2}>
             <p>poopoo</p>
 
             <p>poopoo</p>
