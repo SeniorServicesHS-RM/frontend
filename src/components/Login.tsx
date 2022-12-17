@@ -13,6 +13,7 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // TODO: Send login request to server
     // Hier könnte man dann zum Beispiel eine API-Anfrage an denpn Server senden,
     // um sich anzumelden. Wenn die Anmeldung erfolgreich war, könnte man dann
     // mit "setIsLoggedIn(true)" den "isLoggedIn"-Status auf "true" setzen und
