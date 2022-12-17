@@ -7,13 +7,12 @@ import ArticleCard from "../components/ArticleCard";
 import EditArticleDialog from "../components/EditArticleDialog";
 import FlexBox from "../components/FlexBox";
 import Article from "../data/Article";
-import { ArticleArray } from "../data/ArticleTestData";
+import { OrderArray } from "../data/ArticleTestData";
+import Order from "../data/Order";
 
 const ShoppingPage = () => {
   const [isEditOpen, setEditOpen] = useState(false);
-  const [articleList, setArticleList] = useState<Article[] | null>(
-    ArticleArray
-  );
+  const [orderList, setOrderList] = useState<Order[] | null>(OrderArray);
   const editHandler = () => {
     setEditOpen(!isEditOpen);
   };
@@ -23,26 +22,28 @@ const ShoppingPage = () => {
   const editCloseHandler = () => {
     setEditOpen(false);
   };
-  const editArticle = (article: Article) =>
-    setArticleList([...articleList, article]);
-  const addArticle = (article: Article) =>
-    setArticleList([...articleList, article]);
-  const mappedArticleList = articleList.map((article: Article) => {
+  const editOrder = (order: Order) => setOrderList([...orderList, order]);
+  const addOrder = (order: Order) => setOrderList([...orderList, order]);
+  const mappedOrderList = orderList.map((order: Order) => {
     return (
       <Grid item xs={4}>
         <CardActionArea onClick={editHandler}>
           {isEditOpen ? (
             <EditArticleDialog
               //editArticle={editArticle}
-              article={article}
+              order={order}
               //editCloseHandler={editCloseHandler}
             ></EditArticleDialog>
           ) : (
             <></>
           )}
           <ArticleCard
-            title={article.name}
-            description={article.note}
+            // singleOrder={order}
+            // isEditOpen={isEditOpen}
+            // setEditOpen={setEditOpen}
+            title={order.article.name}
+            description={order.article.note}
+            amount={order.amount}
             route={"/shopping"}
           ></ArticleCard>
         </CardActionArea>
@@ -54,9 +55,9 @@ const ShoppingPage = () => {
       <FlexBox>
         <Grid container alignItems="flex-start" spacing={{ xs: 2 }}>
           <Grid item xs={4}>
-            <AddArticleDialog addArticle={addArticle}></AddArticleDialog>
+            <AddArticleDialog addOrder={addOrder}></AddArticleDialog>
           </Grid>
-          {mappedArticleList}
+          {mappedOrderList}
         </Grid>
       </FlexBox>
     </>

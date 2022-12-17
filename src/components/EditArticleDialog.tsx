@@ -9,9 +9,10 @@ import {
 import Article from "../data/Article";
 import * as React from "react";
 import ShoppingPage from "../pages/ShoppingPage";
+import Order from "../data/Order";
 interface Props {
   //editArticle: (article: Article) => void;
-  article: Article;
+  order: Order;
   //editCloseHandler: () => void;
 }
 interface ValueHandler {
@@ -21,14 +22,15 @@ interface ValueHandler {
 }
 
 function EditArticleDialog(props: Props) {
+  //console.log(props.order.article.name);
   const [valueID, setValueID] = React.useState<ValueHandler>({
-    newId: props.article.id,
+    newId: props.order.id,
   });
   const [valueName, setValueName] = React.useState<ValueHandler>({
-    newName: props.article.name,
+    newName: props.order.article.name,
   });
   const [valueNote, setValueNote] = React.useState<ValueHandler>({
-    newNote: props.article.note,
+    newNote: props.order.article.note,
   });
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValueName({ newName: event.target.value });
@@ -38,8 +40,8 @@ function EditArticleDialog(props: Props) {
   };
   const handleDone = () => {
     //setValueID({ newId: new Date().toString() });
-    props.article.name = valueName.newName;
-    props.article.note = valueName.newNote;
+    props.order.article.name = valueName.newName;
+    props.order.article.note = valueName.newNote;
     // setValueName({ newName: "" });
     // setValueID({ newId: "" });
     // setValueNote({ newNote: "" });
