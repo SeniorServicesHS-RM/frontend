@@ -4,6 +4,7 @@ import { DataBaseContext } from "../store/DataBaseContext";
 
 const LandingPage = () => {
   const { article, changeArticle } = useContext(DataBaseContext);
+
   return (
     <>
       <p>{article}</p>
