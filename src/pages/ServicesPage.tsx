@@ -1,39 +1,26 @@
 import { Box, Grid } from "@mui/material";
 import React from "react";
 import ContentCard from "../components/ContentCard";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FlexBox from "../components/FlexBox";
+import ServiceData from "../data/ServiceData";
 
 const ServicesPage = () => {
   return (
     <>
       <FlexBox>
         <Grid container spacing={2}>
-          <Grid item xs={2}>
-            <ContentCard
-              title={"Shopping"}
-              description={"Toller Shopping Kram fuer alte Saecke"}
-              route={"/shopping"}
-              picture={<AddShoppingCartIcon />}
-            ></ContentCard>
-          </Grid>
-          <Grid item xs={2}>
-            <p>poopoo</p>
-          </Grid>
-          <Grid item xs={2}>
-            <p>poopoo</p>
-          </Grid>
-          <Grid item xs={2}>
-            <p>poopoo</p>
-
-            <p>poopoo</p>
-
-            <p>poopoo</p>
-
-            <p>poopoo</p>
-
-            <p>poopoo</p>
-          </Grid>
+          {ServiceData.map((item) => {
+            return (
+              <Grid item xs={2}>
+                <ContentCard
+                  title={item.title}
+                  description={item.description}
+                  route={item.route}
+                  picture={item.picture}
+                ></ContentCard>
+              </Grid>
+            );
+          })}
         </Grid>
       </FlexBox>
     </>
