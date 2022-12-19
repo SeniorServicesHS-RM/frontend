@@ -6,31 +6,32 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import Article from "../data/Article";
 import * as React from "react";
-import ShoppingPage from "../pages/ShoppingPage";
 import Order from "../data/Order";
+
 interface Props {
-  //editArticle: (article: Article) => void;
   order: Order;
-  //editCloseHandler: () => void;
+  handleClose: () => void;
+  editOrder: (newOrder: Order, oldOrder: Order) => void;
 }
 interface ValueHandler {
   newId?: string;
   newName?: string;
   newNote?: string;
+  newAmount?: number;
 }
 
 function EditArticleDialog(props: Props) {
-  //console.log(props.order.article.name);
-  const [valueID, setValueID] = React.useState<ValueHandler>({
-    newId: props.order.id,
-  });
+  const [order, setOrder] = React.useState<Order>(props.order);
+
   const [valueName, setValueName] = React.useState<ValueHandler>({
     newName: props.order.article.name,
   });
   const [valueNote, setValueNote] = React.useState<ValueHandler>({
     newNote: props.order.article.note,
+  });
+  const [valueAmount, setValueAmount] = React.useState<ValueHandler>({
+    newAmount: props.order.amount,
   });
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValueName({ newName: event.target.value });
@@ -38,14 +39,21 @@ function EditArticleDialog(props: Props) {
   const handleNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValueNote({ newNote: event.target.value });
   };
+  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValueAmount({ newAmount: event.target.valueAsNumber });
+  };
   const handleDone = () => {
-    //setValueID({ newId: new Date().toString() });
-    props.order.article.name = valueName.newName;
-    props.order.article.note = valueName.newNote;
-    // setValueName({ newName: "" });
-    // setValueID({ newId: "" });
-    // setValueNote({ newNote: "" });
-    //props.editCloseHandler();
+    const orderReturn = new Order(
+      order.id,
+      order.article,
+      valueAmount.newAmount,
+      order.date
+    );
+
+    orderReturn.article.name = valueName.newName;
+    orderReturn.article.note = valueNote.newNote;
+    props.editOrder(orderReturn, order);
+    props.handleClose();
   };
   return (
     <div>
@@ -70,9 +78,17 @@ function EditArticleDialog(props: Props) {
             onChange={handleNoteChange}
             fullWidth
           />
+          <TextField
+            autoFocus
+            margin="normal"
+            label="Menge"
+            type="number"
+            value={valueAmount.newAmount}
+            onChange={handleAmountChange}
+            fullWidth
+          />
         </DialogContent>
         <DialogActions>
-          {/* <Button onClick={props.editCloseHandler}>Abbrechen</Button> */}
           <Button onClick={handleDone}>Fertig</Button>
         </DialogActions>
       </Dialog>

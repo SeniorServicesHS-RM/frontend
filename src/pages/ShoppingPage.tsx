@@ -1,46 +1,42 @@
-import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Grid";
-import React, { useState } from "react";
 import AddArticleDialog from "../components/AddArticleDialog";
 import ArticleCard from "../components/ArticleCard";
 import EditArticleDialog from "../components/EditArticleDialog";
 import FlexBox from "../components/FlexBox";
-import Article from "../data/Article";
 import { OrderArray } from "../data/ArticleTestData";
 import Order from "../data/Order";
+import React, { useState } from "react";
 
 const ShoppingPage = () => {
   const [isEditOpen, setEditOpen] = useState(false);
   const [orderList, setOrderList] = useState<Order[] | null>(OrderArray);
-  const editHandler = () => {
+  const [singleOrder, setSingleOrder] = useState<Order | null>(null);
+  const editHandler = (order: Order) => {
+    setSingleOrder(order);
     setEditOpen(!isEditOpen);
   };
-  const editOpenHandler = () => {
-    setEditOpen(true);
-  };
-  const editCloseHandler = () => {
+  const handleClose = () => {
     setEditOpen(false);
   };
-  const editOrder = (order: Order) => setOrderList([...orderList, order]);
+  const editOrder = (newOrder: Order, oldOrder: Order) => {
+    const arrayIndex = orderList.findIndex((aryOrder) => {
+      return aryOrder === oldOrder;
+    });
+    const newList = [...orderList];
+    newList[arrayIndex] = newOrder;
+    setOrderList(newList);
+  };
   const addOrder = (order: Order) => setOrderList([...orderList, order]);
   const mappedOrderList = orderList.map((order: Order) => {
     return (
       <Grid item xs={4}>
-        <CardActionArea onClick={editHandler}>
-          {isEditOpen ? (
-            <EditArticleDialog
-              //editArticle={editArticle}
-              order={order}
-              //editCloseHandler={editCloseHandler}
-            ></EditArticleDialog>
-          ) : (
-            <></>
-          )}
+        <CardActionArea
+          onClick={() => {
+            editHandler(order);
+          }}
+        >
           <ArticleCard
-            // singleOrder={order}
-            // isEditOpen={isEditOpen}
-            // setEditOpen={setEditOpen}
             title={order.article.name}
             description={order.article.note}
             amount={order.amount}
@@ -58,6 +54,15 @@ const ShoppingPage = () => {
             <AddArticleDialog addOrder={addOrder}></AddArticleDialog>
           </Grid>
           {mappedOrderList}
+          {isEditOpen ? (
+            <EditArticleDialog
+              order={singleOrder}
+              handleClose={handleClose}
+              editOrder={editOrder}
+            ></EditArticleDialog>
+          ) : (
+            <></>
+          )}
         </Grid>
       </FlexBox>
     </>
