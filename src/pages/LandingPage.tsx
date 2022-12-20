@@ -14,7 +14,14 @@ const LandingPage = () => {
   };
   return (
     <FlexBox>
-      <p>{article}</p>
+      {article &&
+        article.map((art) => {
+          return (
+            <p>
+              {art.id} und {art.title}
+            </p>
+          );
+        })}
       <Button onClick={changeArticle}> Random Button</Button>
       <p>Hier können Sie sich einloggen UwU:</p>
       <Button variant="contained" onClick={routeChange}>
