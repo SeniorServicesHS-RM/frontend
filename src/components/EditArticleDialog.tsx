@@ -45,6 +45,7 @@ function EditArticleDialog(props: Props) {
   const handleDone = () => {
     const orderReturn = new Order(
       order.id,
+      order.seniorId,
       order.article,
       valueAmount.newAmount,
       order.date

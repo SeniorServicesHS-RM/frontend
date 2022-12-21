@@ -4,6 +4,7 @@ import LandingPage from "./LandingPage";
 import ServicesPage from "./ServicesPage";
 import ShoppingPage from "./ShoppingPage";
 import LoginPage from "./LoginPage";
+import DataBaseTestPage from "./DatabaseTestPage";
 
 const NavigationPage = () => {
   return (
@@ -13,6 +14,7 @@ const NavigationPage = () => {
         <Route path="/shopping" element={<ShoppingPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/dbtest" element={<DataBaseTestPage />} />
       </Routes>
     </React.Fragment>
   );

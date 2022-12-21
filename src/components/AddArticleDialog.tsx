@@ -54,6 +54,7 @@ function AddArticleDialog(props: Props) {
     props.addOrder(
       new Order(
         "o" + Date.now(),
+        "Hier Senior ID einfuegen",
         new Article(
           Date.now().toString(),
           valueName.newName,

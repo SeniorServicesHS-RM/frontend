@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
 import React, { ReactNode } from "react";
 interface Props {
-  children?: ReactNode;
+  children?: ReactNode | ReactNode[];
 }
 const FlexBox = ({ children }: Props) => {
   return (

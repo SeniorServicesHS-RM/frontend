@@ -4,6 +4,7 @@ class Order {
   private _orderDone = false;
   constructor(
     private _id: string,
+    private _seniorId: string,
     private _article: Article,
     private _amount: number,
     private _date: Date,
@@ -15,6 +16,12 @@ class Order {
   }
   public set id(id: string) {
     this._id = id;
+  }
+  public get seniorId() {
+    return this._seniorId;
+  }
+  public set seniorId(seniorId: string) {
+    this._seniorId = seniorId;
   }
   public get orderDone() {
     return this._orderDone;
