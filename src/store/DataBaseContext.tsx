@@ -26,6 +26,9 @@ interface ImportedOrder {
   date: Date;
   unit?: string;
   additionalServices?: string[];
+  mart?: string;
+  planDate?: Date | string;
+  employeeId: string;
 }
 interface DataBaseContextInterface {
   articles: ImportedArticle[];
@@ -94,7 +97,10 @@ export const DataBaseProvider = ({ children }: Props) => {
             order.amount,
             order.date,
             order.unit && order.unit,
-            order.additionalServices && order.additionalServices
+            order.additionalServices && order.additionalServices,
+            order.mart && order.mart,
+            order.planDate instanceof Date && order.planDate,
+            order.employeeId && order.employeeId
           )
         );
       }
