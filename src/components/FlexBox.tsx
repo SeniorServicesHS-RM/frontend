@@ -11,6 +11,10 @@ const FlexBox = ({ children }: Props) => {
       marginTop="1rem"
       marginRight="1rem"
       marginBottom="1rem"
+      justifyContent={"center"}
+      alignContent={"center"}
+      display={"inline-flex"}
+      width="95%"
     >
       {children}
     </Box>
