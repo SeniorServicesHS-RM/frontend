@@ -29,7 +29,14 @@ const DataBaseTestPage = () => {
       "Kaes",
       "Hallo Mama, ich bin in der Datenbank!"
     );
-    const order = new Order("01", "LEL GIBTS NOCH NICHT", article, 12, date);
+    const order = new Order(
+      "01",
+      "LEL GIBTS NOCH NICHT",
+      article,
+      12,
+      date,
+      "Rewe"
+    );
     addOrderToDatabase(order);
   };
 
@@ -51,7 +58,7 @@ const DataBaseTestPage = () => {
           return (
             <p>
               id: {order.id} - name: {order.article && order.article.name}{" "}
-              amount: {order.amount} unit: {order.unit}
+              amount: {order.amount} {/*unit: {order.unit}*/}
             </p>
           );
         })}

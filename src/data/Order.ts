@@ -8,9 +8,10 @@ class Order {
     private _article: Article,
     private _amount: number,
     private _date: Date,
-    private _unit?: string,
+    private _mart: string,
+    // private _unit:string,
     private _additionalServices?: string[],
-    private _mart?: string,
+
     private _planDate?: Date,
     private _employeeId?: string
   ) {}
@@ -56,13 +57,13 @@ class Order {
     this._date = date;
   }
 
-  public get unit() {
-    return this._unit;
-  }
+  // public get unit() {
+  //   return this._unit;
+  // }
 
-  public set unit(unit: string) {
-    this._unit = unit;
-  }
+  // public set unit(unit: string) {
+  //   this._unit = unit;
+  // }
 
   public get additionalServices() {
     return this._additionalServices;

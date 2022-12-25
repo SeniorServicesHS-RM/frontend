@@ -9,32 +9,17 @@ import ShoppingPage from "../pages/ShoppingPage";
 import Order from "../data/Order";
 
 interface Props {
-  // singleOrder: Order;
-  // isEditOpen: boolean;
-  // setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
   description?: string;
   amount: number;
+  mart: String;
   picture?: ReactNode;
   route: string;
 }
 
 const ArticleCard = (props: Props) => {
-  // const editHandler = () => {
-  //   props.setEditOpen(true);
-  //   console.log(props.singleOrder);
-  // };
   return (
     <Card sx={{ minWidth: 275 }}>
-      {/* <CardActionArea onClick={editHandler}>
-        {props.isEditOpen ? (
-          <EditArticleDialog
-            order={props.singleOrder}
-            //editCloseHandler={editCloseHandler}
-          ></EditArticleDialog>
-        ) : (
-          <></>
-        )} */}
       <CardContent>
         <Typography sx={{ fontSize: 22 }} color="text.secondary" gutterBottom>
           {props.title}
@@ -43,10 +28,10 @@ const ArticleCard = (props: Props) => {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {props.description}
         </Typography>
+        <Typography color="text.secondary">{props.mart}</Typography>
         <Typography color="text.secondary">Menge {props.amount}</Typography>
         {props.picture !== undefined ? <></> : props.picture}
       </CardContent>
-      {/* </CardActionArea> */}
     </Card>
   );
 };

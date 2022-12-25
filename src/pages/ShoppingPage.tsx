@@ -7,6 +7,7 @@ import FlexBox from "../components/FlexBox";
 import { OrderArray } from "../data/ArticleTestData";
 import Order from "../data/Order";
 import React, { useState } from "react";
+import PushOrdersLogic from "../components/PushOrdersLogic";
 
 const ShoppingPage = () => {
   const [isEditOpen, setEditOpen] = useState(false);
@@ -40,6 +41,7 @@ const ShoppingPage = () => {
             title={order.article.name}
             description={order.article.note}
             amount={order.amount}
+            mart={order.mart}
             route={"/shopping"}
           ></ArticleCard>
         </CardActionArea>
@@ -52,6 +54,7 @@ const ShoppingPage = () => {
         <Grid container alignItems="flex-start" spacing={{ xs: 2 }}>
           <Grid item xs={4}>
             <AddArticleDialog addOrder={addOrder}></AddArticleDialog>
+            <PushOrdersLogic orders={orderList}></PushOrdersLogic>
           </Grid>
           {mappedOrderList}
           {isEditOpen ? (
