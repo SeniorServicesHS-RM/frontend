@@ -5,9 +5,10 @@ class Purchase {
   constructor(
     private _id: string,
     private _orders: Order[],
-    private _date: Date,
+    //Nils: _date? moved from this row to behind last required parameter cause an optional parameter --> TS1016: A required parameter cannot follow an optional parameter.
     private _userId: string,
-    private _estimatedPrice: number
+    private _date?: Date,
+    private _estimatedPrice?: number
   ) {}
   public get id() {
     return this._id;
