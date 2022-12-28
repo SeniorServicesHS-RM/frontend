@@ -4,17 +4,27 @@ class Order {
   private _orderDone = false;
   constructor(
     private _id: string,
+    private _seniorId: string,
     private _article: Article,
     private _amount: number,
     private _date: Date,
     private _unit?: string,
-    private _additionalServices?: string[]
+    private _additionalServices?: string[],
+    private _mart?: string,
+    private _planDate?: Date,
+    private _employeeId?: string
   ) {}
   public get id() {
     return this._id;
   }
   public set id(id: string) {
     this._id = id;
+  }
+  public get seniorId() {
+    return this._seniorId;
+  }
+  public set seniorId(seniorId: string) {
+    this._seniorId = seniorId;
   }
   public get orderDone() {
     return this._orderDone;
@@ -60,6 +70,24 @@ class Order {
 
   public set additionalServices(additionalServices: string[]) {
     this._additionalServices = additionalServices;
+  }
+  public get mart() {
+    return this._mart;
+  }
+  public set mart(mart: string) {
+    this._mart = mart;
+  }
+  public get planDate() {
+    return this._planDate;
+  }
+  public set planDate(date: Date) {
+    this._planDate = date;
+  }
+  public get employeeId() {
+    return this._employeeId;
+  }
+  public set employeeId(id: string) {
+    this._employeeId = id;
   }
 }
 
