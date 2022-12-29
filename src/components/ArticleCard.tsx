@@ -20,21 +20,8 @@ interface Props {
 }
 
 const ArticleCard = (props: Props) => {
-  // const editHandler = () => {
-  //   props.setEditOpen(true);
-  //   console.log(props.singleOrder);
-  // };
   return (
     <Card sx={{ minWidth: 275 }}>
-      {/* <CardActionArea onClick={editHandler}>
-        {props.isEditOpen ? (
-          <EditArticleDialog
-            order={props.singleOrder}
-            //editCloseHandler={editCloseHandler}
-          ></EditArticleDialog>
-        ) : (
-          <></>
-        )} */}
       <CardContent>
         <Typography sx={{ fontSize: 22 }} color="text.secondary" gutterBottom>
           {props.title}
@@ -46,7 +33,6 @@ const ArticleCard = (props: Props) => {
         <Typography color="text.secondary">Menge {props.amount}</Typography>
         {props.picture !== undefined ? <></> : props.picture}
       </CardContent>
-      {/* </CardActionArea> */}
     </Card>
   );
 };
