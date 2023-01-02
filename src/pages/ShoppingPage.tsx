@@ -6,12 +6,14 @@ import EditArticleDialog from "../components/EditArticleDialog";
 import FlexBox from "../components/FlexBox";
 import { OrderArray } from "../data/ArticleTestData";
 import Order from "../data/Order";
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import PushOrdersLogic from "../components/PushOrdersLogic";
+import { DataBaseContext, DataBaseProvider } from "../store/DataBaseContext";
 
 const ShoppingPage = () => {
   const [isEditOpen, setEditOpen] = useState(false);
-  const [orderList, setOrderList] = useState<Order[] | null>(OrderArray);
+  const { articles, changeArticles, openOrders } = useContext(DataBaseContext);
+  const [orderList, setOrderList] = useState<Order[] | null>(openOrders);
   const [singleOrder, setSingleOrder] = useState<Order | null>(null);
   const editHandler = (order: Order) => {
     setSingleOrder(order);

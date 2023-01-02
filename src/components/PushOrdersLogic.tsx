@@ -12,7 +12,7 @@ const PushOrdersLogic = (props: Props) => {
     return addOrderToDatabase(singleOrder);
   });
   const handlePush = () => {
-    // mappedOrders;
+    return mappedOrders;
   };
   return (
     <div>

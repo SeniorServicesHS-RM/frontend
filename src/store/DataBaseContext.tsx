@@ -26,7 +26,7 @@ interface ImportedOrder {
   date: Date;
   //unit?: string;
   additionalServices?: string[];
-  mart?: string;
+  mart: string;
   planDate?: Date | string;
   employeeId: string;
 }
