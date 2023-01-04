@@ -7,6 +7,10 @@ import FlexBox from "../components/FlexBox";
 import { OrderArray } from "../data/ArticleTestData";
 import Order from "../data/Order";
 import React, { useState } from "react";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import FormLabel from '@mui/material/FormLabel';
 
 const ShoppingPage = () => {
   const [isEditOpen, setEditOpen] = useState(false);
@@ -65,6 +69,12 @@ const ShoppingPage = () => {
           )}
         </Grid>
       </FlexBox>
+      <FormLabel component="legend">Zusatzleistungen</FormLabel>
+      <FormGroup>
+      <FormControlLabel control={<Checkbox />} label="In Wohnung bringen" />
+      <FormControlLabel control={<Checkbox />} label="In Wohnung verräumen" />
+      <FormControlLabel control={<Checkbox />} label="Mit Abrechnung helfen" />
+    </FormGroup>
     </>
   );
 };
