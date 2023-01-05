@@ -15,19 +15,26 @@ const EkhPage = () => {
   const [OrderAry, addOrderAry] = React.useState<Order[] | null>(OrderArray);
   const mappedOrderAry = OrderAry.map((order: Order) => {
     return (
-      <Grid item xs={4}>
+      <Grid>
         <ArticleCard
           title={order.article.name}
           description={order.article.note}
           amount={order.amount}
-          route={"/shopping"}
+          route={"/ekh"}
         ></ArticleCard>
       </Grid>
     );
   });
   return (
     <FlexBox>
-      <Grid>{mappedOrderAry}</Grid>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="stretch"
+      >
+        {mappedOrderAry}
+      </Grid>
     </FlexBox>
   );
   console.log("Test");
