@@ -11,7 +11,7 @@ import ArticleCard from "../components/ArticleCard";
 import Order from "../data/Order";
 import { MartAry, OrderArray } from "../data/ArticleTestData";
 
-//TODO: Where to define?
+//TODO: auslagern!
 class FilteredList {
   constructor(private _filter: String, private _filtered: Order[]) {}
 
