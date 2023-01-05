@@ -21,9 +21,8 @@ class OrderNils {
     private _addServiceAuspacken: boolean = false,
 
     private _supermarket: string,
-    private _employeeId: string //EKH //private _orderSum: number = 0, //TOFIX //Summen der Bestellung verwalten
-  ) //private _Gebühr: number as Prozentzahl in Abhängigkeit der Zusatzdienstleistungen, z.B. 10% der Einkaufssumme, +2% für In Wohnung Tragen, +2% für Auspacken
-  //private_priceForSenior: number = 0
+    private _employeeId: string //EKH //private _orderSum: number = 0, //TOFIX //Summen der Bestellung verwalten //private _Gebühr: number as Prozentzahl in Abhängigkeit der Zusatzdienstleistungen, z.B. 10% der Einkaufssumme, +2% für In Wohnung Tragen, +2% für Auspacken
+  ) //private_priceForSenior: number = 0
 
   {}
   public get id() {
@@ -54,7 +53,7 @@ class OrderNils {
   }
 
   get mart() {
-    return this._mart;
+    return this._supermarket;
   }
 
   public get employeeId() {
