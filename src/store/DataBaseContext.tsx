@@ -24,9 +24,9 @@ interface ImportedOrder {
   article: string;
   amount: number;
   date: Date;
-  unit?: string;
+  //unit?: string;
   additionalServices?: string[];
-  mart?: string;
+  mart: string;
   planDate?: Date | string;
   employeeId: string;
 }
@@ -97,9 +97,9 @@ export const DataBaseProvider = ({ children }: Props) => {
             article,
             order.amount,
             order.date,
-            order.unit && order.unit,
-            order.additionalServices && order.additionalServices,
+            // order.unit && order.unit,
             order.mart && order.mart,
+            order.additionalServices && order.additionalServices,
             order.planDate instanceof Date && order.planDate,
             order.employeeId && order.employeeId
           )

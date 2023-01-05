@@ -6,11 +6,14 @@ import EditArticleDialog from "../components/EditArticleDialog";
 import FlexBox from "../components/FlexBox";
 import { OrderArray } from "../data/ArticleTestData";
 import Order from "../data/Order";
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import PushOrdersLogic from "../components/PushOrdersLogic";
+import { DataBaseContext, DataBaseProvider } from "../store/DataBaseContext";
 
 const ShoppingPage = () => {
   const [isEditOpen, setEditOpen] = useState(false);
-  const [orderList, setOrderList] = useState<Order[] | null>(OrderArray);
+  const { articles, changeArticles, openOrders } = useContext(DataBaseContext);
+  const [orderList, setOrderList] = useState<Order[] | null>(openOrders);
   const [singleOrder, setSingleOrder] = useState<Order | null>(null);
   const editHandler = (order: Order) => {
     setSingleOrder(order);
@@ -40,6 +43,7 @@ const ShoppingPage = () => {
             title={order.article.name}
             description={order.article.note}
             amount={order.amount}
+            mart={order.mart}
             route={"/shopping"}
           ></ArticleCard>
         </CardActionArea>
@@ -52,6 +56,7 @@ const ShoppingPage = () => {
         <Grid container alignItems="flex-start" spacing={{ xs: 2 }}>
           <Grid item xs={4}>
             <AddArticleDialog addOrder={addOrder}></AddArticleDialog>
+            <PushOrdersLogic orders={orderList}></PushOrdersLogic>
           </Grid>
           {mappedOrderList}
           {isEditOpen ? (

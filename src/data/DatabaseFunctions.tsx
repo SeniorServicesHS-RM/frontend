@@ -31,7 +31,7 @@ export const addOrderToDatabase = (order: Order) => {
     article: order.article.id,
     date: order.date,
     seniorId: order.seniorId,
-    unit: order.unit ? order.unit : "undefined",
+    // unit: order.unit ? order.unit : "undefined",
     mart: order.mart ? order.mart : "undefined",
     planDate: order.planDate ? order.planDate : "undefined",
     employeeId: order.employeeId ? order.employeeId : "undefined",
