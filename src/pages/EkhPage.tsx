@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import { Grid } from "@mui/material";
+import { Grid, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import FlexBox from "../components/FlexBox";
 import ArticleCard from "../components/ArticleCard";
 import Order from "../data/Order";
@@ -26,26 +26,41 @@ class FilteredList {
 const EkhPage = () => {
   const [OrderAry, addOrderAry] = React.useState<Order[] | null>(OrderArray);
 
-  // const FILTER_MART = "FILTER_MART";
-  // const FILTER_SENIOR = "FILTER_SENIOR";
+  const FILTER_MART = "FILTER_MART";
+  const FILTER_SENIOR = "FILTER_SENIOR";
 
-  // setFilter(FILTER_MART);
-
-  // let activeFilter = FILTER_MART;
+  let activeFilterType = FILTER_MART;
+  let activeFilter: Function = null;
   let filterList = MartAry;
 
-  // function setFilter(filterType: string) {
+  setFilter(FILTER_SENIOR);
 
-  // }
+  function setFilter(filterType: string) {
+    activeFilterType = filterType;
+    if (activeFilterType == FILTER_MART) {
+      filterList = MartAry;
+      activeFilter = (order: Order, entry: string) => {
+        return order.mart.toLowerCase() == entry.toLowerCase();
+      };
+    }
+    if (activeFilterType == FILTER_SENIOR) {
+      filterList = [
+        ...new Set(
+          OrderAry.map((order: Order) => {
+            return order.seniorId;
+          })
+        ),
+      ];
+      activeFilter = (order: Order, entry: string) => {
+        return order.seniorId.toLowerCase() == entry.toLowerCase();
+      };
+    }
+  }
 
   let filteredLists = filterList.map((entry) => {
-    console.log(entry);
     return new FilteredList(
       entry,
-      OrderAry.filter((order: Order) => {
-        return order.mart.toLowerCase() == entry.toLowerCase();
-        return order.seniorId == entry;
-      })
+      OrderAry.filter((order: Order) => activeFilter(order, entry))
     );
   });
 
@@ -90,6 +105,17 @@ const EkhPage = () => {
 
   return (
     <FlexBox>
+      <ToggleButtonGroup
+        color="primary"
+        value={alignment}
+        exclusive
+        onChange={handleChange}
+        aria-label="Platform"
+      >
+        <ToggleButton value="web">Web</ToggleButton>
+        <ToggleButton value="android">Android</ToggleButton>
+        <ToggleButton value="ios">iOS</ToggleButton>
+      </ToggleButtonGroup>
       <Grid
         container
         direction="column"
@@ -100,7 +126,6 @@ const EkhPage = () => {
       </Grid>
     </FlexBox>
   );
-  console.log("Test");
 };
 
 export default EkhPage;
