@@ -7,13 +7,15 @@ import Order from "../data/Order";
 
 interface ImportedArticle {
   id: string;
-  beginDate: Date; //all 3 necessarz? -> one should be enough!
+  beginDate?: Date; //all 3 necessarz? -> one should be enough!
   changeDate?: Date;
   endDate?: Date;
   name: string;
   //description: string;  there is no such thing as a description at the moment :/
   note: string;
-  categorie: string;
+  amount: number;
+  mart: string;
+  // categorie: string; not needed
   picture?: string; //Datatype? gotta check!
 }
 
@@ -21,14 +23,18 @@ interface ImportedOrder {
   id: string;
   seniorId: string;
   orderDone: boolean;
-  article: string;
-  amount: number;
+  articleList: String[];
+  // amount: number;
   date: Date;
   //unit?: string;
   additionalServices?: string[];
-  mart: string;
+  // mart: string;
   planDate?: Date | string;
-  employeeId: string;
+  employeeId?: string;
+  actualPrice?: number;
+  estimatedPrice?: number;
+  signDate?: Date;
+  signature?: string;
 }
 interface DataBaseContextInterface {
   articles: ImportedArticle[];
@@ -63,44 +69,59 @@ export const DataBaseProvider = ({ children }: Props) => {
         ...doc.data(),
         id: doc.id,
       })) as ImportedOrder[];
-      console.log(receivedOrders);
+      // console.log(receivedOrders);
       const newOrders: Order[] = [];
       for (const order of receivedOrders) {
         let article: Article;
-        console.log(articles);
+        let articleAry: Article[] = [];
+        // console.log(articles);
         if (articles) {
-          const articleToInsert: ImportedArticle = articles.find((article) => {
-            return article.id === order.article;
-          });
-          article = new Article(
-            articleToInsert.id,
-            articleToInsert.name,
-            articleToInsert.note && articleToInsert.note,
-            articleToInsert.categorie && articleToInsert.categorie,
-            articleToInsert.picture && articleToInsert.picture
-          );
+          // console.log(order);
+          for (const strArticle of order.articleList) {
+            const articleToInsert: ImportedArticle = articles.find(
+              (localArtical) => {
+                return localArtical.id === strArticle;
+              }
+            );
+            article = new Article(
+              articleToInsert.id,
+              articleToInsert.name,
+              articleToInsert.amount,
+              articleToInsert.mart,
+              articleToInsert.note && articleToInsert.note,
+              // articleToInsert.categorie && articleToInsert.categorie,
+              articleToInsert.picture && articleToInsert.picture
+            );
+            articleAry.push(article);
+          }
         } else if (!article) {
           article = new Article(
             "UNDEFINED",
             "UNDEFINED",
+            0,
             "UNDEFINED",
             "UNDEFINED",
             "UNDEFINED"
           );
+          articleAry.push(article);
         }
 
         newOrders.push(
           new Order(
             order.id,
             order.seniorId,
-            article,
-            order.amount,
+            articleAry,
+            // order.amount,
             order.date,
             // order.unit && order.unit,
-            order.mart && order.mart,
+            // order.mart && order.mart,
             order.additionalServices && order.additionalServices,
             order.planDate instanceof Date && order.planDate,
-            order.employeeId && order.employeeId
+            order.employeeId && order.employeeId,
+            order.actualPrice && order.actualPrice,
+            order.estimatedPrice && order.estimatedPrice,
+            order.signDate && order.signDate,
+            order.signature && order.signature
           )
         );
       }

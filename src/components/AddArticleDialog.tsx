@@ -17,7 +17,7 @@ import Order from "../data/Order";
 import { useState } from "react";
 import { MartAry } from "../data/ArticleTestData";
 interface Props {
-  addOrder: (order: Order) => void;
+  addOrder: (article: Article) => void;
 }
 interface ValueHandler {
   newId?: string;
@@ -65,18 +65,26 @@ function AddArticleDialog(props: Props) {
   };
   const handleDone = () => {
     props.addOrder(
-      new Order(
-        "o" + Date.now(),
-        "senior" + Date.now(), //Hier Senior ID einfuegen
-        new Article(
-          Date.now().toString(),
-          valueName.newName,
-          valueNote.newNote
-        ),
+      new Article(
+        Date.now().toString(),
+        valueName.newName,
         valueAmount.newAmount,
-        new Date(),
-        valueMart.newMart
+        valueMart.newMart,
+        valueNote.newNote
       )
+
+      // new Order(
+      //   "o" + Date.now(),
+      //   "senior" + Date.now(), //Hier Senior ID einfuegen
+      //   new Article(
+      //     Date.now().toString(),
+      //     valueName.newName,
+      //     valueNote.newNote
+      //   ),
+      //   valueAmount.newAmount,
+      //   new Date(),
+      //   valueMart.newMart
+      // )
     );
     setValueName({ newName: "" });
     setValueID({ newId: "" });
