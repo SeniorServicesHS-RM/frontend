@@ -1,18 +1,25 @@
 import { Button } from "@mui/material";
 import * as React from "react";
 import { useState } from "react";
-import { addOrderToDatabase } from "../data/DatabaseFunctions";
+import Article from "../data/Article";
+import {
+  addArticleToDatabase,
+  addOrderToDatabase,
+} from "../data/DatabaseFunctions";
 import Order from "../data/Order";
 interface Props {
-  orders: Order[];
+  order: Order;
 }
 
 const PushOrdersLogic = (props: Props) => {
-  const mappedOrders = props.orders.map((singleOrder: Order) => {
-    return addOrderToDatabase(singleOrder);
+  const mappedOrders = props.order.articleList.map((singleOrder: Article) => {
+    return addArticleToDatabase(singleOrder);
   });
   const handlePush = () => {
-    return mappedOrders;
+    for (const singleArticle of props.order.articleList) {
+      addArticleToDatabase(singleArticle);
+    }
+    addOrderToDatabase(props.order);
   };
   return (
     <div>
