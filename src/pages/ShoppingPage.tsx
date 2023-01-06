@@ -6,13 +6,13 @@ import EditArticleDialog from "../components/EditArticleDialog";
 import FlexBox from "../components/FlexBox";
 import Order from "../data/Order";
 import React, { useEffect, useState, useContext } from "react";
-import PushOrdersLogic from "../components/PushOrdersLogic";
 import { DataBaseContext, DataBaseProvider } from "../store/DataBaseContext";
 import Article from "../data/Article";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import FormGroup from "@mui/material/FormGroup/FormGroup";
 import Checkbox from "@mui/material/Checkbox/Checkbox";
+import AdditionalServicesDialog from "../components/AdditionalServicesDialog";
 
 const ShoppingPage = () => {
   const [isEditOpen, setEditOpen] = useState(false);
@@ -68,7 +68,9 @@ const ShoppingPage = () => {
         <Grid container alignItems="flex-start" spacing={{ xs: 2 }}>
           <Grid item xs={4}>
             <AddArticleDialog addOrder={addArticle}></AddArticleDialog>
-            <PushOrdersLogic order={myOrder}></PushOrdersLogic>
+            <AdditionalServicesDialog
+              orderToPush={myOrder}
+            ></AdditionalServicesDialog>
           </Grid>
           {mappedOrderList}
           {isEditOpen ? (
@@ -82,15 +84,6 @@ const ShoppingPage = () => {
           )}
         </Grid>
       </FlexBox>
-      <FormLabel component="legend">Zusatzleistungen</FormLabel>
-      <FormGroup>
-        <FormControlLabel control={<Checkbox />} label="In Wohnung bringen" />
-        <FormControlLabel control={<Checkbox />} label="In Wohnung verräumen" />
-        <FormControlLabel
-          control={<Checkbox />}
-          label="Mit Abrechnung helfen"
-        />
-      </FormGroup>
     </>
   );
 };
