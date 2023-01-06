@@ -29,7 +29,7 @@ export const addOrderToDatabase = (order: Order) => {
     for (const article of order.articleList) {
       newAry.push(article.id);
     }
-    console.log(newAry);
+    // console.log(newAry);
     return newAry;
   };
   const docRef = doc(firestore, "Order", order.id);
