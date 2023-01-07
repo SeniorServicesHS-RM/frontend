@@ -31,6 +31,11 @@ interface ValueHandler {
 }
 
 function AdditionalServicesDialog(props: Props) {
+  const serviceList: string[] = [
+    "In Wohnung bringen",
+    "In Wohnung verräumen",
+    "Mit Abrechnung helfen",
+  ];
   const [services, setServices] = useState([""]);
   const [valueService, setValueService] = React.useState<ValueHandler>({
     newService: "",
@@ -84,6 +89,14 @@ function AdditionalServicesDialog(props: Props) {
     }
     console.log(services);
   }
+  const mappedServices = serviceList.map((singleServ: string) => {
+    return (
+      <FormControlLabel
+        control={<Checkbox onChange={handleChange} name={singleServ} />}
+        label={singleServ}
+      />
+    );
+  });
 
   return (
     <div>
@@ -93,29 +106,7 @@ function AdditionalServicesDialog(props: Props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Zusatzleistungen</DialogTitle>
         <DialogContent>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleChange} name="In Wohnung bringen" />
-              }
-              label="In Wohnung bringen"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox onChange={handleChange} name="In Wohnung verräumen" />
-              }
-              label="In Wohnung verräumen"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={handleChange}
-                  name="Mit Abrechnung helfen"
-                />
-              }
-              label="Mit Abrechnung helfen"
-            />
-          </FormGroup>
+          <FormGroup>{mappedServices}</FormGroup>
           <TextField
             autoFocus
             margin="normal"
