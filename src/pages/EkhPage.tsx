@@ -5,11 +5,21 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import { Grid, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import FlexBox from "../components/FlexBox";
 import ArticleCard from "../components/ArticleCard";
 import Order from "../data/Order";
 import { MartAry, OrderArray } from "../data/ArticleTestData";
+// import ColorToggleButton from "../components/ToggleButton";
 
 //TODO: auslagern!
 class FilteredList {
@@ -22,26 +32,32 @@ class FilteredList {
     return this._filtered;
   }
 }
+const FILTER_MART = "FILTER_MART";
+const FILTER_MART_FUNCTION = (order: Order, entry: string) => {
+  return order.mart.toLowerCase() == entry.toLowerCase();
+};
+
+const FILTER_SENIOR = "FILTER_SENIOR";
+const FILTER_SENIOR_FUNCTION = (order: Order, entry: string) => {
+  return order.seniorId.toLowerCase() == entry.toLowerCase();
+};
+
+let activeFilterType = FILTER_MART;
+let activeFilter: Function = FILTER_MART_FUNCTION;
+let filterList = MartAry;
 
 const EkhPage = () => {
   const [OrderAry, addOrderAry] = React.useState<Order[] | null>(OrderArray);
 
-  const FILTER_MART = "FILTER_MART";
-  const FILTER_SENIOR = "FILTER_SENIOR";
-
-  let activeFilterType = FILTER_MART;
-  let activeFilter: Function = null;
-  let filterList = MartAry;
-
-  setFilter(FILTER_SENIOR);
+  console.log("EkgPage wird neu geladenn");
 
   function setFilter(filterType: string) {
+    console.log("1. übergeben: " + filterType + " aktiv: " + activeFilterType);
     activeFilterType = filterType;
+    console.log("2. übergeben: " + filterType + " aktiv: " + activeFilterType);
     if (activeFilterType == FILTER_MART) {
       filterList = MartAry;
-      activeFilter = (order: Order, entry: string) => {
-        return order.mart.toLowerCase() == entry.toLowerCase();
-      };
+      activeFilter = FILTER_MART_FUNCTION;
     }
     if (activeFilterType == FILTER_SENIOR) {
       filterList = [
@@ -51,9 +67,7 @@ const EkhPage = () => {
           })
         ),
       ];
-      activeFilter = (order: Order, entry: string) => {
-        return order.seniorId.toLowerCase() == entry.toLowerCase();
-      };
+      activeFilter = FILTER_SENIOR_FUNCTION;
     }
   }
 
@@ -103,19 +117,66 @@ const EkhPage = () => {
     });
   }
 
+  const [alignment, setAlignment] = React.useState(activeFilterType);
+
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string
+  ) => {
+    setAlignment(newAlignment);
+    setFilter(newAlignment);
+  };
+
+  let secondLevelFilter = filterList;
+  const [secLvlFilter, setSecLvlFilter] = React.useState(secondLevelFilter);
+
+  const onSelect = (event: SelectChangeEvent) => {
+    // setSecLvlFilter(event.target.value as string);
+    console.log(event.target.value);
+  };
+
+  //1. TODO forEach in JSX für jede option in filterList --
+  //2. TODO in der onSelect auf basis des select wertes die filterList anpassen (wenn ausgewählter wert in filterList vorhanden, nur wert nutzen, ansonsten alle?)
+  //    -> value = senior1, filterList = [senior1, senior2, ...] -> filterList = [senior1]
+  //    -> value = all, filterList = [senior1, senior2, ...] -> all nicht in liste, also alle zeigen
+
   return (
     <FlexBox>
-      <ToggleButtonGroup
-        color="primary"
-        value={alignment}
-        exclusive
-        onChange={handleChange}
-        aria-label="Platform"
-      >
-        <ToggleButton value="web">Web</ToggleButton>
-        <ToggleButton value="android">Android</ToggleButton>
-        <ToggleButton value="ios">iOS</ToggleButton>
-      </ToggleButtonGroup>
+      <FlexBox>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="stretch"
+        >
+          <ToggleButtonGroup
+            color="primary"
+            value={alignment}
+            exclusive
+            onChange={handleChange}
+            aria-label="Platform"
+          >
+            <ToggleButton value={FILTER_MART}>Marts</ToggleButton>
+            <ToggleButton value={FILTER_SENIOR}>Seniors</ToggleButton>
+          </ToggleButtonGroup>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={"10"}
+              label="Age"
+              onChange={onSelect}
+            >
+              <MenuItem value={"all"}>Alle</MenuItem>
+              {/* TODO Fix ForEach for TODO 1 */}
+              {/* filterList.forEach(element => { */}
+              <MenuItem value={"element"}>element</MenuItem>
+              {/* });  */}
+            </Select>
+          </FormControl>
+        </Grid>
+      </FlexBox>
       <Grid
         container
         direction="column"
