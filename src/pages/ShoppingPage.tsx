@@ -18,10 +18,10 @@ const ShoppingPage = () => {
   const [isEditOpen, setEditOpen] = useState(false);
   const { articles, changeArticles, openOrders } = useContext(DataBaseContext);
   const [myOrder, setMyOrder] = useState<Order | null>(
-    openOrders[openOrders.length - 1]
+    openOrders ? openOrders[openOrders.length - 1] : null
   );
   const [orderList, setOrderList] = useState<Article[] | null>(
-    myOrder.articleList
+    myOrder ? myOrder.articleList : null
   );
   const [singleOrder, setSingleOrder] = useState<Article | null>(null);
   const editHandler = (order: Article) => {
@@ -42,26 +42,28 @@ const ShoppingPage = () => {
   };
   const addArticle = (article: Article) =>
     setOrderList([...orderList, article]);
-  myOrder.articleList = orderList;
-  const mappedOrderList = orderList.map((article: Article) => {
-    return (
-      <Grid item xs={4}>
-        <CardActionArea
-          onClick={() => {
-            editHandler(article);
-          }}
-        >
-          <ArticleCard
-            title={article.name}
-            description={article.note}
-            amount={article.amount}
-            mart={article.mart}
-            route={"/shopping"}
-          ></ArticleCard>
-        </CardActionArea>
-      </Grid>
-    );
-  });
+  //myOrder.articleList = orderList;
+  const mappedOrderList = orderList
+    ? orderList.map((article: Article) => {
+        return (
+          <Grid item xs={4}>
+            <CardActionArea
+              onClick={() => {
+                editHandler(article);
+              }}
+            >
+              <ArticleCard
+                title={article.name}
+                description={article.note}
+                amount={article.amount}
+                mart={article.mart}
+                route={"/shopping"}
+              ></ArticleCard>
+            </CardActionArea>
+          </Grid>
+        );
+      })
+    : null;
   return (
     <>
       <FlexBox>
