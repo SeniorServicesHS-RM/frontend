@@ -16,6 +16,9 @@ import * as React from "react";
 import Order from "../data/Order";
 import { useState } from "react";
 import { MartAry } from "../data/ArticleTestData";
+import IconButton from "@mui/material/IconButton";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { MartAry } from "../data/ArticleTestData";
 interface Props {
   addOrder: (article: Article) => void;
 }
@@ -97,9 +100,17 @@ function AddArticleDialog(props: Props) {
   });
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Add Article
+      <Button
+        variant="contained"
+        onClick={handleClickOpen}
+        sx={{ marginBottom: 2, textAlign: "left" }}
+        size="large"
+        startIcon={<AddShoppingCartIcon />}
+        color={"primary"}
+      >
+        Artikel hinzufügen
       </Button>
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add new Article</DialogTitle>
         <DialogContent>
