@@ -19,6 +19,11 @@ interface ImportedArticle {
   picture?: string; //Datatype? gotta check!
 }
 
+interface ImportedDate {
+  id: string;
+  date: string;
+}
+
 interface ImportedOrder {
   id: string;
   seniorId: string;
@@ -52,6 +57,9 @@ export const DataBaseContext =
 export const DataBaseProvider = ({ children }: Props) => {
   const [articles, setArticles] = useState<ImportedArticle[] | null>(null);
   const [openOrders, setOpenOrders] = useState<Order[] | null>(null);
+  const [shoppingDates, setShoppingDates] = useState<ImportedDate[] | null>(
+    null
+  );
   useEffect(() => {
     const unsub = onSnapshot(collection(firestore, "Article"), (snapshot) => {
       const receivedArticles: ImportedArticle[] = snapshot.docs.map((doc) => ({
@@ -130,6 +138,20 @@ export const DataBaseProvider = ({ children }: Props) => {
     });
     return unsub;
   }, [articles]);
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(firestore, "ShoppingDates"),
+      (snapshot) => {
+        const receivedDates: ImportedDate[] = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })) as ImportedDate[];
+        setShoppingDates(receivedDates);
+      }
+    );
+    return unsub;
+  }, []);
 
   const changeArticles = () => {
     setArticles(null);
