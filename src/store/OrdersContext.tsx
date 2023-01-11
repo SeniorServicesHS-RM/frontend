@@ -6,7 +6,7 @@ interface OrdersContextInterface {
   addOrder: (order: Order) => void;
 }
 interface Props {
-  children?: ReactNode;
+  children?: ReactNode | ReactNode[];
 }
 
 export const OrdersContext = React.createContext<OrdersContextInterface | null>(

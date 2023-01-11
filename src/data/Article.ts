@@ -2,8 +2,10 @@ class Article {
   constructor(
     private _id: string,
     private _name: string,
+    private _amount: number,
+    private _mart: string,
     private _note?: string,
-    private _category?: string,
+    // private _category?: string,
     private _picture?: string
   ) {}
   public get id() {
@@ -18,18 +20,30 @@ class Article {
   public set name(name: string) {
     this._name = name;
   }
+  public get amount(): number {
+    return this._amount;
+  }
+  public set amount(value: number) {
+    this._amount = value;
+  }
+  public get mart(): string {
+    return this._mart;
+  }
+  public set mart(value: string) {
+    this._mart = value;
+  }
   public get note() {
     return this._note;
   }
   public set note(note: string) {
     this._note = note;
   }
-  public get category() {
-    return this._category;
-  }
-  public set category(category: string) {
-    this._category = category;
-  }
+  // public get category() {
+  //   return this._category;
+  // }
+  // public set category(category: string) {
+  //   this._category = category;
+  // }
   public get picture() {
     return this._picture;
   }

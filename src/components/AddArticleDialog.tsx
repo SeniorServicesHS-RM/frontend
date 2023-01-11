@@ -4,23 +4,33 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
   TextField,
 } from "@mui/material";
 import Article from "../data/Article";
 import * as React from "react";
 import Order from "../data/Order";
 import { useState } from "react";
+import { MartAry } from "../data/ArticleTestData";
+import IconButton from "@mui/material/IconButton";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 interface Props {
-  addOrder: (order: Order) => void;
+  addOrder: (article: Article) => void;
 }
 interface ValueHandler {
   newId?: string;
   newName?: string;
   newNote?: string;
   newAmount?: number;
+  newMart?: string;
 }
 
 function AddArticleDialog(props: Props) {
+  const [martList, setMartList] = useState<String[] | null>(MartAry);
   const [valueID, setValueID] = useState<ValueHandler>({
     newId: "",
   });
@@ -32,6 +42,9 @@ function AddArticleDialog(props: Props) {
   });
   const [valueAmount, setValueAmount] = useState<ValueHandler>({
     newAmount: 1,
+  });
+  const [valueMart, setValueMart] = useState<ValueHandler>({
+    newMart: "",
   });
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -49,19 +62,31 @@ function AddArticleDialog(props: Props) {
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValueAmount({ newAmount: event.target.valueAsNumber });
   };
+  const handleMartChange = (event: SelectChangeEvent) => {
+    setValueMart({ newMart: event.target.value as string });
+  };
   const handleDone = () => {
-    //setValueID({ newId: new Date().toString()  });
     props.addOrder(
-      new Order(
-        "o" + Date.now(),
-        new Article(
-          Date.now().toString(),
-          valueName.newName,
-          valueNote.newNote
-        ),
+      new Article(
+        Date.now().toString(),
+        valueName.newName,
         valueAmount.newAmount,
-        new Date()
+        valueMart.newMart,
+        valueNote.newNote
       )
+
+      // new Order(
+      //   "o" + Date.now(),
+      //   "senior" + Date.now(), //Hier Senior ID einfuegen
+      //   new Article(
+      //     Date.now().toString(),
+      //     valueName.newName,
+      //     valueNote.newNote
+      //   ),
+      //   valueAmount.newAmount,
+      //   new Date(),
+      //   valueMart.newMart
+      // )
     );
     setValueName({ newName: "" });
     setValueID({ newId: "" });
@@ -69,11 +94,22 @@ function AddArticleDialog(props: Props) {
     setValueAmount({ newAmount: 1 });
     setOpen(false);
   };
+  const mappedMartList = martList.map((mart: String) => {
+    return <MenuItem value={mart as string}>{mart}</MenuItem>;
+  });
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Add Article
+      <Button
+        variant="contained"
+        onClick={handleClickOpen}
+        sx={{ marginBottom: 2, textAlign: "left" }}
+        size="large"
+        startIcon={<AddShoppingCartIcon />}
+        color={"primary"}
+      >
+        Artikel hinzufügen
       </Button>
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add new Article</DialogTitle>
         <DialogContent>
@@ -104,6 +140,17 @@ function AddArticleDialog(props: Props) {
             onChange={handleAmountChange}
             fullWidth
           />
+          <FormControl fullWidth>
+            <InputLabel>Supermarkt</InputLabel>
+            <Select
+              value={valueMart.newMart}
+              label="Supermarkt"
+              onChange={handleMartChange}
+              fullWidth
+            >
+              {mappedMartList}
+            </Select>
+          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Abbrechen</Button>

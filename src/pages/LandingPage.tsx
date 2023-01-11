@@ -1,25 +1,23 @@
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import React, { useContext } from "react";
-import { DataBaseContext } from "../store/DataBaseContext";
 import FlexBox from "../components/FlexBox";
 import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
-  const { article, changeArticle } = useContext(DataBaseContext);
-
   let navigate = useNavigate();
   const routeChange = () => {
     let path = "/login";
     navigate(path);
   };
+
   return (
     <FlexBox>
-      <p>{article}</p>
-      <Button onClick={changeArticle}> Random Button</Button>
-      <p>Hier können Sie sich einloggen UwU:</p>
-      <Button variant="contained" onClick={routeChange}>
-        Login
-      </Button>
+      <Grid display={"flex"} flexDirection={"column"}>
+        <p>Hier können Sie sich einloggen :</p>
+        <Button variant="contained" onClick={routeChange}>
+          Einloggen
+        </Button>
+      </Grid>
     </FlexBox>
   );
 };
