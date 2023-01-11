@@ -18,7 +18,6 @@ interface Props {
   description?: string;
   amount: number;
   mart: String;
-  mart: String;
   picture?: ReactNode;
   route: string;
 }

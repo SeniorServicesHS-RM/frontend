@@ -18,7 +18,6 @@ import { useState } from "react";
 import { MartAry } from "../data/ArticleTestData";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { MartAry } from "../data/ArticleTestData";
 interface Props {
   addOrder: (article: Article) => void;
 }
