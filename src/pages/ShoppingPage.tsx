@@ -13,7 +13,6 @@ import FormLabel from "@mui/material/FormLabel";
 import FormGroup from "@mui/material/FormGroup/FormGroup";
 import Checkbox from "@mui/material/Checkbox/Checkbox";
 import AdditionalServicesDialog from "../components/AdditionalServicesDialog";
-
 const ShoppingPage = () => {
   const [isEditOpen, setEditOpen] = useState(false);
   const { articles, changeArticles, openOrders } = useContext(DataBaseContext);
@@ -23,6 +22,7 @@ const ShoppingPage = () => {
   const [orderList, setOrderList] = useState<Article[] | null>(
     myOrder.articleList
   );
+
   const [singleOrder, setSingleOrder] = useState<Article | null>(null);
   const editHandler = (order: Article) => {
     setSingleOrder(order);
@@ -43,31 +43,44 @@ const ShoppingPage = () => {
   const addArticle = (article: Article) =>
     setOrderList([...orderList, article]);
   myOrder.articleList = orderList;
-  const mappedOrderList = orderList.map((article: Article) => {
-    return (
-      <Grid item lg={3} md={4} sm={6} xs={12}>
-        <CardActionArea
-          onClick={() => {
-            editHandler(article);
-          }}
-        >
-          <ArticleCard
-            title={article.name}
-            description={article.note}
-            amount={article.amount}
-            mart={article.mart}
-            route={"/shopping"}
-          ></ArticleCard>
-        </CardActionArea>
-      </Grid>
-    );
-  });
+
+  const mappedOrderList =
+    orderList &&
+    orderList.length > 0 &&
+    orderList.map((article: Article) => {
+      return (
+        <Grid item lg={3} md={4} sm={6} xs={12}>
+          <CardActionArea
+            onClick={() => {
+              editHandler(article);
+            }}
+          >
+            <ArticleCard
+              key={article.id}
+              title={article.name}
+              description={article.note}
+              amount={article.amount}
+              mart={article.mart}
+              route={"/shopping"}
+            ></ArticleCard>
+          </CardActionArea>
+        </Grid>
+      );
+    });
   return (
     <>
       <FlexBox>
         <Grid container spacing={{ xs: 2 }}>
-          <Grid item xs={12} alignContent={"center"} alignItems={"center"} flexDirection={"column"} justifyContent={"center"} sx={{width:2}}>
-            <AddArticleDialog  addOrder={addArticle} ></AddArticleDialog>
+          <Grid
+            item
+            xs={12}
+            alignContent={"center"}
+            alignItems={"center"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            sx={{ width: 2 }}
+          >
+            <AddArticleDialog addOrder={addArticle}></AddArticleDialog>
             <AdditionalServicesDialog
               orderToPush={myOrder}
             ></AdditionalServicesDialog>
