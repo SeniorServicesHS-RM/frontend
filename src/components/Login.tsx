@@ -71,7 +71,6 @@ const LoginPage: React.FC = () => {
             </Grid>
           </form>
         </Grid>
-        <Grid>te</Grid>
       </Grid>
     </Box>
   );

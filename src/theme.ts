@@ -4,6 +4,8 @@ const seniorTheme = createTheme({
   palette: {
     primary: {
       main: "#00bcd4",
+      dark: "#00838f",
+      light: "#e0f7fa",
     },
   },
   components: {

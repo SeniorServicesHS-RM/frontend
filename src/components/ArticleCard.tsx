@@ -25,7 +25,10 @@ interface Props {
 
 const ArticleCard = (props: Props) => {
   return (
-    <Card variant="outlined" sx={{ maxHeight: 200, height: 200 }}>
+    <Card
+      variant="outlined"
+      sx={{ maxHeight: 200, height: 200, backgroundColor: "primary.light" }}
+    >
       <CardContent>
         <Typography
           variant="h3"
@@ -52,13 +55,25 @@ const ArticleCard = (props: Props) => {
                   <CardMedia component={"img"} image={item.url} height={50} />
                 </Grid>
               );
+            <Typography
+              color="white"
+              borderRadius={1.5}
+              bgcolor={"primary.main"}
+              width="6rem"
+              textAlign={"center"}
+              p={1}
+              m={1}
+            >
+              {props.mart}
+            </Typography>;
           })}
 
           <Typography
-            color="white"
+            color="primary.light"
             borderRadius={1.5}
-            bgcolor={"Highlight"}
-            sx={{ p: 1, m: 1 }}
+            bgcolor={"primary.main"}
+            p={1}
+            m={1}
             width="6rem"
             textAlign={"center"}
           >

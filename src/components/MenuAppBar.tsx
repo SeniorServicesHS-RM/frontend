@@ -54,9 +54,7 @@ export default function MenuAppBar(props: Props) {
 
       <AppBar position="static" color="default">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Smart Services
-          </Typography>
+          
           <IconButton
             size="large"
             edge="start"
@@ -67,6 +65,10 @@ export default function MenuAppBar(props: Props) {
           >
             <MenuIcon />
           </IconButton>
+
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Smart Services
+          </Typography>
 
           {auth && (
             <div>

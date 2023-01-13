@@ -1,15 +1,15 @@
 import React from "react";
-import Login from "../components/Login";
+
 import ContentCard from "../components/ContentCard";
 import FlexBox from "../components/FlexBox";
+import { Sign } from "crypto";
 
 const LoginPage = () => {
   return (
     <React.Fragment>
-      <FlexBox>
-        <Login />
-      </FlexBox>
+      <FlexBox></FlexBox>
     </React.Fragment>
-  );};
+  );
+};
 
 export default LoginPage;
