@@ -105,7 +105,6 @@ function AddArticleDialog(props: Props) {
         sx={{ marginBottom: 2, textAlign: "left" }}
         size="large"
         startIcon={<AddShoppingCartIcon />}
-        color={"primary"}
       >
         Artikel hinzufügen
       </Button>

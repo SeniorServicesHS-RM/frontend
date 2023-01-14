@@ -51,8 +51,10 @@ export default function MenuAppBar(props: Props) {
           label={auth ? "Logout" : "Login"}
         />
       </FormGroup>
-      <AppBar position="static">
+
+      <AppBar position="static" color="default">
         <Toolbar>
+          
           <IconButton
             size="large"
             edge="start"
@@ -63,9 +65,11 @@ export default function MenuAppBar(props: Props) {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Renter machen Sachen
+            Smart Services
           </Typography>
+
           {auth && (
             <div>
               <IconButton
@@ -93,8 +97,8 @@ export default function MenuAppBar(props: Props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profil</MenuItem>
-                <MenuItem onClick={handleClose}>Mein Konto</MenuItem>
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
             </div>
           )}
