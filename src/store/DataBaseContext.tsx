@@ -23,7 +23,7 @@ interface ImportedOrder {
   id: string;
   seniorId: string;
   orderDone: boolean;
-  articleList: String[];
+  articleList: string[];
   // amount: number;
   date: Date;
   //unit?: string;
@@ -36,10 +36,17 @@ interface ImportedOrder {
   signDate?: Date;
   signature?: string;
 }
+
+interface ImportedDate {
+  id: string;
+  date: string;
+}
+
 interface DataBaseContextInterface {
   articles: ImportedArticle[];
   changeArticles: () => void;
   openOrders: Order[];
+  nextShoppingDate: string;
 }
 
 interface Props {
@@ -52,6 +59,7 @@ export const DataBaseContext =
 export const DataBaseProvider = ({ children }: Props) => {
   const [articles, setArticles] = useState<ImportedArticle[] | null>(null);
   const [openOrders, setOpenOrders] = useState<Order[] | null>(null);
+  const [nextShoppingDate, setNextShoppingDate] = useState<string | null>(null);
   useEffect(() => {
     const unsub = onSnapshot(collection(firestore, "Article"), (snapshot) => {
       const receivedArticles: ImportedArticle[] = snapshot.docs.map((doc) => ({
@@ -60,6 +68,23 @@ export const DataBaseProvider = ({ children }: Props) => {
       })) as ImportedArticle[];
       setArticles(receivedArticles);
     });
+    return unsub;
+  }, []);
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(firestore, "ShoppingDates"),
+      (snapshot) => {
+        const receivedDates: ImportedDate[] = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })) as ImportedDate[];
+        const findNewDate = receivedDates.find((date) => {
+          return date.id === "nextDate";
+        });
+        setNextShoppingDate(findNewDate.date);
+      }
+    );
     return unsub;
   }, []);
 
@@ -141,6 +166,7 @@ export const DataBaseProvider = ({ children }: Props) => {
         articles: articles,
         changeArticles,
         openOrders,
+        nextShoppingDate,
       }}
     >
       {children}
