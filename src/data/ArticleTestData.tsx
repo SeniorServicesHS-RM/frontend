@@ -32,7 +32,7 @@ export const OrderArray: Order[] = [
     6,
     new Date(),
 
-    "Edeka"
+    "Lidl"
   ),
   new Order(
     "o5",
@@ -41,6 +41,14 @@ export const OrderArray: Order[] = [
     6,
     new Date(),
     "Lidl"
+  ),
+  new Order(
+    "o6",
+    "senior5",
+    new Article("5", "Mandarine2", "Orange"),
+    6,
+    new Date(),
+    "Edeka"
   ),
 ];
 export const MartAry: String[] = ["Rewe", "Aldi", "Lidl", "Edeka", "Kaufland"];

@@ -19,6 +19,7 @@ import FlexBox from "../components/FlexBox";
 import ArticleCard from "../components/ArticleCard";
 import Order from "../data/Order";
 import { MartAry, OrderArray } from "../data/ArticleTestData";
+
 // import ColorToggleButton from "../components/ToggleButton";
 
 //TODO: auslagern!
@@ -49,7 +50,7 @@ let filterList = MartAry;
 const EkhPage = () => {
   const [OrderAry, addOrderAry] = React.useState<Order[] | null>(OrderArray);
 
-  console.log("EkgPage wird neu geladenn");
+  console.log("EkgPage wird neu geladen");
 
   function setFilter(filterType: string) {
     console.log("1. übergeben: " + filterType + " aktiv: " + activeFilterType);
@@ -139,6 +140,10 @@ const EkhPage = () => {
   //2. TODO in der onSelect auf basis des select wertes die filterList anpassen (wenn ausgewählter wert in filterList vorhanden, nur wert nutzen, ansonsten alle?)
   //    -> value = senior1, filterList = [senior1, senior2, ...] -> filterList = [senior1]
   //    -> value = all, filterList = [senior1, senior2, ...] -> all nicht in liste, also alle zeigen
+
+  // 2. Filterstufe für Dienstag?
+  // Datenmodellanpassung
+  // Auslagern der Components (!) --> Dominik brauchts
 
   return (
     <FlexBox>
