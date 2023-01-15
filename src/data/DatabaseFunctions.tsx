@@ -18,7 +18,7 @@ export const addArticleToDatabase = (article: Article) => {
     mart: article.mart,
     name: article.name,
     note: article.note ? article.note : "undefined",
-    // category: article.category ? article.category : "undefined",
+
     picture: article.picture ? article.picture : "undefined",
   });
 };
@@ -29,7 +29,6 @@ export const addOrderToDatabase = (order: Order) => {
     for (const article of order.articleList) {
       newAry.push(article.id);
     }
-    // console.log(newAry);
     return newAry;
   };
   const docRef = doc(firestore, "Order", order.id);
@@ -51,7 +50,6 @@ export const addOrderToDatabase = (order: Order) => {
   for (const article of order.articleList) {
     addArticleToDatabase(article);
   }
-  // addArticleToDatabase(order.article);
 };
 
 export const deleteOrder = (order: Order) => {

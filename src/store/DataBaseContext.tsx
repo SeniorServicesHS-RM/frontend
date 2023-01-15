@@ -131,7 +131,6 @@ export const DataBaseProvider = ({ children }: Props) => {
           articleAry.push(article);
         }
         if (order.orderDone === "false") {
-          console.log(order.orderDone);
           closedOrders.push(
             new Order(
               order.id,
@@ -167,8 +166,6 @@ export const DataBaseProvider = ({ children }: Props) => {
           );
         }
       }
-      console.log("neue orders", newOrders);
-      console.log("alte orders", closedOrders);
 
       setOpenOrders(newOrders);
       setClosedOrders(closedOrders);

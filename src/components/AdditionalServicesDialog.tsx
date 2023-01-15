@@ -50,10 +50,8 @@ function AdditionalServicesDialog(props: Props) {
     setOpen(false);
   };
   const handleDone = () => {
-    console.log(services);
     services.push(valueService.newService);
     props.orderToPush.additionalServices = services.filter((e) => e);
-    console.log(props.orderToPush.additionalServices);
     handlePush();
     handleClose();
   };
@@ -70,8 +68,6 @@ function AdditionalServicesDialog(props: Props) {
   }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
-    console.log(event.target.checked);
-    console.log(event.target.name);
     if (event.target.checked) {
       services.push(event.target.name);
     } else {
@@ -87,7 +83,6 @@ function AdditionalServicesDialog(props: Props) {
         <></>
       );
     }
-    console.log(services);
   }
   const mappedServices = serviceList.map((singleServ: string) => {
     return (

@@ -20,7 +20,6 @@ const OrderCard = (props: Props) => {
   const [showArticles, setShowArticles] = useState(false);
   const order = props.order;
   const showArticlesHandler = () => {
-    console.log("entered");
     setShowArticles(!showArticles);
   };
   return (
