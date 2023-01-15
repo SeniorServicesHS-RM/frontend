@@ -53,5 +53,7 @@ export const addOrderToDatabase = (order: Order) => {
 };
 
 export const deleteOrder = (order: Order) => {
-  deleteDoc(doc(firestore, "Orders", order.id));
+  console.log("delOrder entered");
+  console.log(order.id);
+  console.log(deleteDoc(doc(firestore, "Order", order.id)));
 };
