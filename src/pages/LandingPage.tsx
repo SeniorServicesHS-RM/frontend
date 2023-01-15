@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import React, { useContext } from "react";
 import FlexBox from "../components/FlexBox";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
   let navigate = useNavigate();
   const routeChange = () => {
-    let path = "/login";
+    let path = "/SignIn";
     navigate(path);
   };
 

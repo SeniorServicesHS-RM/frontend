@@ -11,13 +11,14 @@ import {
   TextField,
 } from "@mui/material";
 import * as React from "react";
+import Article from "../data/Article";
 import { MartAry } from "../data/ArticleTestData";
 import Order from "../data/Order";
 
 interface Props {
-  order: Order;
+  order: Article;
   handleClose: () => void;
-  editOrder: (newOrder: Order, oldOrder: Order) => void;
+  editOrder: (newOrder: Article, oldOrder: Article) => void;
 }
 interface ValueHandler {
   newId?: string;
@@ -28,13 +29,13 @@ interface ValueHandler {
 }
 
 function EditArticleDialog(props: Props) {
-  const [order, setOrder] = React.useState<Order>(props.order);
+  const [order, setOrder] = React.useState<Article>(props.order);
 
   const [valueName, setValueName] = React.useState<ValueHandler>({
-    newName: props.order.article.name,
+    newName: props.order.name,
   });
   const [valueNote, setValueNote] = React.useState<ValueHandler>({
-    newNote: props.order.article.note,
+    newNote: props.order.note,
   });
   const [valueAmount, setValueAmount] = React.useState<ValueHandler>({
     newAmount: props.order.amount,
@@ -55,17 +56,18 @@ function EditArticleDialog(props: Props) {
     setValueMart({ newMart: event.target.value as string });
   };
   const handleDone = () => {
-    const orderReturn = new Order(
+    const orderReturn = new Article(
       order.id,
-      order.seniorId,
-      order.article,
+      // order.seniorId,
+      valueName.newName,
       valueAmount.newAmount,
-      order.date,
-      valueMart.newMart
+      // order.date,
+      valueMart.newMart,
+      valueNote.newNote
     );
 
-    orderReturn.article.name = valueName.newName;
-    orderReturn.article.note = valueNote.newNote;
+    // orderReturn.name = valueName.newName;
+    // orderReturn.note = valueNote.newNote;
     props.editOrder(orderReturn, order);
     props.handleClose();
   };

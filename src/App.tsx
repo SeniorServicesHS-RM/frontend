@@ -1,28 +1,22 @@
-import { ThemeProvider } from "@emotion/react";
 import { BrowserRouter } from "react-router-dom";
-
-import { createTheme } from "@mui/system";
+import { blue, indigo, green, deepOrange, grey } from "@mui/material/colors";
 import React from "react";
-
+import { ThemeProvider } from "@mui/material/styles";
 import MainPage from "./pages/MainPage";
 import { DataBaseProvider } from "./store/DataBaseContext";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "salmon",
-    },
-  },
-});
+import seniorTheme from "./theme";
 
 function App() {
   return (
     <div>
-      <DataBaseProvider>
-        <BrowserRouter>
-          <MainPage></MainPage>
-        </BrowserRouter>
-      </DataBaseProvider>
+      <ThemeProvider theme={seniorTheme}>
+        <DataBaseProvider>
+          <BrowserRouter>
+            <MainPage></MainPage>
+          </BrowserRouter>
+        </DataBaseProvider>
+      </ThemeProvider>
     </div>
   );
 }
