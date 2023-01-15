@@ -89,6 +89,7 @@ const ShoppingPage = (props: Props) => {
           >
             <AddArticleDialog addOrder={addArticle}></AddArticleDialog>
             <AdditionalServicesDialog
+              abort={props.abort}
               orderToPush={myOrder}
             ></AdditionalServicesDialog>
             <Button onClick={props.abort}>Abbrechen</Button>

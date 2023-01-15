@@ -15,6 +15,7 @@ import {
   TextField,
 } from "@mui/material";
 import { text } from "body-parser";
+import { abort } from "process";
 import React, { ChangeEvent } from "react";
 import { useState } from "react";
 import {
@@ -25,6 +26,7 @@ import Order from "../data/Order";
 
 interface Props {
   orderToPush: Order;
+  abort: () => void;
 }
 interface ValueHandler {
   newService?: string;
@@ -54,6 +56,7 @@ function AdditionalServicesDialog(props: Props) {
     props.orderToPush.additionalServices = services.filter((e) => e);
     handlePush();
     handleClose();
+    props.abort();
   };
   const handlePush = () => {
     for (const singleArticle of props.orderToPush.articleList) {
