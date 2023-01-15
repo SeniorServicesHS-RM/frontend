@@ -20,13 +20,14 @@ interface Props {
 }
 
 const ShoppingPage = (props: Props) => {
+  const seniorId = "s001"; //gemockte SeniorId! Richtige muss aus authcontext kommen
   const [isEditOpen, setEditOpen] = useState(false);
   const { articles, changeArticles, openOrders } = useContext(DataBaseContext);
   const [myOrder, setMyOrder] = useState<Order | null>(
-    openOrders[openOrders.length - 1]
+    new Order(Date.now().toString(), seniorId, [], new Date(Date.now()))
   );
   const [orderList, setOrderList] = useState<Article[] | null>(
-    myOrder.articleList
+    myOrder.articleList ? myOrder.articleList : null
   );
 
   const [singleOrder, setSingleOrder] = useState<Article | null>(null);
