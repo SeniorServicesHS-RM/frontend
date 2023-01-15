@@ -46,9 +46,14 @@ export const addOrderToDatabase = (order: Order) => {
     seniorId: order.seniorId,
     signDate: order.signDate ? order.signDate : "undefined",
     signature: order.signature ? order.signature : "undefined",
+    orderDone: order.orderDone,
   });
   for (const article of order.articleList) {
     addArticleToDatabase(article);
   }
   // addArticleToDatabase(order.article);
+};
+
+export const deleteOrder = (order: Order) => {
+  deleteDoc(doc(firestore, "Orders", order.id));
 };

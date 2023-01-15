@@ -33,7 +33,7 @@ const ShoppingPageSelection = () => {
         </>
       )}
       {newOrderSelection && <ShoppingPage abort={orderSelectionHandler} />}
-      {showOrderSelection && <ShowOrders />}
+      {showOrderSelection && <ShowOrders abort={showOrderSelectionHandler} />}
     </>
   );
 };
