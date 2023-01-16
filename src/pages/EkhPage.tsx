@@ -18,13 +18,17 @@ import {
 import FlexBox from "../components/FlexBox";
 import ArticleCard from "../components/ArticleCard";
 import Order from "../data/Order";
-import { MartAry, OrderArray } from "../data/ArticleTestData";
+import GetOrdersByEmployee from "../data/OrderService";
+
+// import { MartAry, OrderArray } from "../data/ArticleTestData";
+import { MartAry } from "../data/ArticleTestData";
+import Article from "../data/Article";
 
 // import ColorToggleButton from "../components/ToggleButton";
 
 //TODO: auslagern!
 class FilteredList {
-  constructor(private _filter: String, private _filtered: Order[]) {}
+  constructor(private _filter: String, private _filtered: ArticleWithOrder[]) {}
 
   public get filter() {
     return this._filter;
@@ -33,14 +37,33 @@ class FilteredList {
     return this._filtered;
   }
 }
+
+class ArticleWithOrder {
+  constructor(private _order: Order, private _article: Article) {}
+
+  public get order() {
+    return this._order;
+  }
+  public set order(order: Order) {
+    this._order = order;
+  }
+
+  public get article() {
+    return this._article;
+  }
+  public set article(article: Article) {
+    this._article = article;
+  }
+}
+
 const FILTER_MART = "FILTER_MART";
-const FILTER_MART_FUNCTION = (order: Order, entry: string) => {
-  return order.mart.toLowerCase() == entry.toLowerCase();
+const FILTER_MART_FUNCTION = (article: ArticleWithOrder, entry: string) => {
+  return article.article.mart.toLowerCase() == entry.toLowerCase();
 };
 
 const FILTER_SENIOR = "FILTER_SENIOR";
-const FILTER_SENIOR_FUNCTION = (order: Order, entry: string) => {
-  return order.seniorId.toLowerCase() == entry.toLowerCase();
+const FILTER_SENIOR_FUNCTION = (article: ArticleWithOrder, entry: string) => {
+  return article.order.seniorId.toLowerCase() == entry.toLowerCase();
 };
 
 let activeFilterType = FILTER_MART;
@@ -48,14 +71,20 @@ let activeFilter: Function = FILTER_MART_FUNCTION;
 let filterList = MartAry;
 
 const EkhPage = () => {
-  const [OrderAry, addOrderAry] = React.useState<Order[] | null>(OrderArray);
+  // TODO aus authContext holen
+  const employeeId = "emp001";
 
-  console.log("EkgPage wird neu geladen");
+  const orderByEmp: Order[] = GetOrdersByEmployee(employeeId);
 
+  const allArticlesByEmp: ArticleWithOrder[] = [].concat(
+    ...orderByEmp.map((order) =>
+      order.articleList.map((article) => new ArticleWithOrder(order, article))
+    )
+  );
+
+  // Set Filter: Mart or Senior ( From Exclusive Toggle Button )
   function setFilter(filterType: string) {
-    console.log("1. übergeben: " + filterType + " aktiv: " + activeFilterType);
     activeFilterType = filterType;
-    console.log("2. übergeben: " + filterType + " aktiv: " + activeFilterType);
     if (activeFilterType == FILTER_MART) {
       filterList = MartAry;
       activeFilter = FILTER_MART_FUNCTION;
@@ -63,8 +92,8 @@ const EkhPage = () => {
     if (activeFilterType == FILTER_SENIOR) {
       filterList = [
         ...new Set(
-          OrderAry.map((order: Order) => {
-            return order.seniorId;
+          allArticlesByEmp.map((article: ArticleWithOrder) => {
+            return article.order.seniorId;
           })
         ),
       ];
@@ -72,46 +101,54 @@ const EkhPage = () => {
     }
   }
 
+  // ArticleWithOrder Lists for every available subFilter in current filter. E.g.: Filter for Marts, available SubFilters = Rewe, Aldi, etc
   let filteredLists = filterList.map((entry) => {
     return new FilteredList(
       entry,
-      OrderAry.filter((order: Order) => activeFilter(order, entry))
+      allArticlesByEmp.filter((article: ArticleWithOrder) =>
+        activeFilter(article, entry)
+      )
     );
   });
 
-  const mappedOrderAry = OrderAry.map((order: Order) => {
-    return (
-      <Grid>
-        <ArticleCard
-          title={order.article.name}
-          description={order.article.note}
-          amount={order.amount}
-          route={"/ekh"}
-          mart={order.mart}
-        ></ArticleCard>
-      </Grid>
-    );
-  });
+  // probably unused
+  // const mappedArticleByEmp = allArticlesByEmp.map(
+  //   (article: ArticleWithOrder) => {
+  //     return (
+  //       <Grid>
+  //         <ArticleCard
+  //           title={article.article.name}
+  //           description={article.article.note}
+  //           amount={article.article.amount}
+  //           route={"/ekh"}
+  //           mart={article.article.mart}
+  //         ></ArticleCard>
+  //       </Grid>
+  //     );
+  //   }
+  // );
 
-  let allFiltered = filteredLists.map((filteredList: FilteredList) => {
-    return (
-      <Grid>
-        <h1>{filteredList.filter.toString()}</h1>
-        {orderByFilter(filteredList.filtered)}
-      </Grid>
-    );
-  });
+  let allFiltered = filteredLists
+    .filter((filtered) => filtered.filtered.length > 0)
+    .map((filteredList: FilteredList) => {
+      return (
+        <Grid>
+          <h1>{filteredList.filter.toString()}</h1>
+          {orderByFilter(filteredList.filtered)}
+        </Grid>
+      );
+    });
 
-  function orderByFilter(filtered: Order[]) {
-    return filtered.map((order: Order) => {
+  function orderByFilter(filtered: ArticleWithOrder[]) {
+    return filtered.map((article: ArticleWithOrder) => {
       return (
         <Grid>
           <ArticleCard
-            title={order.article.name}
-            description={order.article.note}
-            amount={order.amount}
+            title={article.article.name}
+            description={article.article.note}
+            amount={article.article.amount}
             route={"/ekh"}
-            mart={order.mart}
+            mart={article.article.mart}
           ></ArticleCard>
         </Grid>
       );
@@ -128,8 +165,8 @@ const EkhPage = () => {
     setFilter(newAlignment);
   };
 
-  let secondLevelFilter = filterList;
-  const [secLvlFilter, setSecLvlFilter] = React.useState(secondLevelFilter);
+  // let secondLevelFilter = filterList;
+  // const [secLvlFilter, setSecLvlFilter] = React.useState(secondLevelFilter);
 
   const onSelect = (event: SelectChangeEvent) => {
     // setSecLvlFilter(event.target.value as string);
@@ -146,14 +183,15 @@ const EkhPage = () => {
   // Auslagern der Components (!) --> Dominik brauchts
 
   return (
-    <FlexBox>
-      <FlexBox>
-        <Grid
+    <div>
+      <div>
+        <FlexBox>
+          {/* <Grid
           container
           direction="column"
           justifyContent="center"
           alignItems="stretch"
-        >
+        > */}
           <ToggleButtonGroup
             color="primary"
             value={alignment}
@@ -165,7 +203,7 @@ const EkhPage = () => {
             <ToggleButton value={FILTER_SENIOR}>Seniors</ToggleButton>
           </ToggleButtonGroup>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-label">Einzelauswahl</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -180,8 +218,10 @@ const EkhPage = () => {
               {/* });  */}
             </Select>
           </FormControl>
-        </Grid>
-      </FlexBox>
+          {/* </Grid> */}
+        </FlexBox>
+      </div>
+
       <Grid
         container
         direction="column"
@@ -189,8 +229,9 @@ const EkhPage = () => {
         alignItems="stretch"
       >
         {allFiltered}
+        {/* {orderByFilter(allArticlesByEmp)} */}
       </Grid>
-    </FlexBox>
+    </div>
   );
 };
 
