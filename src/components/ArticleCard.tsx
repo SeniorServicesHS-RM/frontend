@@ -14,6 +14,8 @@ import CardHeader from "@mui/material/CardHeader";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
 import logosArr from "../data/LogosArr";
+import DoneIcon from "@mui/icons-material/Done";
+
 interface Props {
   title: string;
   description?: string;
@@ -30,6 +32,14 @@ const ArticleCard = (props: Props) => {
       sx={{ maxHeight: 200, height: 200, backgroundColor: "primary.light" }}
     >
       <CardContent>
+        <DoneIcon>articleInCart</DoneIcon>
+        {true && (
+          <div>
+            {" "}
+            <DoneIcon>articleInCart</DoneIcon>
+          </div>
+        )}
+
         <Typography
           variant="h3"
           sx={{ p: 1, fontSize: 22, fontWeight: "bold" }}

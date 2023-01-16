@@ -29,17 +29,17 @@ export const OrderArray: Order[] = [
   //     new Article("4", "Milch", "Weiß"),
   //     6,
   //     new Date(),
-  new Order(
-    "o5",
-    "senior5",
-    [new Article(Date.now().toString(), "Mandarine", 5, "Lidl")],
-    new Date()
-  ),
-  new Order(
-    "o6",
-    "senior5",
-    [new Article(Date.now().toString(), "Mandarine2", 5, "Aldi")],
-    new Date()
-  ),
+  // new Order(
+  //   "o5",
+  //   "senior5",
+  //   [new Article(Date.now().toString(), "Mandarine", 5, "Lidl")],
+  //   new Date()
+  // ),
+  // new Order(
+  //   "o6",
+  //   "senior5",
+  //   [new Article(Date.now().toString(), "Mandarine2", 5, "Aldi")],
+  //   new Date()
+  // ),
 ];
 export const MartAry: String[] = ["Rewe", "Aldi", "Lidl", "Edeka", "Kaufland"];

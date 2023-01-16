@@ -174,15 +174,6 @@ const EkhPage = () => {
               route={"/ekh"}
               mart={article.article.mart}
             ></ArticleCard>
-            {/* this is to show a checkmark, if articleInCart */}
-            <div>
-              {article.article.mart == "Rewe" && (
-                <div>
-                  {" "}
-                  <DoneIcon>articleInCart</DoneIcon>
-                </div>
-              )}
-            </div>
           </CardActionArea>
         </Grid>
       );
