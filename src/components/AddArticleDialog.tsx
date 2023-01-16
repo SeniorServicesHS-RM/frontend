@@ -72,6 +72,7 @@ function AddArticleDialog(props: Props) {
         valueName.newName,
         valueAmount.newAmount,
         valueMart.newMart,
+        false,
         valueNote.newNote
       )
 

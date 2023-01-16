@@ -4,6 +4,7 @@ class Article {
     private _name: string,
     private _amount: number,
     private _mart: string,
+    private _done: boolean,
     private _note?: string,
     // private _category?: string,
     private _picture?: string
@@ -32,6 +33,13 @@ class Article {
   public set mart(value: string) {
     this._mart = value;
   }
+  public get done(): boolean {
+    return this.done;
+  }
+  public set done(value: boolean) {
+    this._done = value;
+  }
+
   public get note() {
     return this._note;
   }

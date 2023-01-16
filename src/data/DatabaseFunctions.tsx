@@ -15,6 +15,7 @@ export const addArticleToDatabase = (article: Article) => {
   const docRef = doc(firestore, "Article", article.id);
   setDoc(docRef, {
     amount: article.amount,
+    done: article.done,
     mart: article.mart,
     name: article.name,
     note: article.note ? article.note : "undefined",

@@ -12,6 +12,7 @@ interface ImportedArticle {
   changeDate?: Date;
   endDate?: Date;
   name: string;
+  done: boolean;
   //description: string;  there is no such thing as a description at the moment :/
   note: string;
   amount: number;
@@ -114,6 +115,7 @@ export const DataBaseProvider = ({ children }: Props) => {
               articleToInsert.name,
               articleToInsert.amount,
               articleToInsert.mart,
+              articleToInsert.done,
               articleToInsert.note && articleToInsert.note,
               articleToInsert.picture && articleToInsert.picture
             );
@@ -125,6 +127,7 @@ export const DataBaseProvider = ({ children }: Props) => {
             "UNDEFINED",
             0,
             "UNDEFINED",
+            false,
             "UNDEFINED",
             "UNDEFINED"
           );
