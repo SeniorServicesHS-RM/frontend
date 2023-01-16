@@ -91,7 +91,7 @@ export const DataBaseProvider = ({ children }: Props) => {
       }
     });
     return unsub;
-  });
+  }, []);
   useEffect(() => {
     const unsub = onSnapshot(
       collection(firestore, "AdditionalServices"),
@@ -110,7 +110,7 @@ export const DataBaseProvider = ({ children }: Props) => {
       }
     );
     return unsub;
-  });
+  }, []);
 
   useEffect(() => {
     const unsub = onSnapshot(
