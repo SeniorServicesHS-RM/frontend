@@ -4,7 +4,6 @@ import { collection, onSnapshot } from "@firebase/firestore";
 import { firestore } from "./Firebase";
 import Article from "../data/Article";
 import Order from "../data/Order";
-import { closeSync } from "fs";
 
 interface ImportedArticle {
   id: string;

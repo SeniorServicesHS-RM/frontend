@@ -8,10 +8,6 @@ import Order from "../data/Order";
 import React, { useEffect, useState, useContext } from "react";
 import { DataBaseContext, DataBaseProvider } from "../store/DataBaseContext";
 import Article from "../data/Article";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
-import FormGroup from "@mui/material/FormGroup/FormGroup";
-import Checkbox from "@mui/material/Checkbox/Checkbox";
 import AdditionalServicesDialog from "../components/AdditionalServicesDialog";
 import { Button } from "@mui/material";
 

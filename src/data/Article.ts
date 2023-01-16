@@ -5,7 +5,6 @@ class Article {
     private _amount: number,
     private _mart: string,
     private _note?: string,
-    // private _category?: string,
     private _picture?: string
   ) {}
   public get id() {
@@ -38,12 +37,6 @@ class Article {
   public set note(note: string) {
     this._note = note;
   }
-  // public get category() {
-  //   return this._category;
-  // }
-  // public set category(category: string) {
-  //   this._category = category;
-  // }
   public get picture() {
     return this._picture;
   }

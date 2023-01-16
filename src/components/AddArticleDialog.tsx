@@ -13,10 +13,7 @@ import {
 } from "@mui/material";
 import Article from "../data/Article";
 import * as React from "react";
-import Order from "../data/Order";
 import { useContext, useState } from "react";
-import { MartAry } from "../data/ArticleTestData";
-import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { DataBaseContext } from "../store/DataBaseContext";
 interface Props {
@@ -75,19 +72,6 @@ function AddArticleDialog(props: Props) {
         valueMart.newMart,
         valueNote.newNote
       )
-
-      // new Order(
-      //   "o" + Date.now(),
-      //   "senior" + Date.now(), //Hier Senior ID einfuegen
-      //   new Article(
-      //     Date.now().toString(),
-      //     valueName.newName,
-      //     valueNote.newNote
-      //   ),
-      //   valueAmount.newAmount,
-      //   new Date(),
-      //   valueMart.newMart
-      // )
     );
     setValueName({ newName: "" });
     setValueID({ newId: "" });

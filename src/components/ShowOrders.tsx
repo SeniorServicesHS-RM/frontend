@@ -1,8 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useContext, useState } from "react";
 import GetUserOrders from "../data/GetUserOrders";
-import Order from "../data/Order";
-import { DataBaseContext } from "../store/DataBaseContext";
 import OrderCard from "./OrderCard";
 
 interface Props {

@@ -1,5 +1,3 @@
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-
 const ServiceData = [
   {
     title: "Shopping",
