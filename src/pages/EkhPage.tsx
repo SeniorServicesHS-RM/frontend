@@ -6,6 +6,9 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import {
+  Button,
+  CardActionArea,
+  CardActions,
   FormControl,
   Grid,
   InputLabel,
@@ -19,6 +22,7 @@ import FlexBox from "../components/FlexBox";
 import ArticleCard from "../components/ArticleCard";
 import Order from "../data/Order";
 import GetOrdersByEmployee from "../data/OrderService";
+import DoneIcon from "@mui/icons-material/Done";
 
 // import { MartAry, OrderArray } from "../data/ArticleTestData";
 import { MartAry } from "../data/ArticleTestData";
@@ -141,15 +145,45 @@ const EkhPage = () => {
 
   function orderByFilter(filtered: ArticleWithOrder[]) {
     return filtered.map((article: ArticleWithOrder) => {
+      function editHandler(article: ArticleWithOrder) {
+        //TODO
+        //flag articleInCart
+        //if articleInCart set to !articleInCart
+        //if !articleInCart set to articleInCart
+        //view eines hakens aktivieren oder deaktivieren (auf basis der abgehakt flag)
+        console.log(
+          "Artikel " +
+            article.article.id +
+            " aus Bestellung " +
+            article.order.id +
+            " ist abgehakt"
+        );
+      }
+
       return (
         <Grid>
-          <ArticleCard
-            title={article.article.name}
-            description={article.article.note}
-            amount={article.article.amount}
-            route={"/ekh"}
-            mart={article.article.mart}
-          ></ArticleCard>
+          <CardActionArea
+            onClick={() => {
+              editHandler(article);
+            }}
+          >
+            <ArticleCard
+              title={article.article.name}
+              description={article.article.note}
+              amount={article.article.amount}
+              route={"/ekh"}
+              mart={article.article.mart}
+            ></ArticleCard>
+            {/* this is to show a checkmark, if articleInCart */}
+            <div>
+              {article.article.mart == "Rewe" && (
+                <div>
+                  {" "}
+                  <DoneIcon>articleInCart</DoneIcon>
+                </div>
+              )}
+            </div>
+          </CardActionArea>
         </Grid>
       );
     });
@@ -229,6 +263,7 @@ const EkhPage = () => {
         alignItems="stretch"
       >
         {allFiltered}
+
         {/* {orderByFilter(allArticlesByEmp)} */}
       </Grid>
     </div>
