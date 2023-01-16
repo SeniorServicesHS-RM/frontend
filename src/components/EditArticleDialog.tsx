@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import Article from "../data/Article";
-import { MartAry } from "../data/ArticleTestData";
 import Order from "../data/Order";
+import { DataBaseContext } from "../store/DataBaseContext";
 
 interface Props {
   order: Article;
@@ -29,6 +29,7 @@ interface ValueHandler {
 }
 
 function EditArticleDialog(props: Props) {
+  const { martList } = React.useContext(DataBaseContext);
   const [order, setOrder] = React.useState<Article>(props.order);
 
   const [valueName, setValueName] = React.useState<ValueHandler>({
@@ -58,20 +59,16 @@ function EditArticleDialog(props: Props) {
   const handleDone = () => {
     const orderReturn = new Article(
       order.id,
-      // order.seniorId,
       valueName.newName,
       valueAmount.newAmount,
-      // order.date,
       valueMart.newMart,
       valueNote.newNote
     );
 
-    // orderReturn.name = valueName.newName;
-    // orderReturn.note = valueNote.newNote;
     props.editOrder(orderReturn, order);
     props.handleClose();
   };
-  const mappedMartList = MartAry.map((mart: String) => {
+  const mappedMartList = martList.map((mart: String) => {
     return <MenuItem value={mart as string}>{mart}</MenuItem>;
   });
   return (

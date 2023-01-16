@@ -14,10 +14,11 @@ import {
 import Article from "../data/Article";
 import * as React from "react";
 import Order from "../data/Order";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MartAry } from "../data/ArticleTestData";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { DataBaseContext } from "../store/DataBaseContext";
 interface Props {
   addOrder: (article: Article) => void;
 }
@@ -30,7 +31,7 @@ interface ValueHandler {
 }
 
 function AddArticleDialog(props: Props) {
-  const [martList, setMartList] = useState<String[] | null>(MartAry);
+  const { martList } = useContext(DataBaseContext);
   const [valueID, setValueID] = useState<ValueHandler>({
     newId: "",
   });
