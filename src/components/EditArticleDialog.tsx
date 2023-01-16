@@ -63,6 +63,7 @@ function EditArticleDialog(props: Props) {
       valueAmount.newAmount,
       // order.date,
       valueMart.newMart,
+      false,
       valueNote.newNote
     );
 
