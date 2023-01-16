@@ -12,11 +12,9 @@ interface ImportedArticle {
   changeDate?: Date;
   endDate?: Date;
   name: string;
-  //description: string;  there is no such thing as a description at the moment :/
   note: string;
   amount: number;
   mart: string;
-  // categorie: string; not needed
   picture?: string; //Datatype? gotta check!
 }
 
@@ -25,11 +23,8 @@ interface ImportedOrder {
   seniorId: string;
   orderDone: string;
   articleList: string[];
-  // amount: number;
   date: Date;
-  //unit?: string;
   additionalServices?: string[];
-  // mart: string;
   planDate?: Date | string;
   employeeId?: string;
   actualPrice?: number;
@@ -42,13 +37,16 @@ interface ImportedDate {
   id: string;
   date: string;
 }
+interface ImportedMarts {
+  id: string;
+  name: string;
+}
 
 interface DataBaseContextInterface {
-  articles: ImportedArticle[];
-  changeArticles: () => void;
   openOrders: Order[];
   closedOrders: Order[];
   nextShoppingDate: string;
+  martList: string[];
 }
 
 interface Props {
@@ -63,6 +61,7 @@ export const DataBaseProvider = ({ children }: Props) => {
   const [openOrders, setOpenOrders] = useState<Order[] | null>(null);
   const [nextShoppingDate, setNextShoppingDate] = useState<string | null>(null);
   const [closedOrders, setClosedOrders] = useState<Order[] | null>(null);
+  const [martList, setMarts] = useState<string[] | null>(null);
   useEffect(() => {
     const unsub = onSnapshot(collection(firestore, "Article"), (snapshot) => {
       const receivedArticles: ImportedArticle[] = snapshot.docs.map((doc) => ({
@@ -74,6 +73,19 @@ export const DataBaseProvider = ({ children }: Props) => {
     return unsub;
   }, []);
 
+  useEffect(() => {
+    const unsub = onSnapshot(collection(firestore, "Marts"), (snapshot) => {
+      const recievedMarts: ImportedMarts[] = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      })) as ImportedMarts[];
+      const martList: string[] = [];
+      for (const mart of recievedMarts) {
+        martList.push(mart.name);
+        setMarts(martList);
+      }
+    });
+  });
   useEffect(() => {
     const unsub = onSnapshot(
       collection(firestore, "ShoppingDates"),
@@ -173,18 +185,13 @@ export const DataBaseProvider = ({ children }: Props) => {
     return unsub;
   }, [articles]);
 
-  const changeArticles = () => {
-    setArticles(null);
-  };
-
   return (
     <DataBaseContext.Provider
       value={{
-        articles: articles,
-        changeArticles,
         openOrders,
         closedOrders,
         nextShoppingDate,
+        martList,
       }}
     >
       {children}
