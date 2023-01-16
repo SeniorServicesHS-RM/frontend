@@ -14,13 +14,14 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useContext } from "react";
 import { useState } from "react";
 import {
   addArticleToDatabase,
   addOrderToDatabase,
 } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
+import { DataBaseContext } from "../store/DataBaseContext";
 
 interface Props {
   orderToPush: Order;
@@ -31,11 +32,7 @@ interface ValueHandler {
 }
 
 function AdditionalServicesDialog(props: Props) {
-  const serviceList: string[] = [
-    "In Wohnung bringen",
-    "In Wohnung verräumen",
-    "Mit Abrechnung helfen",
-  ];
+  const { serviceList } = useContext(DataBaseContext);
   const [services, setServices] = useState([""]);
   const [valueService, setValueService] = React.useState<ValueHandler>({
     newService: "",
