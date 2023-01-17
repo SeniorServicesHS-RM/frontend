@@ -7,6 +7,7 @@ import SignIn from "./SignIn";
 import PlanningPage from "./PlanningPage";
 import LoginPage from "./LoginPage";
 import ShoppingPageSelection from "./ShoppingPageSelection";
+import AssistantPage from "./AssistantPage";
 const NavigationPage = () => {
   return (
     <React.Fragment>
@@ -17,6 +18,7 @@ const NavigationPage = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/planning" element={<PlanningPage />} />
+        <Route path="/assistant" element={<AssistantPage />} />
       </Routes>
     </React.Fragment>
   );

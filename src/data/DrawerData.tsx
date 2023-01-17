@@ -36,6 +36,7 @@ const DrawerData = [
     path: "/planning",
     icon: <CalendarMonthIcon />,
   },
+  { title: "Einkaufshelfer", path: "/assistant" },
 ];
 
 export default DrawerData;
