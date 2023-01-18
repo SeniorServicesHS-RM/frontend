@@ -13,6 +13,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import seniorTheme from "../theme";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../store/Firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
 
 function Copyright(props: any) {
   return (
@@ -32,7 +36,15 @@ function Copyright(props: any) {
   );
 }
 
+
+
 export default function LoginSide() {
+
+  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -40,7 +52,25 @@ export default function LoginSide() {
       email: data.get("email"),
       password: data.get("password"),
     });
+
+     //firebase methode
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    console.log('successful login');
+    navigate('/');
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    console.log('user does not exist');
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+    
   };
+
+
 
   return (
     <ThemeProvider theme={seniorTheme}>
@@ -93,6 +123,8 @@ export default function LoginSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={event => setEmail(event.target.value)}
+                value={email}
               />
               <TextField
                 margin="normal"
@@ -103,6 +135,8 @@ export default function LoginSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={event => setPassword(event.target.value)}
+                value={password}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -113,6 +147,7 @@ export default function LoginSide() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                //onClick={}
               >
                 Sign In
               </Button>
@@ -136,3 +171,4 @@ export default function LoginSide() {
     </ThemeProvider>
   );
 }
+

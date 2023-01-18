@@ -5,16 +5,17 @@ import ServicesPage from "./ServicesPage";
 import PlanningPage from "./PlanningPage";
 import LoginPage from "./LoginPage";
 import ShoppingPageSelection from "./ShoppingPageSelection";
+import AuthContext from '../store/AuthContext';
 
 const NavigationPage = () => {
   return (
     <React.Fragment>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/shopping" element={<ShoppingPageSelection />} />
-        <Route path="/services" element={<ServicesPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/planning" element={<PlanningPage />} />
+        <Route path="/shopping" element={<AuthContext> <ShoppingPageSelection /> </AuthContext>} />
+        <Route path="/services" element={<AuthContext> <ServicesPage /> </AuthContext>} />
+        <Route path="/planning" element={<AuthContext> <PlanningPage /> </AuthContext>} />
       </Routes>
     </React.Fragment>
   );

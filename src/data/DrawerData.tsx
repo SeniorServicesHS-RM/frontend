@@ -22,8 +22,8 @@ const DrawerData = [
     icon: <AccessibleIcon />,
   },
   {
-    title: "LogIn",
-    path: "/signin",
+    title: "Login",
+    path: "/login",
     icon: <LoginIcon />,
   },
   {
