@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
   let navigate = useNavigate();
   const routeChange = () => {
-    let path = "/SignIn";
+    let path = "/login";
     navigate(path);
   };
 
