@@ -64,7 +64,6 @@ const ShoppingPage = (props: Props) => {
               description={article.note}
               amount={article.amount}
               mart={article.mart}
-              route={"/shopping"}
             ></ArticleCard>
           </CardActionArea>
         </Grid>
