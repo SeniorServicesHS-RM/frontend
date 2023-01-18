@@ -47,12 +47,10 @@ const ShowAsisstantOrders = (props: Props) => {
     seniorList.length > 0 &&
     seniorList.map((senior: string) => {
       return (
-        <>
-          <ShowOrdersBySeniors
-            senior={senior}
-            orderList={orderList}
-          ></ShowOrdersBySeniors>
-        </>
+        <ShowOrdersBySeniors
+          senior={senior}
+          orderList={orderList}
+        ></ShowOrdersBySeniors>
       );
     });
   const handleMartChange = (event: SelectChangeEvent) => {
@@ -70,7 +68,7 @@ const ShowAsisstantOrders = (props: Props) => {
         <InputLabel>Supermarkt</InputLabel>
         {mappedMartList}
       </Select>
-      <Grid>{mappedArticleList}</Grid>
+      {mappedArticleList}
     </FlexBox>
   );
 };

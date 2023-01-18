@@ -1,6 +1,7 @@
-import { Grid } from "@mui/material";
+import { Grid, TextField, Typography } from "@mui/material";
 import Article from "../data/Article";
 import Order from "../data/Order";
+import FlexBox from "./FlexBox";
 import ShowArticles from "./ShowArticles";
 
 interface Props {
@@ -19,12 +20,24 @@ const ShowOrdersBySeniors = (props: Props) => {
   const getAllArticles = () => {
     const newList = [] as Article[];
     userOrders.map((order) => {
-      [...newList, ...order.articleList];
+      return [...newList, ...order.articleList];
     });
     return newList;
   };
   const userOrders = getUserOrdersByEmp();
-  return <ShowArticles articles={getAllArticles()}></ShowArticles>;
+  return (
+    <>
+      <Typography
+        variant="h3"
+        sx={{ p: 1, fontSize: 22, fontWeight: "bold" }}
+        color="text.secondary"
+        gutterBottom
+      >
+        {props.senior}
+      </Typography>
+      <ShowArticles articles={getAllArticles()}></ShowArticles>
+    </>
+  );
 };
 
 export default ShowOrdersBySeniors;
