@@ -33,23 +33,26 @@ const ShowAsisstantOrders = (props: Props) => {
     for (const order of openOrders) {
       console.log(order.employeeId);
       if (order.employeeId === employee) {
-        newArticleList.concat(order.articleList);
+        console.log([...newArticleList, ...order.articleList]);
       }
     }
     return newArticleList;
   };
-  const [orderList, setOrderList] = useState<Article[] | null>(unsortedList());
+  const [orderList, setOrderList] = useState<Article[] | null>(null);
 
   const handleMartChange = (event: SelectChangeEvent) => {
     setValueMart({ selectedMart: event.target.value as string });
   };
-  const mappedMartList = martList.map((mart: String) => {
-    return <MenuItem value={mart as string}>{mart}</MenuItem>;
-  });
+  const mappedMartList =
+    martList &&
+    martList.length > 0 &&
+    martList.map((mart: String) => {
+      return <MenuItem value={mart as string}>{mart}</MenuItem>;
+    });
   const mappedArticleList =
-    orderList &&
-    orderList.length > 0 &&
-    orderList.map((article: Article) => {
+    unsortedList() &&
+    unsortedList().length > 0 &&
+    unsortedList().map((article: Article) => {
       return (
         <Grid item lg={3} md={4} sm={6} xs={12}>
           {/* <CardActionArea> */}
