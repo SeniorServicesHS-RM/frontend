@@ -36,11 +36,8 @@ function Copyright(props: any) {
   );
 }
 
-
-
 export default function LoginSide() {
-
-  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  //const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
@@ -53,11 +50,11 @@ export default function LoginSide() {
       password: data.get("password"),
     });
 
-     //firebase methode
+  //firebase method 
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
-    console.log('successful login');
+    console.log('login successful');
     navigate('/');
     const user = userCredential.user;
     // ...
@@ -69,8 +66,6 @@ export default function LoginSide() {
   });
     
   };
-
-
 
   return (
     <ThemeProvider theme={seniorTheme}>
@@ -158,9 +153,6 @@ export default function LoginSide() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
