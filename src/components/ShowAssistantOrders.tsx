@@ -50,6 +50,7 @@ const ShowAsisstantOrders = (props: Props) => {
         <ShowOrdersBySeniors
           senior={senior}
           orderList={orderList}
+          selectedMart={valueMart.selectedMart}
         ></ShowOrdersBySeniors>
       );
     });

@@ -9,6 +9,7 @@ import ShowArticles from "./ShowArticles";
 interface Props {
   senior: string;
   orderList: Order[];
+  selectedMart: string;
 }
 
 const ShowOrdersBySeniors = (props: Props) => {
@@ -19,18 +20,22 @@ const ShowOrdersBySeniors = (props: Props) => {
         })
       : [];
   };
+
   const userOrders = getUserOrdersByEmp();
   const getAllArticles = () => {
     const newList = [] as Article[];
     userOrders.map((order) => {
       order.articleList.map((article) => {
         if (order.seniorId === props.senior) {
-          newList.push(article);
+          if (article.mart === props.selectedMart) {
+            newList.push(article);
+          }
         }
       });
     });
     return newList;
   };
+
   return (
     <>
       <Card variant="outlined">

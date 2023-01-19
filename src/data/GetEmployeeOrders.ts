@@ -30,6 +30,15 @@ const GetEmployeeOrders = (employeeId: string) => {
       new Date(),
       "emp001"
     ),
+    new Order(
+      "otest3",
+      "s002",
+      [new Article("atest2", "brot2 ", 1, "Rewe", "bla2")],
+      new Date(),
+      ["nix2", "nix1"],
+      new Date(),
+      "emp001"
+    ),
   ];
   const openUserOrders = openOrders
     ? openOrders.filter((order: Order) => {
