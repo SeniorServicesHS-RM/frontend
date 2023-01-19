@@ -87,8 +87,8 @@ export const DataBaseProvider = ({ children }: Props) => {
       const martList: string[] = [];
       for (const mart of recievedMarts) {
         martList.push(mart.name);
-        setMarts(martList);
       }
+      setMarts(martList);
     });
     return unsub;
   }, []);
@@ -105,8 +105,8 @@ export const DataBaseProvider = ({ children }: Props) => {
         const serviceList: string[] = [];
         for (const service of recievedServices) {
           serviceList.push(service.desc);
-          setServiceList(serviceList);
         }
+        setServiceList(serviceList);
       }
     );
     return unsub;
