@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import firebase from "firebase/app";
+import { auth } from "../store/Firebase";
 
 //https://github.com/joeythelantern/React-Firebase-9/blob/main/src/components/AuthRoute.tsx
 
@@ -11,7 +12,6 @@ type Props = {
 
 const AuthContext: React.FunctionComponent<Props> = (props) => {
     const { children } = props;
-    const auth = getAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     //const [authenticated, setAuthenticated] = useState(false);
