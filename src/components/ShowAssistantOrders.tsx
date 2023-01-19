@@ -56,19 +56,36 @@ const ShowAsisstantOrders = (props: Props) => {
   const handleMartChange = (event: SelectChangeEvent) => {
     setValueMart({ selectedMart: event.target.value as string });
   };
+  const testArr = () => {
+    const test1 = [] as number[];
+    const test2 = [1, 2, 3];
+    const test3 = [4, 5, 6];
+    const test4 = [test2, test3];
+    for (const stest of test4) {
+      for (const t of stest) {
+        // console.log([...test1, t]);
+        test1.push(t);
+      }
+      // console.log([...test1, stest]);
+    }
+    console.log(test1);
+  };
 
   return (
     <FlexBox>
-      <Button onClick={props.abort}>Menü</Button>
-      <Select
-        value={valueMart.selectedMart}
-        onChange={handleMartChange}
-        fullWidth
-      >
-        <InputLabel>Supermarkt</InputLabel>
-        {mappedMartList}
-      </Select>
-      {mappedArticleList}
+      <Grid>
+        <Button onClick={props.abort}>Menü</Button>
+        <Button onClick={testArr}>Test</Button>
+        <Select
+          value={valueMart.selectedMart}
+          onChange={handleMartChange}
+          fullWidth
+        >
+          <InputLabel>Supermarkt</InputLabel>
+          {mappedMartList}
+        </Select>
+        {mappedArticleList}
+      </Grid>
     </FlexBox>
   );
 };

@@ -1,4 +1,6 @@
-import { Grid, TextField, Typography } from "@mui/material";
+import { Card, Grid, TextField, Typography } from "@mui/material";
+import CardContent from "@mui/material/CardContent/CardContent";
+import { useState } from "react";
 import Article from "../data/Article";
 import Order from "../data/Order";
 import FlexBox from "./FlexBox";
@@ -17,25 +19,33 @@ const ShowOrdersBySeniors = (props: Props) => {
         })
       : [];
   };
+  const userOrders = getUserOrdersByEmp();
   const getAllArticles = () => {
     const newList = [] as Article[];
     userOrders.map((order) => {
-      return [...newList, ...order.articleList];
+      order.articleList.map((article) => {
+        if (order.seniorId === props.senior) {
+          newList.push(article);
+        }
+      });
     });
     return newList;
   };
-  const userOrders = getUserOrdersByEmp();
   return (
     <>
-      <Typography
-        variant="h3"
-        sx={{ p: 1, fontSize: 22, fontWeight: "bold" }}
-        color="text.secondary"
-        gutterBottom
-      >
-        {props.senior}
-      </Typography>
-      <ShowArticles articles={getAllArticles()}></ShowArticles>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography
+            variant="h3"
+            sx={{ p: 1, fontSize: 22, fontWeight: "bold" }}
+            color="text.secondary"
+            gutterBottom
+          >
+            {props.senior}
+          </Typography>
+          <ShowArticles articles={getAllArticles()}></ShowArticles>
+        </CardContent>
+      </Card>
     </>
   );
 };
