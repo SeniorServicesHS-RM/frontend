@@ -60,7 +60,7 @@ export default function LoginSide() {
     // ...
   })
   .catch((error) => {
-    console.log('user does not exist');
+    console.log('wrong Email or password');
     const errorCode = error.code;
     const errorMessage = error.message;
   });
