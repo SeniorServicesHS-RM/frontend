@@ -11,7 +11,6 @@ interface Props {
   amount: number;
   mart: String;
   picture?: ReactNode;
-  route: string;
 }
 
 const ArticleCard = (props: Props) => {

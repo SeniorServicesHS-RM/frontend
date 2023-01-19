@@ -9,10 +9,14 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import Article from "../data/Article";
+import GetEmployeeOrders from "../data/GetEmployeeOrders";
 import Order from "../data/Order";
 import { DataBaseContext } from "../store/DataBaseContext";
 import ArticleCard from "./ArticleCard";
 import FlexBox from "./FlexBox";
+import ShowArticles from "./ShowArticles";
+import ShowOrders from "./ShowOrders";
+import ShowOrdersBySeniors from "./ShowOrdersBySeniors";
 
 interface Props {
   abort: () => void;
@@ -22,27 +26,16 @@ interface ValueHandler {
 }
 const ShowAsisstantOrders = (props: Props) => {
   const employee = "emp001";
-  const { openOrders } = React.useContext(DataBaseContext);
+  const seniorList = ["s001", "s002"];
   const { martList } = React.useContext(DataBaseContext);
+  const [isSorted, setIsSorted] = useState(true);
   const [valueMart, setValueMart] = useState<ValueHandler>({
     selectedMart: martList ? martList[0] : "",
   });
-  const unsortedList = () => {
-    console.log(openOrders);
-    const newArticleList: Article[] = [];
-    for (const order of openOrders) {
-      console.log(order.employeeId);
-      if (order.employeeId === employee) {
-        console.log([...newArticleList, ...order.articleList]);
-      }
-    }
-    return newArticleList;
-  };
-  const [orderList, setOrderList] = useState<Article[] | null>(null);
+  const [orderList, setOrderList] = useState<Order[] | null>(
+    GetEmployeeOrders(employee)
+  );
 
-  const handleMartChange = (event: SelectChangeEvent) => {
-    setValueMart({ selectedMart: event.target.value as string });
-  };
   const mappedMartList =
     martList &&
     martList.length > 0 &&
@@ -50,24 +43,20 @@ const ShowAsisstantOrders = (props: Props) => {
       return <MenuItem value={mart as string}>{mart}</MenuItem>;
     });
   const mappedArticleList =
-    unsortedList() &&
-    unsortedList().length > 0 &&
-    unsortedList().map((article: Article) => {
+    seniorList &&
+    seniorList.length > 0 &&
+    seniorList.map((senior: string) => {
       return (
-        <Grid item lg={3} md={4} sm={6} xs={12}>
-          {/* <CardActionArea> */}
-          <ArticleCard
-            key={article.id}
-            title={article.name}
-            description={article.note}
-            amount={article.amount}
-            mart={article.mart}
-            route={"/assistant"}
-          ></ArticleCard>
-          {/* </CardActionArea> */}
-        </Grid>
+        <ShowOrdersBySeniors
+          senior={senior}
+          orderList={orderList}
+        ></ShowOrdersBySeniors>
       );
     });
+  const handleMartChange = (event: SelectChangeEvent) => {
+    setValueMart({ selectedMart: event.target.value as string });
+  };
+
   return (
     <FlexBox>
       <Button onClick={props.abort}>Menü</Button>
@@ -79,7 +68,7 @@ const ShowAsisstantOrders = (props: Props) => {
         <InputLabel>Supermarkt</InputLabel>
         {mappedMartList}
       </Select>
-      <Grid>{mappedArticleList}</Grid>
+      {mappedArticleList}
     </FlexBox>
   );
 };
