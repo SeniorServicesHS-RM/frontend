@@ -2,21 +2,22 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./LandingPage";
 import ServicesPage from "./ServicesPage";
-import SignIn from "./SignIn";
-
 import PlanningPage from "./PlanningPage";
 import LoginPage from "./LoginPage";
 import ShoppingPageSelection from "./ShoppingPageSelection";
+import ProfilePage from "./ProfilePage";
+import AuthContext from '../store/AuthContext';
+
 const NavigationPage = () => {
   return (
     <React.Fragment>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/shopping" element={<ShoppingPageSelection />} />
-        <Route path="/services" element={<ServicesPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/planning" element={<PlanningPage />} />
+        <Route path="/shopping" element={<AuthContext> <ShoppingPageSelection /> </AuthContext>} />
+        <Route path="/services" element={<AuthContext> <ServicesPage /> </AuthContext>} />
+        <Route path="/planning" element={<AuthContext> <PlanningPage /> </AuthContext>} />
+        <Route path="/profile" element={<AuthContext> <ProfilePage /> </AuthContext>} />
       </Routes>
     </React.Fragment>
   );

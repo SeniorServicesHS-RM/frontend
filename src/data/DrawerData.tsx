@@ -4,6 +4,7 @@ import AccessibleIcon from "@mui/icons-material/Accessible";
 import LoginIcon from "@mui/icons-material/Login";
 import BlindIcon from "@mui/icons-material/Blind";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const DrawerData = [
   {
@@ -22,11 +23,6 @@ const DrawerData = [
     icon: <AccessibleIcon />,
   },
   {
-    title: "LogIn",
-    path: "/signin",
-    icon: <LoginIcon />,
-  },
-  {
     title: "DBTest",
     path: "/dbtest",
     icon: <BlindIcon />,
@@ -35,6 +31,16 @@ const DrawerData = [
     title: "Planning",
     path: "/planning",
     icon: <CalendarMonthIcon />,
+  },
+  {
+    title: "Login",
+    path: "/login",
+    icon: <LoginIcon />,
+  },
+  {
+    title: "Logout",
+    path: "/",
+    icon: <LogoutIcon />,
   },
 ];
 
