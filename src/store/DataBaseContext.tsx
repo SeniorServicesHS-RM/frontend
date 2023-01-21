@@ -168,7 +168,7 @@ export const DataBaseProvider = ({ children }: Props) => {
           );
           articleAry.push(article);
         }
-        if (order.orderDone === "false" || !order.orderDone) {
+        if (order.orderDone === "true" || order.orderDone) {
           closedOrders.push(
             new Order(
               order.id,

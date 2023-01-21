@@ -50,7 +50,7 @@ const GetEmployeeOrders = (employeeId: string) => {
         return order.employeeId === employeeId;
       })
     : [];
-  return [...openUserOrders, ...closedUserOrders];
+  return openUserOrders;
 };
 
 export default GetEmployeeOrders;
