@@ -1,11 +1,15 @@
 import {
   Button,
   CardActionArea,
+  FormControlLabel,
   Grid,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
+  Switch,
+  ToggleButton,
+  ToggleButtonGroup,
 } from "@mui/material";
 import React, { useState } from "react";
 import Article from "../data/Article";
@@ -27,11 +31,13 @@ interface ValueHandler {
 const ShowAsisstantOrders = (props: Props) => {
   const employee = "emp001";
   const seniorList = ["s001", "s002"];
+  // const martList = ["Rewe", "Lidl", "Aldi"];
   const { martList } = React.useContext(DataBaseContext);
   const [isSorted, setIsSorted] = useState(true);
   const [valueMart, setValueMart] = useState<ValueHandler>({
     selectedMart: martList ? martList[0] : "",
   });
+  const [showSorted, setShowSorted] = useState(true);
   const [orderList, setOrderList] = useState<Order[] | null>(
     GetEmployeeOrders(employee)
   );
@@ -51,32 +57,22 @@ const ShowAsisstantOrders = (props: Props) => {
           senior={senior}
           orderList={orderList}
           selectedMart={valueMart.selectedMart}
+          showSorted={showSorted}
         ></ShowOrdersBySeniors>
       );
     });
   const handleMartChange = (event: SelectChangeEvent) => {
     setValueMart({ selectedMart: event.target.value as string });
   };
-  const testArr = () => {
-    const test1 = [] as number[];
-    const test2 = [1, 2, 3];
-    const test3 = [4, 5, 6];
-    const test4 = [test2, test3];
-    for (const stest of test4) {
-      for (const t of stest) {
-        // console.log([...test1, t]);
-        test1.push(t);
-      }
-      // console.log([...test1, stest]);
-    }
-    console.log(test1);
+  const handleSeniorChange = () => {
+    setShowSorted(!showSorted);
   };
 
   return (
     <FlexBox>
       <Grid>
         <Button onClick={props.abort}>Menü</Button>
-        <Button onClick={testArr}>Test</Button>
+        <Switch defaultChecked onChange={handleSeniorChange}></Switch>
         <Select
           value={valueMart.selectedMart}
           onChange={handleMartChange}

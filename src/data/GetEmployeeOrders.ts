@@ -1,10 +1,10 @@
-import React from "react";
+import { useContext } from "react";
 import { DataBaseContext } from "../store/DataBaseContext";
 import Article from "./Article";
 import Order from "./Order";
 
 const GetEmployeeOrders = (employeeId: string) => {
-  const { openOrders } = React.useContext(DataBaseContext);
+  const { openOrders, closedOrders } = useContext(DataBaseContext);
   const testOrders = [
     new Order(
       "otest1",
@@ -41,11 +41,16 @@ const GetEmployeeOrders = (employeeId: string) => {
     ),
   ];
   const openUserOrders = openOrders
-    ? openOrders.filter((order: Order) => {
+    ? openOrders.filter((order) => {
         return order.employeeId === employeeId;
       })
     : testOrders;
-  return testOrders;
+  const closedUserOrders = closedOrders
+    ? closedOrders.filter((order) => {
+        return order.employeeId === employeeId;
+      })
+    : [];
+  return [...openUserOrders, ...closedUserOrders];
 };
 
 export default GetEmployeeOrders;

@@ -10,6 +10,7 @@ interface Props {
   senior: string;
   orderList: Order[];
   selectedMart: string;
+  showSorted: boolean;
 }
 
 const ShowOrdersBySeniors = (props: Props) => {
@@ -26,11 +27,11 @@ const ShowOrdersBySeniors = (props: Props) => {
     const newList = [] as Article[];
     userOrders.map((order) => {
       order.articleList.map((article) => {
-        if (order.seniorId === props.senior) {
-          if (article.mart === props.selectedMart) {
-            newList.push(article);
-          }
+        // if (order.seniorId === props.senior) {
+        if (article.mart === props.selectedMart) {
+          newList.push(article);
         }
+        // }
       });
     });
     return newList;
@@ -38,19 +39,23 @@ const ShowOrdersBySeniors = (props: Props) => {
 
   return (
     <>
-      <Card variant="outlined">
-        <CardContent>
-          <Typography
-            variant="h3"
-            sx={{ p: 1, fontSize: 22, fontWeight: "bold" }}
-            color="text.secondary"
-            gutterBottom
-          >
-            {props.senior}
-          </Typography>
-          <ShowArticles articles={getAllArticles()}></ShowArticles>
-        </CardContent>
-      </Card>
+      {props.showSorted ? (
+        <Card variant="outlined">
+          <CardContent>
+            <Typography
+              variant="h3"
+              sx={{ p: 1, fontSize: 22, fontWeight: "bold" }}
+              color="text.secondary"
+              gutterBottom
+            >
+              {props.senior}
+            </Typography>
+            <ShowArticles articles={getAllArticles()}></ShowArticles>
+          </CardContent>
+        </Card>
+      ) : (
+        <ShowArticles articles={getAllArticles()}></ShowArticles>
+      )}
     </>
   );
 };
