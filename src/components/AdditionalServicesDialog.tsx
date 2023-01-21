@@ -14,8 +14,8 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { text } from "body-parser";
+import { abort } from "process";
 import React, { ChangeEvent } from "react";
 import { useState } from "react";
 import {
@@ -26,6 +26,7 @@ import Order from "../data/Order";
 
 interface Props {
   orderToPush: Order;
+  abort: () => void;
 }
 interface ValueHandler {
   newService?: string;
@@ -51,12 +52,11 @@ function AdditionalServicesDialog(props: Props) {
     setOpen(false);
   };
   const handleDone = () => {
-    console.log(services);
     services.push(valueService.newService);
     props.orderToPush.additionalServices = services.filter((e) => e);
-    console.log(props.orderToPush.additionalServices);
     handlePush();
     handleClose();
+    props.abort();
   };
   const handlePush = () => {
     for (const singleArticle of props.orderToPush.articleList) {
@@ -71,8 +71,6 @@ function AdditionalServicesDialog(props: Props) {
   }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
-    console.log(event.target.checked);
-    console.log(event.target.name);
     if (event.target.checked) {
       services.push(event.target.name);
     } else {
@@ -88,7 +86,6 @@ function AdditionalServicesDialog(props: Props) {
         <></>
       );
     }
-    console.log(services);
   }
   const mappedServices = serviceList.map((singleServ: string) => {
     return (
@@ -100,15 +97,8 @@ function AdditionalServicesDialog(props: Props) {
   });
 
   return (
-    <div className="send-btn">
-      <Button
-        variant="contained"
-        onClick={handleClickOpen}
-        sx={{ marginBottom: 2 }}
-        size="large"
-        startIcon={<TaskAltIcon />}
-        color={"primary"}
-      >
+    <div>
+      <Button variant="outlined" onClick={handleClickOpen}>
         Fertig
       </Button>
       <Dialog open={open} onClose={handleClose}>

@@ -13,14 +13,21 @@ import FormLabel from "@mui/material/FormLabel";
 import FormGroup from "@mui/material/FormGroup/FormGroup";
 import Checkbox from "@mui/material/Checkbox/Checkbox";
 import AdditionalServicesDialog from "../components/AdditionalServicesDialog";
-const ShoppingPage = () => {
+import { Button } from "@mui/material";
+
+interface Props {
+  abort: () => void;
+}
+
+const ShoppingPage = (props: Props) => {
+  const seniorId = "s001"; //gemockte SeniorId! Richtige muss aus authcontext kommen
   const [isEditOpen, setEditOpen] = useState(false);
   const { articles, changeArticles, openOrders } = useContext(DataBaseContext);
   const [myOrder, setMyOrder] = useState<Order | null>(
-    openOrders[openOrders.length - 1]
+    new Order(Date.now().toString(), seniorId, [], new Date(Date.now()))
   );
   const [orderList, setOrderList] = useState<Article[] | null>(
-    myOrder.articleList
+    myOrder.articleList ? myOrder.articleList : null
   );
 
   const [singleOrder, setSingleOrder] = useState<Article | null>(null);
@@ -82,8 +89,10 @@ const ShoppingPage = () => {
           >
             <AddArticleDialog addOrder={addArticle}></AddArticleDialog>
             <AdditionalServicesDialog
+              abort={props.abort}
               orderToPush={myOrder}
             ></AdditionalServicesDialog>
+            <Button onClick={props.abort}>Abbrechen</Button>
           </Grid>
           {mappedOrderList}
           {isEditOpen ? (

@@ -1,22 +1,24 @@
 import Article from "./Article";
 
 class Order {
-  private _orderDone = false;
   constructor(
     private _id: string,
     private _seniorId: string,
     private _articleList: Article[],
-    //private _amount: number,
     private _date: Date,
-    // private _mart: string,
     private _additionalServices?: string[],
     private _planDate?: Date,
     private _employeeId?: string,
     private _actualPrice?: number,
     private _estimatedPrice?: number,
     private _signDate?: Date,
-    private _signature?: string //hier muss das Base64-Bild rein
-  ) {}
+    private _signature?: string, //hier muss das Base64-Bild rein
+    private _orderDone?: boolean
+  ) {
+    if (this._orderDone === undefined) {
+      this._orderDone = false;
+    }
+  }
   public get id() {
     return this._id;
   }
