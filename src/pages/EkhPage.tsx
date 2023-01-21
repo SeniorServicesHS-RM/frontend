@@ -1,14 +1,5 @@
-import { PurchaseArray } from "../data/PurchaseTestData";
-import Purchase from "../data/Purchase";
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
 import {
-  Button,
   CardActionArea,
-  CardActions,
   FormControl,
   Grid,
   InputLabel,
@@ -20,25 +11,25 @@ import FlexBox from "../components/FlexBox";
 import ArticleCard from "../components/ArticleCard";
 import Order from "../data/Order";
 import { GetOrdersByEmployee } from "../data/OrderService";
-
-// import { MartAry, OrderArray } from "../data/ArticleTestData";
 import { MartAry } from "../data/ArticleTestData";
 import Article from "../data/Article";
+import React from "react";
 
-// import ColorToggleButton from "../components/ToggleButton";
+//Frage an Marcel: macht es Sinn, diese spezielle Klassen auszulagern?
+//IN: Markt als String, Artikelarray; OUT: Marktbezeichnung; Artikel aus ausgewähltem Markt
+class MartFilteredList {
+  constructor(private _mart: String, private _articles: ArticleWithOrder[]) {}
 
-//TODO: auslagern!
-class FilteredList {
-  constructor(private _filter: String, private _filtered: ArticleWithOrder[]) {}
-
-  public get filter() {
-    return this._filter;
+  public get mart() {
+    return this._mart;
   }
-  public get filtered() {
-    return this._filtered;
+  public get articles() {
+    return this._articles;
   }
 }
 
+//Frage an Marcel: macht es Sinn, diese spezielle Klassen auszulagern?
+//new class with injected Order to Article (only reference) for 2nd-level Filter with an option in order after Filter (mapping) with an option from article
 class ArticleWithOrder {
   constructor(private _order: Order, private _article: Article) {}
 
@@ -58,18 +49,9 @@ class ArticleWithOrder {
 }
 
 const FILTER_MART = "FILTER_MART";
-const FILTER_MART_FUNCTION = (article: ArticleWithOrder, entry: string) => {
+const FILTER_MART_FUNCTION = (article: ArticleWithOrder, entry: String) => {
   return article.article.mart.toLowerCase() == entry.toLowerCase();
 };
-
-const FILTER_SENIOR = "FILTER_SENIOR";
-const FILTER_SENIOR_FUNCTION = (article: ArticleWithOrder, entry: string) => {
-  return article.order.seniorId.toLowerCase() == entry.toLowerCase();
-};
-
-let activeFilterType = FILTER_MART;
-let activeFilter: Function = FILTER_MART_FUNCTION;
-// let filterList: String[] = ["Rewe"];
 
 const EkhPage = () => {
   // TODO aus authContext holen
@@ -86,13 +68,12 @@ const EkhPage = () => {
     () => allArticles
   );
 
-  // const [filteredArticlesBySen, setFilteredArticlesBySen] = React.useState(
-  //   () => allArticlesByEmp
-  // );
-
-  const [martFilterValue, setMartFilterValue] = React.useState(() => "all");
+  // martFilter ist Array, sodass nach einzelnen und auch nach mehreren Märkten gefiltert werden kann & ResponsiveAktualisierung nach Auswahl
   const [martFilter, setMartFilter] = React.useState(() => MartAry);
 
+  // Liste aller Senioren erstellen
+  // damit nur die Senioren im Dropdown und in den Filterungen erscheinen,
+  // die auch Artikel im Einkauf des EKH enthalten sind, angezeigt werden
   const senList = [
     ...new Set(
       allArticlesByEmp.map((article: ArticleWithOrder) => {
@@ -101,30 +82,37 @@ const EkhPage = () => {
     ),
   ];
 
-  const [oldieFilterValue, setOldieFilterValue] = React.useState(() => "all");
+  //const [oldieFilterValue, setOldieFilterValue] = React.useState(() => "all");
+  // reaktives Update, falls sich senFilter ändert (durch Nutzen des Dropdown Menüs "Senior" --> initial => senList (alle Senioren))
   const [senFilter, setSenFilter] = React.useState(() => senList);
 
+  // Filterung: SeniorenID in senFilter enthalten?
   let filteredArticlesBySen = allArticlesByEmp.filter((article) =>
     senFilter.includes(article.order.seniorId)
   );
 
-  // ArticleWithOrder Lists for every available subFilter in current filter. E.g.: Filter for Marts, available SubFilters = Rewe, Aldi, etc
-  let filteredLists = martFilter.map((mart) => {
-    return new FilteredList(
+  // Erstelle Liste von MartFilteredLlists, für jeden Supermarkt einen Eintrag mit Liste aller Artikel aus jenem
+  let martArticles = MartAry.map((mart) => {
+    return new MartFilteredList(
       mart,
       filteredArticlesBySen.filter((article: ArticleWithOrder) =>
-        activeFilter(article, mart)
+        FILTER_MART_FUNCTION(article, mart)
       )
     );
-  });
+  }).filter((martFilteredList) => martFilteredList.articles.length > 0);
+
+  // Liste aller Supermärkte mit jeweiligen Artikeln nach martFilter filtern (Selection Dropdown)
+  let filteredLists = martArticles.filter((martArt) =>
+    martFilter.includes(martArt.mart)
+  );
 
   let allFiltered = filteredLists
-    .filter((filtered) => filtered.filtered.length > 0)
-    .map((filteredList: FilteredList) => {
+    // .filter((filtered) => filtered.articles.length > 0)
+    .map((filteredList: MartFilteredList) => {
       return (
         <Grid>
-          <h1>{filteredList.filter.toString()}</h1>
-          {orderByFilter(filteredList.filtered)}
+          <h1>{filteredList.mart.toString()}</h1>
+          {orderByFilter(filteredList.articles)}
         </Grid>
       );
     });
@@ -135,7 +123,7 @@ const EkhPage = () => {
         article.article.done = !article.article.done;
 
         //aktualisieren der view nach onCLick
-        const arrayIndex = allArticlesByEmp.indexOf(article);
+        //const arrayIndex = allArticlesByEmp.indexOf(article);
         const newList = [...allArticlesByEmp];
         // newList[arrayIndex] = article;
         setAllArticlesByEmp(newList);
@@ -163,14 +151,12 @@ const EkhPage = () => {
   }
 
   const onMartSelect = (event: SelectChangeEvent) => {
-    setMartFilterValue(event.target.value);
     setMartFilter(
       MartAry.includes(event.target.value) ? [event.target.value] : MartAry
     );
   };
 
-  function onOldieSelect(event: SelectChangeEvent) {
-    setOldieFilterValue(event.target.value);
+  function onSeniorSelect(event: SelectChangeEvent) {
     setSenFilter(
       senList.includes(event.target.value) ? [event.target.value] : senList
     );
@@ -180,43 +166,46 @@ const EkhPage = () => {
     <div>
       <div>
         <FlexBox>
+          {/* MarktDropdown */}
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Mart</InputLabel>
+            <InputLabel id="Marktauswahl">Markt</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={martFilterValue}
+              labelId="Marktauswahl"
+              id="marktauswahl"
+              value={martFilter.join("-")} //Voreinstellung für Dropdown
               label="Mart"
               onChange={onMartSelect}
             >
-              <MenuItem value={"all"}>Alle</MenuItem>
-              {/* TODO Fix ForEach for TODO 1 */}
-              {MartAry.map((element) => {
+              {/* MenüItem voreingestellt Alle Märkte*/}
+              <MenuItem value={MartAry.join("-")}>Alle</MenuItem>
+
+              {/* mapping aller Supermärkte als Dropdownmenü Item */}
+              {martArticles.map((mart) => {
                 return (
-                  <MenuItem value={element.toString()}>{element}</MenuItem>
+                  <MenuItem value={mart.mart.toString()}>{mart.mart}</MenuItem>
                 );
               })}
             </Select>
           </FormControl>
+
+          {/* SeniorenDropdown */}
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Oldie</InputLabel>
+            <InputLabel id="Seniorenauswahl">Senior</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={oldieFilterValue}
+              labelId="Seniorenauswahl"
+              id="seniorenauswahl"
+              value={senFilter.join("-")} //Voreinstellung für Dropdown
               label="Oldie"
-              onChange={onOldieSelect}
+              onChange={onSeniorSelect}
             >
-              <MenuItem value={"all"}>Alle</MenuItem>
-              {/* TODO Fix ForEach for TODO 1 */}
-              {senList.map((element) => {
-                return (
-                  <MenuItem value={element.toString()}>{element}</MenuItem>
-                );
+              {/* MenüItem voreingestellt für Alle Senioren*/}
+              <MenuItem value={senList.join("-")}>Alle</MenuItem>
+              {/* mapping Dropdownmenü Item für alle Senioren */}
+              {senList.map((seniorId) => {
+                return <MenuItem value={seniorId}>{seniorId}</MenuItem>;
               })}
             </Select>
           </FormControl>
-          {/* </Grid> */}
         </FlexBox>
       </div>
 
@@ -227,8 +216,6 @@ const EkhPage = () => {
         alignItems="stretch"
       >
         {allFiltered}
-
-        {/* {orderByFilter(allArticlesByEmp)} */}
       </Grid>
     </div>
   );
