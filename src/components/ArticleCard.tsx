@@ -21,6 +21,7 @@ interface Props {
   description?: string;
   amount: number;
   mart: String;
+  done?: Boolean;
   picture?: ReactNode;
   route: string;
 }
@@ -31,9 +32,9 @@ const ArticleCard = (props: Props) => {
       variant="outlined"
       sx={{ maxHeight: 200, height: 200, backgroundColor: "primary.light" }}
     >
+      {/* visible Done Icon representing ArticleDone == true */}
       <CardContent>
-        <DoneIcon>articleInCart</DoneIcon>
-        {true && (
+        {props.done && (
           <div>
             {" "}
             <DoneIcon>articleInCart</DoneIcon>

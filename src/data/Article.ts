@@ -34,7 +34,7 @@ class Article {
     this._mart = value;
   }
   public get done(): boolean {
-    return this.done;
+    return this._done;
   }
   public set done(value: boolean) {
     this._done = value;

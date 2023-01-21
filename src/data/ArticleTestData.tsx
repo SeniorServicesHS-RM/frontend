@@ -1,6 +1,36 @@
 import Article from "./Article";
 import Order from "./Order";
 export const OrderArray: Order[] = [
+  new Order(
+    "order1",
+    "sen001",
+    [
+      new Article("art001", "Banane", 3, "Rewe", false, "Gelbe"),
+      new Article("art001", "Banane", 3, "Rewe", false, "Gelbe"),
+      new Article("art001", "Banane", 3, "Rewe", false, "Gelbe"),
+      new Article("art001", "Banane", 3, "Rewe", false, "Gelbe"),
+      new Article("art001", "Banane", 3, "Rewe", false, "Gelbe"),
+    ],
+    new Date(),
+    [],
+    undefined,
+    "emp001"
+  ),
+  new Order(
+    "order2",
+    "sen002",
+    [
+      new Article("art002", "Apfel", 3, "Aldi", false, "Lila"),
+      new Article("art001", "Banane", 3, "Rewe", false, "Gelbe"),
+      new Article("art001", "Banane", 3, "Rewe", false, "Gelbe"),
+      new Article("art001", "Banane", 3, "Rewe", false, "Gelbe"),
+      new Article("art001", "Banane", 3, "Rewe", false, "Gelbe"),
+    ],
+    new Date(),
+    [],
+    undefined,
+    "emp001"
+  ),
   //   new Order(
   //     "o1",
   //     "senior1",

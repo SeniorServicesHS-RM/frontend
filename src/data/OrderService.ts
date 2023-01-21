@@ -1,6 +1,7 @@
 import React from "react";
 import { DataBaseContext } from "../store/DataBaseContext";
 import Order from "./Order";
+import { OrderArray } from "./ArticleTestData";
 
 // Alternative Implementierung einer GetUserOrders-ähnlichen Funktion
 // Bessere Lesbarkeit?
@@ -29,23 +30,31 @@ export const GetOrdersByUser = (seniorId: string) => {
     return order.seniorId === seniorId;
   };
 
-  const { openOrders, closedOrders } = React.useContext(DataBaseContext);
+  // const { openOrders, closedOrders } = React.useContext(DataBaseContext);
+  const openOrders = OrderArray;
+  const closedOrders = OrderArray;
   const openUserOrders = filterOrders(openOrders, filterFun);
   const closedUserOrders = filterOrders(closedOrders, filterFun);
 
   return openUserOrders.concat(closedUserOrders);
 };
 
-const GetOrdersByEmployee = (employeeId: string) => {
+export const GetOrdersByEmployee = (employeeId: string) => {
   const filterFun: OrderFilter = (order: Order) => {
     return order.employeeId === employeeId;
   };
 
-  const { openOrders, closedOrders } = React.useContext(DataBaseContext);
+  console.log("Get employee orders");
+
+  // const { openOrders, closedOrders } = React.useContext(DataBaseContext);
+  const openOrders = OrderArray;
+  const closedOrders = OrderArray;
+
+  console.log(openOrders);
+  console.log(closedOrders);
+
   const openUserOrders = filterOrders(openOrders, filterFun);
   const closedUserOrders = filterOrders(closedOrders, filterFun);
 
   return openUserOrders.concat(closedUserOrders);
 };
-
-export default GetOrdersByEmployee;

@@ -15,14 +15,11 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  ToggleButton,
-  ToggleButtonGroup,
 } from "@mui/material";
 import FlexBox from "../components/FlexBox";
 import ArticleCard from "../components/ArticleCard";
 import Order from "../data/Order";
-import GetOrdersByEmployee from "../data/OrderService";
-import DoneIcon from "@mui/icons-material/Done";
+import { GetOrdersByEmployee } from "../data/OrderService";
 
 // import { MartAry, OrderArray } from "../data/ArticleTestData";
 import { MartAry } from "../data/ArticleTestData";
@@ -72,65 +69,54 @@ const FILTER_SENIOR_FUNCTION = (article: ArticleWithOrder, entry: string) => {
 
 let activeFilterType = FILTER_MART;
 let activeFilter: Function = FILTER_MART_FUNCTION;
-let filterList = MartAry;
+// let filterList: String[] = ["Rewe"];
 
 const EkhPage = () => {
   // TODO aus authContext holen
   const employeeId = "emp001";
-
   const orderByEmp: Order[] = GetOrdersByEmployee(employeeId);
 
-  const allArticlesByEmp: ArticleWithOrder[] = [].concat(
+  const allArticles: ArticleWithOrder[] = [].concat(
     ...orderByEmp.map((order) =>
       order.articleList.map((article) => new ArticleWithOrder(order, article))
     )
   );
 
-  // Set Filter: Mart or Senior ( From Exclusive Toggle Button )
-  function setFilter(filterType: string) {
-    activeFilterType = filterType;
-    if (activeFilterType == FILTER_MART) {
-      filterList = MartAry;
-      activeFilter = FILTER_MART_FUNCTION;
-    }
-    if (activeFilterType == FILTER_SENIOR) {
-      filterList = [
-        ...new Set(
-          allArticlesByEmp.map((article: ArticleWithOrder) => {
-            return article.order.seniorId;
-          })
-        ),
-      ];
-      activeFilter = FILTER_SENIOR_FUNCTION;
-    }
-  }
+  const [allArticlesByEmp, setAllArticlesByEmp] = React.useState(
+    () => allArticles
+  );
+
+  // const [filteredArticlesBySen, setFilteredArticlesBySen] = React.useState(
+  //   () => allArticlesByEmp
+  // );
+
+  const [martFilterValue, setMartFilterValue] = React.useState(() => "all");
+  const [martFilter, setMartFilter] = React.useState(() => MartAry);
+
+  const senList = [
+    ...new Set(
+      allArticlesByEmp.map((article: ArticleWithOrder) => {
+        return article.order.seniorId;
+      })
+    ),
+  ];
+
+  const [oldieFilterValue, setOldieFilterValue] = React.useState(() => "all");
+  const [senFilter, setSenFilter] = React.useState(() => senList);
+
+  let filteredArticlesBySen = allArticlesByEmp.filter((article) =>
+    senFilter.includes(article.order.seniorId)
+  );
 
   // ArticleWithOrder Lists for every available subFilter in current filter. E.g.: Filter for Marts, available SubFilters = Rewe, Aldi, etc
-  let filteredLists = filterList.map((entry) => {
+  let filteredLists = martFilter.map((mart) => {
     return new FilteredList(
-      entry,
-      allArticlesByEmp.filter((article: ArticleWithOrder) =>
-        activeFilter(article, entry)
+      mart,
+      filteredArticlesBySen.filter((article: ArticleWithOrder) =>
+        activeFilter(article, mart)
       )
     );
   });
-
-  // probably unused
-  // const mappedArticleByEmp = allArticlesByEmp.map(
-  //   (article: ArticleWithOrder) => {
-  //     return (
-  //       <Grid>
-  //         <ArticleCard
-  //           title={article.article.name}
-  //           description={article.article.note}
-  //           amount={article.article.amount}
-  //           route={"/ekh"}
-  //           mart={article.article.mart}
-  //         ></ArticleCard>
-  //       </Grid>
-  //     );
-  //   }
-  // );
 
   let allFiltered = filteredLists
     .filter((filtered) => filtered.filtered.length > 0)
@@ -146,18 +132,13 @@ const EkhPage = () => {
   function orderByFilter(filtered: ArticleWithOrder[]) {
     return filtered.map((article: ArticleWithOrder) => {
       function editHandler(article: ArticleWithOrder) {
-        //TODO
-        //flag articleInCart
-        //if articleInCart set to !articleInCart
-        //if !articleInCart set to articleInCart
-        //view eines hakens aktivieren oder deaktivieren (auf basis der abgehakt flag)
-        console.log(
-          "Artikel " +
-            article.article.id +
-            " aus Bestellung " +
-            article.order.id +
-            " ist abgehakt"
-        );
+        article.article.done = !article.article.done;
+
+        //aktualisieren der view nach onCLick
+        const arrayIndex = allArticlesByEmp.indexOf(article);
+        const newList = [...allArticlesByEmp];
+        // newList[arrayIndex] = article;
+        setAllArticlesByEmp(newList);
       }
 
       return (
@@ -171,8 +152,9 @@ const EkhPage = () => {
               title={article.article.name}
               description={article.article.note}
               amount={article.article.amount}
-              route={"/ekh"}
               mart={article.article.mart}
+              done={article.article.done}
+              route={"/ekh"}
             ></ArticleCard>
           </CardActionArea>
         </Grid>
@@ -180,67 +162,58 @@ const EkhPage = () => {
     });
   }
 
-  const [alignment, setAlignment] = React.useState(activeFilterType);
-
-  const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
-  ) => {
-    setAlignment(newAlignment);
-    setFilter(newAlignment);
+  const onMartSelect = (event: SelectChangeEvent) => {
+    setMartFilterValue(event.target.value);
+    setMartFilter(
+      MartAry.includes(event.target.value) ? [event.target.value] : MartAry
+    );
   };
 
-  // let secondLevelFilter = filterList;
-  // const [secLvlFilter, setSecLvlFilter] = React.useState(secondLevelFilter);
-
-  const onSelect = (event: SelectChangeEvent) => {
-    // setSecLvlFilter(event.target.value as string);
-    console.log(event.target.value);
-  };
-
-  //1. TODO forEach in JSX für jede option in filterList --
-  //2. TODO in der onSelect auf basis des select wertes die filterList anpassen (wenn ausgewählter wert in filterList vorhanden, nur wert nutzen, ansonsten alle?)
-  //    -> value = senior1, filterList = [senior1, senior2, ...] -> filterList = [senior1]
-  //    -> value = all, filterList = [senior1, senior2, ...] -> all nicht in liste, also alle zeigen
-
-  // 2. Filterstufe für Dienstag?
-  // Datenmodellanpassung
-  // Auslagern der Components (!) --> Dominik brauchts
+  function onOldieSelect(event: SelectChangeEvent) {
+    setOldieFilterValue(event.target.value);
+    setSenFilter(
+      senList.includes(event.target.value) ? [event.target.value] : senList
+    );
+  }
 
   return (
     <div>
       <div>
         <FlexBox>
-          {/* <Grid
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="stretch"
-        > */}
-          <ToggleButtonGroup
-            color="primary"
-            value={alignment}
-            exclusive
-            onChange={handleChange}
-            aria-label="Platform"
-          >
-            <ToggleButton value={FILTER_MART}>Marts</ToggleButton>
-            <ToggleButton value={FILTER_SENIOR}>Seniors</ToggleButton>
-          </ToggleButtonGroup>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Einzelauswahl</InputLabel>
+            <InputLabel id="demo-simple-select-label">Mart</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={"10"}
-              label="Age"
-              onChange={onSelect}
+              value={martFilterValue}
+              label="Mart"
+              onChange={onMartSelect}
             >
               <MenuItem value={"all"}>Alle</MenuItem>
               {/* TODO Fix ForEach for TODO 1 */}
-              {/* filterList.forEach(element => { */}
-              <MenuItem value={"element"}>element</MenuItem>
-              {/* });  */}
+              {MartAry.map((element) => {
+                return (
+                  <MenuItem value={element.toString()}>{element}</MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Oldie</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={oldieFilterValue}
+              label="Oldie"
+              onChange={onOldieSelect}
+            >
+              <MenuItem value={"all"}>Alle</MenuItem>
+              {/* TODO Fix ForEach for TODO 1 */}
+              {senList.map((element) => {
+                return (
+                  <MenuItem value={element.toString()}>{element}</MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
           {/* </Grid> */}
