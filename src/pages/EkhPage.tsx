@@ -48,13 +48,14 @@ class ArticleWithOrder {
   }
 }
 
-const FILTER_MART = "FILTER_MART";
+//JAN: EINLAGERN, da nur 1x benutzt?
+//const FILTER_MART = "FILTER_MART";
 const FILTER_MART_FUNCTION = (article: ArticleWithOrder, entry: String) => {
-  return article.article.mart.toLowerCase() == entry.toLowerCase();
+  return article.article.mart.toLowerCase() === entry.toLowerCase();
 };
 
 const EkhPage = () => {
-  // TODO aus authContext holen
+  // TODO: aus authContext holen
   const employeeId = "emp001";
   const orderByEmp: Order[] = GetOrdersByEmployee(employeeId);
 
@@ -64,6 +65,7 @@ const EkhPage = () => {
     )
   );
 
+  //reaktives Update falls sich Articles/Orders des EKH (empID) ändern
   const [allArticlesByEmp, setAllArticlesByEmp] = React.useState(
     () => allArticles
   );
@@ -82,7 +84,6 @@ const EkhPage = () => {
     ),
   ];
 
-  //const [oldieFilterValue, setOldieFilterValue] = React.useState(() => "all");
   // reaktives Update, falls sich senFilter ändert (durch Nutzen des Dropdown Menüs "Senior" --> initial => senList (alle Senioren))
   const [senFilter, setSenFilter] = React.useState(() => senList);
 
@@ -106,26 +107,22 @@ const EkhPage = () => {
     martFilter.includes(martArt.mart)
   );
 
-  let allFiltered = filteredLists
-    // .filter((filtered) => filtered.articles.length > 0)
-    .map((filteredList: MartFilteredList) => {
-      return (
-        <Grid>
-          <h1>{filteredList.mart.toString()}</h1>
-          {orderByFilter(filteredList.articles)}
-        </Grid>
-      );
-    });
+  //Filterung
+  let allFiltered = filteredLists.map((filteredList: MartFilteredList) => {
+    return (
+      <Grid>
+        <h1>{filteredList.mart.toString()}</h1>
+        {orderByFilter(filteredList.articles)}
+      </Grid>
+    );
+  });
 
   function orderByFilter(filtered: ArticleWithOrder[]) {
     return filtered.map((article: ArticleWithOrder) => {
       function editHandler(article: ArticleWithOrder) {
         article.article.done = !article.article.done;
 
-        //aktualisieren der view nach onCLick
-        //const arrayIndex = allArticlesByEmp.indexOf(article);
         const newList = [...allArticlesByEmp];
-        // newList[arrayIndex] = article;
         setAllArticlesByEmp(newList);
       }
 
@@ -150,12 +147,17 @@ const EkhPage = () => {
     });
   }
 
+  // wenn Marktauswahl getroffen wird --> Logik siehe Kommentar onSeniorsSelect
   const onMartSelect = (event: SelectChangeEvent) => {
     setMartFilter(
       MartAry.includes(event.target.value) ? [event.target.value] : MartAry
     );
   };
 
+  //wenn Seniorenauswahl getroffen wird --> setSenFilter auf den ausgewählten Wert,
+  //falls dieser unter allen Senioren enthalten ist, ansonsten auf alle (senList)
+  //es werden alle vorhanden Senioren als Dropdownitem erstellt, die der EmployeeID zugewiesen sind,
+  //nur alle ist voreingestellt, ist somit nicht der senList enthalten und zeigt dann senList (alle) an
   function onSeniorSelect(event: SelectChangeEvent) {
     setSenFilter(
       senList.includes(event.target.value) ? [event.target.value] : senList
@@ -209,6 +211,7 @@ const EkhPage = () => {
         </FlexBox>
       </div>
 
+      {/* Anzeige der gefilterten Objecte als Article Cards untereinander in einem Grid */}
       <Grid
         container
         direction="column"
