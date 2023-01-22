@@ -6,7 +6,8 @@ import PlanningPage from "./PlanningPage";
 import LoginPage from "./LoginPage";
 import ShoppingPageSelection from "./ShoppingPageSelection";
 import ProfilePage from "./ProfilePage";
-import AuthContext from '../store/AuthContext';
+import AuthContext from "../store/AuthContext";
+import PlanningPageOpenOrders from "./PlanningPageOpenOrders";
 
 const NavigationPage = () => {
   return (
@@ -14,10 +15,51 @@ const NavigationPage = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/shopping" element={<AuthContext> <ShoppingPageSelection /> </AuthContext>} />
-        <Route path="/services" element={<AuthContext> <ServicesPage /> </AuthContext>} />
-        <Route path="/planning" element={<AuthContext> <PlanningPage /> </AuthContext>} />
-        <Route path="/profile" element={<AuthContext> <ProfilePage /> </AuthContext>} />
+        <Route
+          path="/shopping"
+          element={
+            <AuthContext>
+              {" "}
+              <ShoppingPageSelection />{" "}
+            </AuthContext>
+          }
+        />
+        <Route
+          path="/services"
+          element={
+            <AuthContext>
+              {" "}
+              <ServicesPage />{" "}
+            </AuthContext>
+          }
+        />
+        <Route
+          path="/planning"
+          element={
+            <AuthContext>
+              {" "}
+              <PlanningPage />{" "}
+            </AuthContext>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <AuthContext>
+              {" "}
+              <ProfilePage />{" "}
+            </AuthContext>
+          }
+        />
+        <Route
+          path="/planning/openorders"
+          element={
+            <AuthContext>
+              {" "}
+              <PlanningPageOpenOrders />{" "}
+            </AuthContext>
+          }
+        />
       </Routes>
     </React.Fragment>
   );
