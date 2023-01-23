@@ -18,7 +18,7 @@ const AssistantPage = () => {
   };
   return (
     <FlexBox>
-      {!shoppingListSelection && (
+      {!shoppingListSelection && !showEmployeeAvailability && (
         <Typography>
           <Button onClick={shoppingListHandler}>Einkaufsliste</Button>
           <Button onClick={employeeAvailabiliyHandler}>Planning</Button>

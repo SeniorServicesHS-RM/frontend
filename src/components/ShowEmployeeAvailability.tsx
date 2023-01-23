@@ -70,6 +70,7 @@ const ShowEmployeeAvailability = (props: Props) => {
 
   return (
     <FlexBox>
+      <Button onClick={props.abort}>Menü</Button>
       <FormControlLabel
         control={
           <Checkbox onChange={handleAvailabilityChange} name="available" />

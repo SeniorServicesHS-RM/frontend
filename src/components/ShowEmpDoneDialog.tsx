@@ -22,34 +22,37 @@ interface Props {
 }
 
 const ShowEmpDoneDialog = (props: Props) => {
-  const [valuePrice, setValuePrice] = useState<number | null>(
-    props.article ? props.article.price : null
+  const [valuePrice, setValuePrice] = useState<number>(
+    // props.article ? props.article.price : 0
+    props.article.price
   );
-  const [valueDone, setValueDone] = useState<boolean | null>(
-    props.article ? props.article.done : null
+  const [valueDone, setValueDone] = useState<boolean>(
+    // props.article ? props.article.done : false
+    props.article.done
   );
-  const hanldeValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(valuePrice);
-    setValuePrice(event.target.valueAsNumber);
-  };
   const handleDone = () => {
-    if (props.article.price !== 0 && valuePrice >= 0) {
-      props.article.price = valuePrice;
-      props.article.done = valueDone;
-      updateArticleDoneInDB(props.article);
-      updateArticlePriceInDB(props.article);
-    } else {
-      setValuePrice(0);
-    }
+    console.log(props.article);
+
+    props.article.price = valuePrice;
+    props.article.done = valueDone;
+    updateArticleDoneInDB(props.article);
+    updateArticlePriceInDB(props.article);
+
     return props.abort();
+  };
+  const hanldeValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValuePrice(event.target.valueAsNumber);
+    props.article.price = event.target.valueAsNumber;
   };
   const handleDoneChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValueDone(!valueDone);
+    props.article.done = Boolean(event.target.checked);
   };
   const handleAbort = () => {
     setValuePrice(0);
     return props.abort();
   };
+
   return (
     <div>
       <Dialog open={props.open} onClose={handleAbort}>
@@ -58,13 +61,13 @@ const ShowEmpDoneDialog = (props: Props) => {
             label="Artikel eingekauft"
             type="number"
             inputProps={{ step: 0.01 }}
-            value={valuePrice}
+            value={props.article.price}
             onChange={hanldeValueChange}
           />
           <FormControlLabel
             control={
               <Checkbox
-                checked={valueDone}
+                checked={props.article.done}
                 onChange={handleDoneChange}
                 name="eingekauft?"
               />
