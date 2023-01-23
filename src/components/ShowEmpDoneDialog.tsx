@@ -22,14 +22,8 @@ interface Props {
 }
 
 const ShowEmpDoneDialog = (props: Props) => {
-  const [valuePrice, setValuePrice] = useState<number>(
-    // props.article ? props.article.price : 0
-    props.article.price
-  );
-  const [valueDone, setValueDone] = useState<boolean>(
-    // props.article ? props.article.done : false
-    props.article.done
-  );
+  const [valuePrice, setValuePrice] = useState<number>(props.article.price);
+  const [valueDone, setValueDone] = useState<boolean>(props.article.done);
   const handleDone = () => {
     console.log(props.article);
 
