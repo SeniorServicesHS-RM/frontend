@@ -68,7 +68,18 @@ export const GetDrawerData = () => {
     });
   }
   if (role === 2) {
-    //drawerData.push() //Employee Page still needed!!!
+    drawerData.push(
+      {
+        title: "Assistant",
+        path: "/assistant",
+        icon: <AccessibleIcon />,
+      },
+      {
+        title: "Logout",
+        path: "/",
+        icon: <LogoutIcon />,
+      }
+    ); //Employee Page still needed!!!
   }
   if (role === 1) {
     drawerData.push(
