@@ -1,6 +1,13 @@
-import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  FormControlLabel,
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Article from "../data/Article";
 import {
   updateArticleDoneInDB,
@@ -13,41 +20,56 @@ interface Props {
   open: boolean;
   article: Article;
 }
-interface ValueHandler {
-  newPrice: number;
-}
+
 const ShowEmpDoneDialog = (props: Props) => {
-  const [valuePrice, setValuePrice] = useState<ValueHandler>({
-    newPrice: props.article.price,
-  });
+  const [valuePrice, setValuePrice] = useState<number | null>(
+    props.article ? props.article.price : null
+  );
+  const [valueDone, setValueDone] = useState<boolean | null>(
+    props.article ? props.article.done : null
+  );
   const hanldeValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValuePrice({ newPrice: event.target.valueAsNumber });
+    console.log(valuePrice);
+    setValuePrice(event.target.valueAsNumber);
   };
   const handleDone = () => {
-    if (props.article && valuePrice.newPrice >= 0) {
-      props.article.price = valuePrice.newPrice;
-      props.article.done = true;
+    if (props.article.price !== 0 && valuePrice >= 0) {
+      props.article.price = valuePrice;
+      props.article.done = valueDone;
       updateArticleDoneInDB(props.article);
       updateArticlePriceInDB(props.article);
     } else {
-      setValuePrice({ newPrice: 0 });
+      setValuePrice(0);
     }
     return props.abort();
   };
+  const handleDoneChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValueDone(!valueDone);
+  };
   const handleAbort = () => {
-    valuePrice.newPrice >= 0 ? <></> : setValuePrice({ newPrice: 0 });
+    setValuePrice(0);
     return props.abort();
   };
   return (
     <div>
-      <Dialog open={props.open} onClose={props.abort}>
+      <Dialog open={props.open} onClose={handleAbort}>
         <DialogContent>
           <TextField
             label="Artikel eingekauft"
             type="number"
             inputProps={{ step: 0.01 }}
-            value={valuePrice.newPrice}
+            value={valuePrice}
             onChange={hanldeValueChange}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={valueDone}
+                onChange={handleDoneChange}
+                name="eingekauft?"
+              />
+            }
+            label="eingekauft?"
           />
         </DialogContent>
         <DialogActions>
