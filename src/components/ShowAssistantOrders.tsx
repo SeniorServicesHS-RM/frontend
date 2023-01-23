@@ -34,7 +34,7 @@ const ShowAsisstantOrders = (props: Props) => {
   const { user } = useContext(UserContext);
   const { users } = useContext(DataBaseContext);
   const employee = user.empID;
-  console.log(user);
+  // console.log(user);
   const seniorList = users.filter((singleUser: User) => {
     return singleUser.role === 3;
   });

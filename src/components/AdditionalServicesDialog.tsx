@@ -59,13 +59,13 @@ function AdditionalServicesDialog(props: Props) {
     }
     addOrderToDatabase(props.orderToPush);
   };
-  function addToAry(
+  const addToAry = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void {
+  ) => {
     setValueService({ newService: event.target.value });
-  }
+  };
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>): void {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       services.push(event.target.name);
     } else {
@@ -81,7 +81,7 @@ function AdditionalServicesDialog(props: Props) {
         <></>
       );
     }
-  }
+  };
   const mappedServices = serviceList.map((singleServ: string) => {
     return (
       <FormControlLabel

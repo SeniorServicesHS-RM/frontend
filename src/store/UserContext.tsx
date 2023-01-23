@@ -55,7 +55,6 @@ export const UserProvider = ({ children }: Props) => {
         return user.id.trim() === userId.trim();
       });
       setRole(newUser.role);
-      // console.log(newUser);
 
       setUser(
         new User(

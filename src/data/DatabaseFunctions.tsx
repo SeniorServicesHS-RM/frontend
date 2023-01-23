@@ -35,6 +35,18 @@ export const updateArticleDoneInDB = (article: Article) => {
     done: article.done,
   });
 };
+export const updateAvailabilityInDB = (available: boolean, userId: string) => {
+  const docRef = doc(firestore, "users", userId);
+  updateDoc(docRef, {
+    available: available,
+  });
+};
+export const updateAvailableMartsInDB = (marts: string[], userId: string) => {
+  const docRef = doc(firestore, "users", userId);
+  updateDoc(docRef, {
+    marts: marts,
+  });
+};
 export const addOrderToDatabase = (order: Order) => {
   const getArticlesAsStringAry = () => {
     const newAry: String[] = [];
