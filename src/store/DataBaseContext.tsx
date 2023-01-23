@@ -4,6 +4,7 @@ import { collection, onSnapshot } from "@firebase/firestore";
 import { firestore } from "./Firebase";
 import Article from "../data/Article";
 import Order from "../data/Order";
+import User from "../data/User";
 
 interface ImportedArticle {
   id: string;
@@ -52,11 +53,23 @@ interface DataBaseContextInterface {
   martList: string[];
   serviceList: string[];
   userId: string;
+  users: User[];
   handleUserId: (userId: string) => void;
 }
 
 interface Props {
   children?: ReactNode | ReactNode[];
+}
+
+interface UserInterface {
+  role: number;
+  id: string;
+  plannerId?: string;
+  marts?: string[];
+  employeeId?: string;
+  seniorId?: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 export const DataBaseContext =
@@ -70,10 +83,26 @@ export const DataBaseProvider = ({ children }: Props) => {
   const [martList, setMarts] = useState<string[] | null>(null);
   const [serviceList, setServiceList] = useState<string[] | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [users, setUsers] = useState<User[] | null>(null);
 
   const handleUserId = (userId: string) => {
     setUserId(userId);
   };
+
+  useEffect(() => {
+    const unsub = onSnapshot(collection(firestore, "users"), (snapshot) => {
+      const receivedUsers: UserInterface[] = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      })) as UserInterface[];
+      setUsers(
+        receivedUsers.map((user) => {
+          return new User(user.firstName, user.lastName, user.id, user.role);
+        })
+      );
+    });
+    return unsub;
+  }, []);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(firestore, "Article"), (snapshot) => {
@@ -237,6 +266,7 @@ export const DataBaseProvider = ({ children }: Props) => {
         serviceList,
         userId,
         handleUserId,
+        users,
       }}
     >
       {children}

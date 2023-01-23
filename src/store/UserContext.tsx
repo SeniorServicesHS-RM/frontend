@@ -50,20 +50,13 @@ export const UserProvider = ({ children }: Props) => {
         ...doc.data(),
         id: doc.id,
       })) as UserInterface[];
-      setRole(
-        receivedUsers.find((user) => {
-          return user.id.trim() === userId.trim();
-        }).role
-      );
+      const newUser = receivedUsers.find((user) => {
+        return user.id.trim() === userId.trim();
+      });
+      setRole(newUser.role);
+
       setUser(
-        new User(
-          receivedUsers.find((user) => {
-            return user.id.trim() === userId.trim();
-          }).firstName,
-          receivedUsers.find((user) => {
-            return user.id.trim() === userId.trim();
-          }).lastName
-        )
+        new User(newUser.firstName, newUser.lastName, newUser.id, newUser.role)
       );
     });
     console.log("setRoleEntered");
