@@ -1,10 +1,17 @@
-import DatePicker from "../components/DatePicker";
+import { Button } from "@mui/material";
+import { NavLink } from "react-router-dom";
 import FlexBox from "../components/FlexBox";
 
 const PlanningPage = () => {
+  //needs to other pages: EditSeniorOrders und AllocateShoppingAssistants
   return (
     <FlexBox>
-      <DatePicker label="Naechster Einkaufstermin" />
+      <NavLink to="">
+        <Button>Offene Bestellungen Ueberpruefen</Button>
+      </NavLink>
+      <NavLink to="">
+        <Button>Einkaufshelfer zuweisen</Button>
+      </NavLink>
     </FlexBox>
   );
 };

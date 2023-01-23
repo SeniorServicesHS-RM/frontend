@@ -77,6 +77,7 @@ export const DataBaseProvider = ({ children }: Props) => {
       })) as ImportedArticle[];
       setArticles(receivedArticles);
     });
+    console.log("article called");
     return unsub;
   }, []);
 
@@ -92,6 +93,8 @@ export const DataBaseProvider = ({ children }: Props) => {
       }
       setMarts(martList);
     });
+    console.log("Marts called");
+
     return unsub;
   }, []);
   useEffect(() => {
@@ -111,6 +114,8 @@ export const DataBaseProvider = ({ children }: Props) => {
         setServiceList(serviceList);
       }
     );
+    console.log("AddServices called");
+
     return unsub;
   }, []);
 
@@ -128,6 +133,8 @@ export const DataBaseProvider = ({ children }: Props) => {
         setNextShoppingDate(findNewDate.date);
       }
     );
+    console.log("ShoppingDates called");
+
     return unsub;
   }, []);
 
@@ -214,6 +221,7 @@ export const DataBaseProvider = ({ children }: Props) => {
       setOpenOrders(newOrders);
       setClosedOrders(closedOrders);
     });
+    console.log("orders called");
     return unsub;
   }, [articles]);
 
