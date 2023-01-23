@@ -8,7 +8,7 @@ import ShoppingPageSelection from "./ShoppingPageSelection";
 import AssistantPage from "./AssistantPage";
 import ProfilePage from "./ProfilePage";
 import AuthContext from "../store/AuthContext";
-<Route path="/assistant" element={<AssistantPage />} />;
+import PlanningPageOpenOrders from "./PlanningPageOpenOrders";
 
 const NavigationPage = () => {
   return (
@@ -49,6 +49,15 @@ const NavigationPage = () => {
             <AuthContext>
               {" "}
               <ProfilePage />{" "}
+            </AuthContext>
+          }
+        />
+        <Route
+          path="/planning/openorders"
+          element={
+            <AuthContext>
+              {" "}
+              <PlanningPageOpenOrders />{" "}
             </AuthContext>
           }
         />

@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../store/Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import { UserContext } from "../store/UserContext";
 
 function Copyright(props: any) {
   return (
@@ -38,8 +39,9 @@ function Copyright(props: any) {
 
 export default function LoginSide() {
   //const [authenticated, setAuthenticated] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const { handleUserId } = React.useContext(UserContext);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -50,21 +52,21 @@ export default function LoginSide() {
       password: data.get("password"),
     });
 
-  //firebase method 
-  signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    console.log('login successful');
-    navigate('/');
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    console.log('wrong Email or password');
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
-    
+    //firebase method
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        console.log("login successful");
+        navigate("/");
+        handleUserId(userCredential.user.uid);
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        console.log("wrong Email or password");
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (
@@ -118,7 +120,7 @@ export default function LoginSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                onChange={event => setEmail(event.target.value)}
+                onChange={(event) => setEmail(event.target.value)}
                 value={email}
               />
               <TextField
@@ -130,7 +132,7 @@ export default function LoginSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={event => setPassword(event.target.value)}
+                onChange={(event) => setPassword(event.target.value)}
                 value={password}
               />
               <FormControlLabel
@@ -152,8 +154,7 @@ export default function LoginSide() {
                     Forgot password?
                   </Link>
                 </Grid>
-                <Grid item>
-                </Grid>
+                <Grid item></Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
             </Box>
@@ -163,4 +164,3 @@ export default function LoginSide() {
     </ThemeProvider>
   );
 }
-

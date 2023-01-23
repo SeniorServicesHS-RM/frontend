@@ -3,14 +3,10 @@ import { NavLink } from "react-router-dom";
 import FlexBox from "../components/FlexBox";
 
 const PlanningPage = () => {
-  //needs to other pages: EditSeniorOrders und AllocateShoppingAssistants
   return (
     <FlexBox>
-      <NavLink to="">
+      <NavLink to="/planning/openorders">
         <Button>Offene Bestellungen Ueberpruefen</Button>
-      </NavLink>
-      <NavLink to="">
-        <Button>Einkaufshelfer zuweisen</Button>
       </NavLink>
     </FlexBox>
   );
