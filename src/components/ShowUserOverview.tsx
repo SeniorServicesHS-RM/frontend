@@ -40,10 +40,28 @@ const ShowUserOverview = (props: Props) => {
       );
     }
   );
+  const sumAllPrices = () => {
+    let sum = 0;
+    console.log(props.orderList);
+    props.orderList.map((order) => {
+      order.articleList.map((article) => {
+        sum = sum + article.price;
+      });
+    });
+    return sum;
+  };
   return (
     <div>
       <Dialog open={props.open} onClose={props.abort}>
-        <DialogContent>{mappedServices}</DialogContent>
+        <DialogContent>
+          {mappedServices}
+          <TextField
+            label="Summe"
+            type="number"
+            value={sumAllPrices()}
+            disabled
+          />
+        </DialogContent>
         <DialogActions>
           <Button onClick={props.abort}>Zurück</Button>
         </DialogActions>
