@@ -10,13 +10,18 @@ import { DataBaseContext, DataBaseProvider } from "../store/DataBaseContext";
 import Article from "../data/Article";
 import AdditionalServicesDialog from "../components/AdditionalServicesDialog";
 import { Button } from "@mui/material";
+import { UserContext } from "../store/UserContext";
 
 interface Props {
   abort: () => void;
 }
 
 const ShoppingPage = (props: Props) => {
-  const seniorId = "s001"; //gemockte SeniorId! Richtige muss aus authcontext kommen
+  const { userId: seniorId, role } = useContext(UserContext);
+  console.log(role);
+  console.log(seniorId);
+
+  //const seniorId = "s001"; //gemockte SeniorId! Richtige muss aus authcontext kommen
   const [isEditOpen, setEditOpen] = useState(false);
   const { openOrders } = useContext(DataBaseContext);
   const [myOrder, setMyOrder] = useState<Order | null>(

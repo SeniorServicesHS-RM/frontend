@@ -6,7 +6,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import DrawerData from "../data/DrawerData";
+import DrawerData, { GetDrawerData } from "../data/DrawerData";
 import { NavLink } from "react-router-dom";
 interface AnchorState {
   left: boolean;
@@ -21,6 +21,7 @@ interface Props {
 }
 
 export default function MenuDrawer(props: Props) {
+  const drawerData = GetDrawerData();
   const list = (anchor: Anchor) => (
     <Box
       sx={{ width: 250 }}
@@ -29,7 +30,7 @@ export default function MenuDrawer(props: Props) {
       onKeyDown={props.toggleDrawer(anchor, false)}
     >
       <List>
-        {DrawerData.map((item, index) => {
+        {drawerData.map((item, index) => {
           return (
             <ListItem key={index} disablePadding>
               <NavLink
