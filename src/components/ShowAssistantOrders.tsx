@@ -31,7 +31,6 @@ interface ValueHandler {
 const ShowAsisstantOrders = (props: Props) => {
   const employee = "emp001";
   const seniorList = ["s001", "s002"];
-  // const martList = ["Rewe", "Lidl", "Aldi"];
   const { martList } = React.useContext(DataBaseContext);
   const [isSorted, setIsSorted] = useState(true);
   const [valueMart, setValueMart] = useState<ValueHandler>({

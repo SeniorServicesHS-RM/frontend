@@ -14,6 +14,8 @@ interface ImportedArticle {
   note: string;
   amount: number;
   mart: string;
+  done: boolean;
+  price: number;
   picture?: string; //Datatype? gotta check!
 }
 
@@ -152,6 +154,8 @@ export const DataBaseProvider = ({ children }: Props) => {
               articleToInsert.name,
               articleToInsert.amount,
               articleToInsert.mart,
+              articleToInsert.done,
+              articleToInsert.price,
               articleToInsert.note && articleToInsert.note,
               articleToInsert.picture && articleToInsert.picture
             );
@@ -163,6 +167,8 @@ export const DataBaseProvider = ({ children }: Props) => {
             "UNDEFINED",
             0,
             "UNDEFINED",
+            false,
+            0,
             "UNDEFINED",
             "UNDEFINED"
           );
