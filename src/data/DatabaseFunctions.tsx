@@ -15,14 +15,26 @@ export const addArticleToDatabase = (article: Article) => {
   const docRef = doc(firestore, "Article", article.id);
   setDoc(docRef, {
     amount: article.amount,
+    done: article.done,
     mart: article.mart,
     name: article.name,
     note: article.note ? article.note : "undefined",
-
     picture: article.picture ? article.picture : "undefined",
+    price: article.price,
   });
 };
-
+export const updateArticlePriceInDB = (article: Article) => {
+  const docRef = doc(firestore, "Article", article.id);
+  updateDoc(docRef, {
+    price: article.price,
+  });
+};
+export const updateArticleDoneInDB = (article: Article) => {
+  const docRef = doc(firestore, "Article", article.id);
+  updateDoc(docRef, {
+    done: article.done,
+  });
+};
 export const addOrderToDatabase = (order: Order) => {
   const getArticlesAsStringAry = () => {
     const newAry: String[] = [];

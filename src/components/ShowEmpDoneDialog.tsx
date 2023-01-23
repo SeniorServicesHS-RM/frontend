@@ -2,6 +2,10 @@ import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import Article from "../data/Article";
+import {
+  updateArticleDoneInDB,
+  updateArticlePriceInDB,
+} from "../data/DatabaseFunctions";
 import Order from "../data/Order";
 
 interface Props {
@@ -20,9 +24,11 @@ const ShowEmpDoneDialog = (props: Props) => {
     setValuePrice({ newPrice: event.target.valueAsNumber });
   };
   const handleDone = () => {
-    if (props.article.price && valuePrice.newPrice >= 0) {
+    if (props.article && valuePrice.newPrice >= 0) {
       props.article.price = valuePrice.newPrice;
       props.article.done = true;
+      updateArticleDoneInDB(props.article);
+      updateArticlePriceInDB(props.article);
     } else {
       setValuePrice({ newPrice: 0 });
     }
