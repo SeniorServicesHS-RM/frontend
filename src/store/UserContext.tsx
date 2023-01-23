@@ -14,6 +14,7 @@ interface UserInterface {
   id: string;
   plannerId?: string;
   marts?: string[];
+  available?: boolean;
   employeeId?: string;
   seniorId?: string;
   firstName?: string;
@@ -54,9 +55,20 @@ export const UserProvider = ({ children }: Props) => {
         return user.id.trim() === userId.trim();
       });
       setRole(newUser.role);
+      // console.log(newUser);
 
       setUser(
-        new User(newUser.firstName, newUser.lastName, newUser.id, newUser.role)
+        new User(
+          newUser.firstName,
+          newUser.lastName,
+          newUser.id,
+          newUser.role,
+          newUser.role === 2 ? newUser.employeeId : undefined,
+          newUser.role === 3 ? newUser.seniorId : undefined,
+          newUser.role === 1 ? newUser.plannerId : undefined,
+          newUser.available,
+          newUser.marts
+        )
       );
     });
     console.log("setRoleEntered");

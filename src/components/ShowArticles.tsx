@@ -11,9 +11,6 @@ const ShowArticles = (props: Props) => {
   const [showEmpDone, setShowEmpDone] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
-  const openEmpDone = () => {
-    setShowEmpDone(true);
-  };
   const closeEmpDone = () => {
     setShowEmpDone(false);
   };

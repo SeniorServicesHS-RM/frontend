@@ -1,4 +1,16 @@
 class User {
+  public get seniorId(): string {
+    return this._seniorId;
+  }
+  public set seniorId(value: string) {
+    this._seniorId = value;
+  }
+  public get empID(): string {
+    return this._empoyeeId;
+  }
+  public set empID(value: string) {
+    this._empoyeeId = value;
+  }
   public get id(): string {
     return this._id;
   }
@@ -27,7 +39,12 @@ class User {
     private _firstName: string,
     private _lastName: string,
     private _id: string,
-    private _role: number
+    private _role: number,
+    private _empoyeeId?: string,
+    private _seniorId?: string,
+    private _plannerId?: string,
+    private _available?: boolean,
+    private _marts?: string[]
   ) {}
 }
 

@@ -72,6 +72,7 @@ interface UserInterface {
   seniorId?: string;
   firstName?: string;
   lastName?: string;
+  available?: boolean;
 }
 
 export const DataBaseContext =
@@ -99,7 +100,17 @@ export const DataBaseProvider = ({ children }: Props) => {
       })) as UserInterface[];
       setUsers(
         receivedUsers.map((user) => {
-          return new User(user.firstName, user.lastName, user.id, user.role);
+          return new User(
+            user.firstName,
+            user.lastName,
+            user.id,
+            user.role,
+            user.role === 2 ? user.employeeId : undefined,
+            user.role === 3 ? user.seniorId : undefined,
+            user.role === 1 ? user.plannerId : undefined,
+            user.available,
+            user.marts
+          );
         })
       );
     });
