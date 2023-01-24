@@ -17,9 +17,8 @@ interface Props {
 }
 
 const ShoppingPage = (props: Props) => {
-  const { userId: seniorId, role } = useContext(UserContext);
-  console.log(role);
-  console.log(seniorId);
+  const { user } = useContext(UserContext);
+  const seniorId = user.seniorId;
 
   //const seniorId = "s001"; //gemockte SeniorId! Richtige muss aus authcontext kommen
   const [isEditOpen, setEditOpen] = useState(false);

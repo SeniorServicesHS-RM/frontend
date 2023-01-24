@@ -1,5 +1,7 @@
 import { Button } from "@mui/material";
+import { useContext } from "react";
 import GetUserOrders from "../data/GetUserOrders";
+import { UserContext } from "../store/UserContext";
 import OrderCard from "./OrderCard";
 
 interface Props {
@@ -7,7 +9,8 @@ interface Props {
 }
 
 const ShowOrders = (props: Props) => {
-  const seniorId = "s001"; //gemockte SeniorId! Richtige muss aus authcontext kommen
+  const { user } = useContext(UserContext);
+  const seniorId = user.seniorId;
   const userOrders = GetUserOrders(seniorId);
   console.log(userOrders);
 
