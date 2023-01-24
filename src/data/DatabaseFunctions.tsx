@@ -9,6 +9,7 @@ import {
 } from "@firebase/firestore";
 import { firestore } from "../store/Firebase";
 import Order from "./Order";
+import User from "./User";
 
 export const addArticleToDatabase = (article: Article) => {
   //const newId = Math.floor(Math.random() * (9999 - 0 + 1) + 0); //We need logic to generate keys!
@@ -47,6 +48,14 @@ export const updateAvailableMartsInDB = (marts: string[], userId: string) => {
     marts: marts,
   });
 };
+
+export const updateEmployeeInOrderToDatabase = (order: Order, user: User) => {
+  const docRef = doc(firestore, "Order", order.id);
+  updateDoc(docRef, {
+    employeeId: user ? user.empID : "undefined",
+  });
+};
+
 export const addOrderToDatabase = (order: Order) => {
   const getArticlesAsStringAry = () => {
     const newAry: String[] = [];

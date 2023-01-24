@@ -1,3 +1,4 @@
+import { orderBy } from "@firebase/firestore";
 import {
   Button,
   Dialog,
@@ -5,10 +6,17 @@ import {
   DialogContent,
   DialogContentText,
   Divider,
+  TextField,
   Typography,
 } from "@mui/material";
 import React, { useContext, useState } from "react";
+import Article from "../data/Article";
+import { updateEmployeeInOrderToDatabase } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
+import User from "../data/User";
+import { DataBaseContext } from "../store/DataBaseContext";
+import DropDownUserMenu from "./DropDownUserMenu";
+import EditArticleDialog from "./EditArticleDialog";
 import OrderCard from "./OrderCard";
 
 interface Props {
@@ -16,11 +24,55 @@ interface Props {
 }
 
 const OrderCardPlanner = (props: Props) => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [isDialogOpen, setDialogOpen] = useState(false);
-
+  const [isEditArticleDialogOpen, setEditArticleDialogOpen] = useState(false);
+  const [article, setArticle] = useState<Article | null>(null);
+  const { users } = useContext(DataBaseContext);
+  const employees = users.filter((user) => {
+    return user.role === 2;
+  });
+  const editArticleOpenDialogHandler = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setArticle(
+      props.order.articleList.find((article) => {
+        return article.id === event.currentTarget.id;
+      })
+    );
+    setEditArticleDialogOpen(!isEditArticleDialogOpen);
+  };
+  const editArticleDialogHandler = () => {
+    setEditArticleDialogOpen(!isEditArticleDialogOpen);
+  };
+  //event: React.MouseEvent<HTMLButtonElement>
+  const handleClickDropDown = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+    setDialogOpen(true);
+  };
   const dialogOpenHandler = () => {
     setDialogOpen(!isDialogOpen);
   };
+  const dropDownClosingHandler = (user?: User) => {
+    if (user) {
+      updateEmployeeInOrderToDatabase(props.order, user);
+      console.log(user.empID);
+    } else if (user === null) {
+      updateEmployeeInOrderToDatabase(props.order, null);
+    }
+    setAnchorEl(null);
+  };
+
+  const editOrder = (newOrder: Article, oldOrder: Article) => {
+    const arrayIndex = props.order.articleList.findIndex((aryOrder) => {
+      return aryOrder === oldOrder;
+    });
+    const newList = [...props.order.articleList];
+    newList[arrayIndex] = newOrder;
+    props.order.articleList = newList;
+  };
+
+  console.log(props.order);
 
   return (
     <>
@@ -47,7 +99,36 @@ const OrderCardPlanner = (props: Props) => {
           <DialogContentText>
             Einkaufshelfer ID: {props.order.employeeId}
           </DialogContentText>
-          <Button>Einkaufshelfer zuweisen</Button>
+          <Button onClick={handleClickDropDown}>Einkaufshelfer zuweisen</Button>
+          <br></br>
+          <DropDownUserMenu
+            userList={employees}
+            isOpen={Boolean(anchorEl)}
+            handleClose={dropDownClosingHandler}
+            anchorElement={anchorEl}
+          />{" "}
+          <>
+            {props.order.articleList.map((article) => {
+              return (
+                <>
+                  <Button
+                    onClick={editArticleOpenDialogHandler}
+                    id={article.id}
+                  >
+                    {article.name}
+                  </Button>
+                  <br></br>
+                </>
+              );
+            })}
+            {isEditArticleDialogOpen && (
+              <EditArticleDialog
+                order={article}
+                handleClose={editArticleDialogHandler}
+                editOrder={editOrder}
+              ></EditArticleDialog>
+            )}
+          </>
         </DialogContent>
 
         <DialogActions>
