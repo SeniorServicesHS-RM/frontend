@@ -1,4 +1,22 @@
 class User {
+  public get plannerId(): string {
+    return this._plannerId;
+  }
+  public set plannerId(value: string) {
+    this._plannerId = value;
+  }
+  public get marts(): string[] {
+    return this._marts;
+  }
+  public set marts(value: string[]) {
+    this._marts = value;
+  }
+  public get available(): boolean {
+    return this._available;
+  }
+  public set available(value: boolean) {
+    this._available = value;
+  }
   public get seniorId(): string {
     return this._seniorId;
   }
