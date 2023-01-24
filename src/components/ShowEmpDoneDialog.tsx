@@ -13,7 +13,6 @@ import {
   updateArticleDoneInDB,
   updateArticlePriceInDB,
 } from "../data/DatabaseFunctions";
-import Order from "../data/Order";
 
 interface Props {
   abort: () => void;
