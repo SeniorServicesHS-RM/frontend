@@ -20,13 +20,13 @@ interface Props {
 
 const ShowEmployeeAvailability = (props: Props) => {
   const { martList } = useContext(DataBaseContext);
-  const [selectedMarts, setSelectedMart] = useState<string[]>([]);
-  const [isAvailable, setIsAvailable] = useState(false);
   const { user } = useContext(UserContext);
+  const [selectedMarts, setSelectedMart] = useState<string[]>(user.marts);
+  const [isAvailable, setIsAvailable] = useState(user.available);
   const handleDone = () => {
-    console.log(user.id);
     updateAvailabilityInDB(isAvailable, user.id);
     updateAvailableMartsInDB(selectedMarts, user.id);
+    props.abort();
   };
 
   const handleMartChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -45,23 +45,20 @@ const ShowEmployeeAvailability = (props: Props) => {
   };
   const handleAvailabilityChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsAvailable(!isAvailable);
-    if (!event.target.checked) {
-      setSelectedMart([]);
-    }
+    setSelectedMart(user.marts);
+    console.log(user.marts);
   };
   const mappedMartAvailability = martList.map((mart) => {
-    const checkSelect = () => {
-      return (
-        selectedMarts &&
-        selectedMarts.find((singleMart) => {
-          return singleMart === mart;
-        }) === mart
-      );
-    };
     return (
       <FlexBox>
         <FormControlLabel
-          control={<Checkbox onChange={handleMartChange} name={mart} />}
+          control={
+            <Checkbox
+              defaultChecked={user.marts.includes(mart)}
+              onChange={handleMartChange}
+              name={mart}
+            />
+          }
           label={mart}
         />
       </FlexBox>
@@ -73,7 +70,11 @@ const ShowEmployeeAvailability = (props: Props) => {
       <Button onClick={props.abort}>Menü</Button>
       <FormControlLabel
         control={
-          <Checkbox onChange={handleAvailabilityChange} name="available" />
+          <Checkbox
+            checked={isAvailable}
+            onChange={handleAvailabilityChange}
+            name="available"
+          />
         }
         label="available"
       />

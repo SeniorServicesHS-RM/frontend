@@ -1,27 +1,19 @@
 import {
   Button,
-  CardActionArea,
-  FormControlLabel,
   Grid,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
   Switch,
-  ToggleButton,
-  ToggleButtonGroup,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
-import Article from "../data/Article";
+import { useContext, useState } from "react";
 import GetEmployeeOrders from "../data/GetEmployeeOrders";
 import Order from "../data/Order";
 import User from "../data/User";
 import { DataBaseContext } from "../store/DataBaseContext";
 import { UserContext } from "../store/UserContext";
-import ArticleCard from "./ArticleCard";
 import FlexBox from "./FlexBox";
-import ShowArticles from "./ShowArticles";
-import ShowOrders from "./ShowOrders";
 import ShowOrdersBySeniors from "./ShowOrdersBySeniors";
 
 interface Props {
@@ -34,12 +26,11 @@ const ShowAsisstantOrders = (props: Props) => {
   const { user } = useContext(UserContext);
   const { users } = useContext(DataBaseContext);
   const employee = user.empID;
-  // console.log(user);
   const seniorList = users.filter((singleUser: User) => {
     return singleUser.role === 3;
   });
 
-  const { martList } = useContext(DataBaseContext);
+  const martList = user.marts;
   const [valueMart, setValueMart] = useState<ValueHandler>({
     selectedMart: martList ? martList[0] : "",
   });
