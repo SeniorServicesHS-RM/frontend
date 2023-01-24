@@ -68,32 +68,18 @@ export const GetDrawerData = () => {
     });
   }
   if (role === 2) {
-    drawerData.push(
-      {
-        title: "Assistant",
-        path: "/assistant",
-        icon: <AccessibleIcon />,
-      },
-      {
-        title: "Logout",
-        path: "/",
-        icon: <LogoutIcon />,
-      }
-    ); //Employee Page still needed!!!
+    drawerData.push({
+      title: "Assistant",
+      path: "/assistant",
+      icon: <AccessibleIcon />,
+    }); //Employee Page still needed!!!
   }
   if (role === 1) {
-    drawerData.push(
-      {
-        title: "Planning",
-        path: "/planning",
-        icon: <CalendarMonthIcon />,
-      },
-      {
-        title: "Logout",
-        path: "/",
-        icon: <LogoutIcon />,
-      }
-    );
+    drawerData.push({
+      title: "Planning",
+      path: "/planning",
+      icon: <CalendarMonthIcon />,
+    });
   }
   return drawerData;
 };
