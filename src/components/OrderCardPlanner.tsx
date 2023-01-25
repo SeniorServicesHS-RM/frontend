@@ -124,10 +124,10 @@ const OrderCardPlanner = (props: Props) => {
             })}
             {isEditArticleDialogOpen && (
               <EditArticleDialog
-                order={article}
+                article={article}
                 handleClose={editArticleDialogHandler}
                 editOrder={editOrder}
-                deleteOrder={deleteOrder}
+                deleteArticle={deleteOrder}
               ></EditArticleDialog>
             )}
           </>

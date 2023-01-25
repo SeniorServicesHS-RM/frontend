@@ -53,7 +53,10 @@ const OrderCard = (props: Props) => {
         </CardActionArea>
       </Card>
       {showArticles ? (
-        <ShowArticles articles={order.articleList}></ShowArticles>
+        <ShowArticles
+          articles={order.articleList}
+          order={props.order}
+        ></ShowArticles>
       ) : (
         <></>
       )}

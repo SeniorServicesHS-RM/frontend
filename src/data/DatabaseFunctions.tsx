@@ -55,6 +55,24 @@ export const updateEmployeeInOrderToDatabase = (order: Order, user: User) => {
     employeeId: user ? user.empID : "undefined",
   });
 };
+export const updateArticleListToDatabase = (
+  order: Order,
+  articleList: string[]
+) => {
+  const docRef = doc(firestore, "Order", order.id);
+  updateDoc(docRef, {
+    articleList: articleList,
+  });
+};
+export const updateArticleInDB = (article: Article) => {
+  const docRef = doc(firestore, "Article", article.id);
+  updateDoc(docRef, {
+    amount: article.amount,
+    mart: article.mart,
+    name: article.name,
+    note: article.note,
+  });
+};
 
 export const addOrderToDatabase = (order: Order) => {
   const getArticlesAsStringAry = () => {

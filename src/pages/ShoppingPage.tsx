@@ -103,10 +103,10 @@ const ShoppingPage = (props: Props) => {
           {mappedOrderList}
           {isEditOpen ? (
             <EditArticleDialog
-              order={singleOrder}
+              article={singleOrder}
               handleClose={handleClose}
               editOrder={editOrder}
-              deleteOrder={deleteOrder}
+              deleteArticle={deleteOrder}
             ></EditArticleDialog>
           ) : (
             <></>
