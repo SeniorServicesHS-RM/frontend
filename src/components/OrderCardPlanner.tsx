@@ -71,6 +71,7 @@ const OrderCardPlanner = (props: Props) => {
     newList[arrayIndex] = newOrder;
     props.order.articleList = newList;
   };
+  const deleteOrder = () => {};
 
   console.log(props.order);
 
@@ -126,6 +127,7 @@ const OrderCardPlanner = (props: Props) => {
                 order={article}
                 handleClose={editArticleDialogHandler}
                 editOrder={editOrder}
+                deleteOrder={deleteOrder}
               ></EditArticleDialog>
             )}
           </>

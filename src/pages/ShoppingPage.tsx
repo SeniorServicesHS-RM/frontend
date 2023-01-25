@@ -29,7 +29,6 @@ const ShoppingPage = (props: Props) => {
   const [orderList, setOrderList] = useState<Article[] | null>(
     myOrder.articleList ? myOrder.articleList : null
   );
-
   const [singleOrder, setSingleOrder] = useState<Article | null>(null);
   const editHandler = (order: Article) => {
     setSingleOrder(order);
@@ -47,6 +46,14 @@ const ShoppingPage = (props: Props) => {
     setOrderList(newList);
     myOrder.articleList = orderList;
   };
+  const deleteOrder = (articleToDelete: Article) => {
+    setOrderList(
+      orderList.filter((article) => {
+        return article.id != articleToDelete.id;
+      })
+    );
+  };
+
   const addArticle = (article: Article) =>
     setOrderList([...orderList, article]);
   myOrder.articleList = orderList;
@@ -99,6 +106,7 @@ const ShoppingPage = (props: Props) => {
               order={singleOrder}
               handleClose={handleClose}
               editOrder={editOrder}
+              deleteOrder={deleteOrder}
             ></EditArticleDialog>
           ) : (
             <></>

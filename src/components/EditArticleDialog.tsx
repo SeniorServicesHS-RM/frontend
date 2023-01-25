@@ -18,6 +18,7 @@ interface Props {
   order: Article;
   handleClose: () => void;
   editOrder: (newOrder: Article, oldOrder: Article) => void;
+  deleteOrder: (article: Article) => void;
 }
 interface ValueHandler {
   newId?: string;
@@ -69,6 +70,10 @@ function EditArticleDialog(props: Props) {
     props.editOrder(orderReturn, order);
     props.handleClose();
   };
+  const handleDelete = () => {
+    props.deleteOrder(props.order);
+    props.handleClose();
+  };
   const mappedMartList = martList.map((mart: String) => {
     return <MenuItem value={mart as string}>{mart}</MenuItem>;
   });
@@ -114,6 +119,7 @@ function EditArticleDialog(props: Props) {
           </Select>
         </DialogContent>
         <DialogActions>
+          <Button onClick={handleDelete}>Löschen</Button>
           <Button onClick={handleDone}>Fertig</Button>
         </DialogActions>
       </Dialog>
