@@ -1,11 +1,13 @@
-import * as React from "react";
-import DatePicker from "../components/DatePicker";
+import { Button } from "@mui/material";
+import { NavLink } from "react-router-dom";
 import FlexBox from "../components/FlexBox";
 
 const PlanningPage = () => {
   return (
     <FlexBox>
-      <DatePicker label="Naechster Einkaufstermin" />
+      <NavLink to="/planning/openorders">
+        <Button>Offene Bestellungen Ueberpruefen</Button>
+      </NavLink>
     </FlexBox>
   );
 };

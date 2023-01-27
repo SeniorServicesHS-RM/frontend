@@ -13,11 +13,9 @@ import {
 } from "@mui/material";
 import Article from "../data/Article";
 import * as React from "react";
-import Order from "../data/Order";
-import { useState } from "react";
-import { MartAry } from "../data/ArticleTestData";
-import IconButton from "@mui/material/IconButton";
+import { useContext, useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { DataBaseContext } from "../store/DataBaseContext";
 interface Props {
   addOrder: (article: Article) => void;
 }
@@ -30,7 +28,7 @@ interface ValueHandler {
 }
 
 function AddArticleDialog(props: Props) {
-  const [martList, setMartList] = useState<String[] | null>(MartAry);
+  const { martList } = useContext(DataBaseContext);
   const [valueID, setValueID] = useState<ValueHandler>({
     newId: "",
   });
@@ -72,21 +70,10 @@ function AddArticleDialog(props: Props) {
         valueName.newName,
         valueAmount.newAmount,
         valueMart.newMart,
+        false,
+        0,
         valueNote.newNote
       )
-
-      // new Order(
-      //   "o" + Date.now(),
-      //   "senior" + Date.now(), //Hier Senior ID einfuegen
-      //   new Article(
-      //     Date.now().toString(),
-      //     valueName.newName,
-      //     valueNote.newNote
-      //   ),
-      //   valueAmount.newAmount,
-      //   new Date(),
-      //   valueMart.newMart
-      // )
     );
     setValueName({ newName: "" });
     setValueID({ newId: "" });

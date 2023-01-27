@@ -14,15 +14,14 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import { text } from "body-parser";
-import { abort } from "process";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useContext } from "react";
 import { useState } from "react";
 import {
   addArticleToDatabase,
   addOrderToDatabase,
 } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
+import { DataBaseContext } from "../store/DataBaseContext";
 
 interface Props {
   orderToPush: Order;
@@ -33,11 +32,7 @@ interface ValueHandler {
 }
 
 function AdditionalServicesDialog(props: Props) {
-  const serviceList: string[] = [
-    "In Wohnung bringen",
-    "In Wohnung verräumen",
-    "Mit Abrechnung helfen",
-  ];
+  const { serviceList } = useContext(DataBaseContext);
   const [services, setServices] = useState([""]);
   const [valueService, setValueService] = React.useState<ValueHandler>({
     newService: "",
@@ -64,13 +59,13 @@ function AdditionalServicesDialog(props: Props) {
     }
     addOrderToDatabase(props.orderToPush);
   };
-  function addToAry(
+  const addToAry = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void {
+  ) => {
     setValueService({ newService: event.target.value });
-  }
+  };
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>): void {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       services.push(event.target.name);
     } else {
@@ -86,7 +81,7 @@ function AdditionalServicesDialog(props: Props) {
         <></>
       );
     }
-  }
+  };
   const mappedServices = serviceList.map((singleServ: string) => {
     return (
       <FormControlLabel

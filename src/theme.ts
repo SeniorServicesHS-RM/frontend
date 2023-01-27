@@ -7,12 +7,6 @@ const seniorTheme = createTheme({
       dark: "#00838f",
       light: "#e0f7fa",
     },
-    error: {
-      main: "#ef5350",
-    },
-    success: {
-      main: "#69f0ae",
-    },
   },
   components: {
     MuiAppBar: {

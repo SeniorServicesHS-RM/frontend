@@ -4,8 +4,9 @@ class Article {
     private _name: string,
     private _amount: number,
     private _mart: string,
+    private _done: boolean,
+    private _price: number,
     private _note?: string,
-    // private _category?: string,
     private _picture?: string
   ) {}
   public get id() {
@@ -32,18 +33,24 @@ class Article {
   public set mart(value: string) {
     this._mart = value;
   }
+  public get done(): boolean {
+    return this._done;
+  }
+  public set done(value: boolean) {
+    this._done = value;
+  }
   public get note() {
     return this._note;
   }
   public set note(note: string) {
     this._note = note;
   }
-  // public get category() {
-  //   return this._category;
-  // }
-  // public set category(category: string) {
-  //   this._category = category;
-  // }
+  public get price(): number {
+    return this._price;
+  }
+  public set price(value: number) {
+    this._price = value;
+  }
   public get picture() {
     return this._picture;
   }

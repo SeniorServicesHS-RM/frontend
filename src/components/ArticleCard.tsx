@@ -2,17 +2,8 @@ import React, { ReactNode, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
-import CardActionArea from "@mui/material/CardActionArea";
-import EditArticleDialog from "../components/EditArticleDialog";
-import Article from "../data/Article";
 import Typography from "@mui/material/Typography";
-import ShoppingPage from "../pages/ShoppingPage";
-import Order from "../data/Order";
 import { Grid, CardMedia } from "@mui/material";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
-import CardHeader from "@mui/material/CardHeader";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Tooltip from "@mui/material/Tooltip";
 import logosArr from "../data/LogosArr";
 interface Props {
   title: string;
@@ -20,7 +11,6 @@ interface Props {
   amount: number;
   mart: String;
   picture?: ReactNode;
-  route: string;
 }
 
 const ArticleCard = (props: Props) => {
@@ -48,26 +38,36 @@ const ArticleCard = (props: Props) => {
           flexDirection={"row"}
           justifyContent={"space-between"}
         >
-          {logosArr.map((item) => {
-            if (props.mart === item.name)
-              return (
-                <Grid>
-                  <CardMedia component={"img"} image={item.url} height={50} />
-                </Grid>
-              );
+          {logosArr.some((ele) => {
+            if (props.mart == ele.name) return ele.name;
+          }) ? (
+            logosArr.map((item) => {
+              if (item.name == props.mart) {
+                return (
+                  <Grid>
+                    <CardMedia
+                      component={"img"}
+                      image={item.url}
+                      alt={item.name}
+                      height={50}
+                    />
+                  </Grid>
+                );
+              }
+            })
+          ) : (
             <Typography
-              color="white"
+              color="primary.light"
               borderRadius={1.5}
               bgcolor={"primary.main"}
-              width="6rem"
-              textAlign={"center"}
               p={1}
               m={1}
+              width="6rem"
+              textAlign={"center"}
             >
               {props.mart}
-            </Typography>;
-          })}
-
+            </Typography>
+          )}
           <Typography
             color="primary.light"
             borderRadius={1.5}

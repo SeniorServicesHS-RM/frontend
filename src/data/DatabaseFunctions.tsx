@@ -9,17 +9,50 @@ import {
 } from "@firebase/firestore";
 import { firestore } from "../store/Firebase";
 import Order from "./Order";
+import User from "./User";
 
 export const addArticleToDatabase = (article: Article) => {
   //const newId = Math.floor(Math.random() * (9999 - 0 + 1) + 0); //We need logic to generate keys!
   const docRef = doc(firestore, "Article", article.id);
   setDoc(docRef, {
     amount: article.amount,
+    done: article.done,
     mart: article.mart,
     name: article.name,
     note: article.note ? article.note : "undefined",
-
     picture: article.picture ? article.picture : "undefined",
+    price: article.price,
+  });
+};
+export const updateArticlePriceInDB = (article: Article) => {
+  const docRef = doc(firestore, "Article", article.id);
+  updateDoc(docRef, {
+    price: article.price,
+  });
+};
+export const updateArticleDoneInDB = (article: Article) => {
+  const docRef = doc(firestore, "Article", article.id);
+  updateDoc(docRef, {
+    done: article.done,
+  });
+};
+export const updateAvailabilityInDB = (available: boolean, userId: string) => {
+  const docRef = doc(firestore, "users", userId);
+  updateDoc(docRef, {
+    available: available,
+  });
+};
+export const updateAvailableMartsInDB = (marts: string[], userId: string) => {
+  const docRef = doc(firestore, "users", userId);
+  updateDoc(docRef, {
+    marts: marts,
+  });
+};
+
+export const updateEmployeeInOrderToDatabase = (order: Order, user: User) => {
+  const docRef = doc(firestore, "Order", order.id);
+  updateDoc(docRef, {
+    employeeId: user ? user.empID : "undefined",
   });
 };
 

@@ -159,12 +159,10 @@ const OrderCard = (props: Props) => {
               xs={12}
               sx={{
                 display: "flex",
-                justifyContent: "space-between",
                 alignContent: "center",
-                textAlign: "center",
               }}
             >
-              <CardActionArea>
+              <CardActionArea sx={{ textAlign: "end" }}>
                 <Button
                   onClick={showArticlesHandler}
                   sx={{ bgcolor: "primary.main", color: "#ffffff", margin: 1 }}

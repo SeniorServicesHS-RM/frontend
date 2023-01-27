@@ -4,7 +4,7 @@ import { collection, onSnapshot } from "@firebase/firestore";
 import { firestore } from "./Firebase";
 import Article from "../data/Article";
 import Order from "../data/Order";
-import { closeSync } from "fs";
+import User from "../data/User";
 
 interface ImportedArticle {
   id: string;
@@ -12,11 +12,11 @@ interface ImportedArticle {
   changeDate?: Date;
   endDate?: Date;
   name: string;
-  //description: string;  there is no such thing as a description at the moment :/
   note: string;
   amount: number;
   mart: string;
-  // categorie: string; not needed
+  done: boolean;
+  price: number;
   picture?: string; //Datatype? gotta check!
 }
 
@@ -25,11 +25,8 @@ interface ImportedOrder {
   seniorId: string;
   orderDone: string;
   articleList: string[];
-  // amount: number;
   date: Date;
-  //unit?: string;
   additionalServices?: string[];
-  // mart: string;
   planDate?: Date | string;
   employeeId?: string;
   actualPrice?: number;
@@ -42,17 +39,40 @@ interface ImportedDate {
   id: string;
   date: string;
 }
+interface ImportedMart {
+  id: string;
+  name: string;
+}
+interface ImportedService {
+  id: string;
+  desc: string;
+}
 
 interface DataBaseContextInterface {
-  articles: ImportedArticle[];
-  changeArticles: () => void;
   openOrders: Order[];
   closedOrders: Order[];
   nextShoppingDate: string;
+  martList: string[];
+  serviceList: string[];
+  userId: string;
+  users: User[];
+  handleUserId: (userId: string) => void;
 }
 
 interface Props {
   children?: ReactNode | ReactNode[];
+}
+
+interface UserInterface {
+  role: number;
+  id: string;
+  plannerId?: string;
+  marts?: string[];
+  employeeId?: string;
+  seniorId?: string;
+  firstName?: string;
+  lastName?: string;
+  available?: boolean;
 }
 
 export const DataBaseContext =
@@ -63,6 +83,40 @@ export const DataBaseProvider = ({ children }: Props) => {
   const [openOrders, setOpenOrders] = useState<Order[] | null>(null);
   const [nextShoppingDate, setNextShoppingDate] = useState<string | null>(null);
   const [closedOrders, setClosedOrders] = useState<Order[] | null>(null);
+  const [martList, setMarts] = useState<string[] | null>(null);
+  const [serviceList, setServiceList] = useState<string[] | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [users, setUsers] = useState<User[] | null>(null);
+
+  const handleUserId = (userId: string) => {
+    setUserId(userId);
+  };
+
+  useEffect(() => {
+    const unsub = onSnapshot(collection(firestore, "users"), (snapshot) => {
+      const receivedUsers: UserInterface[] = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      })) as UserInterface[];
+      setUsers(
+        receivedUsers.map((user) => {
+          return new User(
+            user.firstName,
+            user.lastName,
+            user.id,
+            user.role,
+            user.role === 2 ? user.employeeId : undefined,
+            user.role === 3 ? user.seniorId : undefined,
+            user.role === 1 ? user.plannerId : undefined,
+            user.available,
+            user.marts
+          );
+        })
+      );
+    });
+    return unsub;
+  }, []);
+
   useEffect(() => {
     const unsub = onSnapshot(collection(firestore, "Article"), (snapshot) => {
       const receivedArticles: ImportedArticle[] = snapshot.docs.map((doc) => ({
@@ -71,6 +125,45 @@ export const DataBaseProvider = ({ children }: Props) => {
       })) as ImportedArticle[];
       setArticles(receivedArticles);
     });
+    console.log("article called");
+    return unsub;
+  }, []);
+
+  useEffect(() => {
+    const unsub = onSnapshot(collection(firestore, "Marts"), (snapshot) => {
+      const recievedMarts: ImportedMart[] = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      })) as ImportedMart[];
+      const martList: string[] = [];
+      for (const mart of recievedMarts) {
+        martList.push(mart.name);
+      }
+      setMarts(martList);
+    });
+    console.log("Marts called");
+
+    return unsub;
+  }, []);
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(firestore, "AdditionalServices"),
+      (snapshot) => {
+        const recievedServices: ImportedService[] = snapshot.docs.map(
+          (doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          })
+        ) as ImportedService[];
+        const serviceList: string[] = [];
+        for (const service of recievedServices) {
+          serviceList.push(service.desc);
+        }
+        setServiceList(serviceList);
+      }
+    );
+    console.log("AddServices called");
+
     return unsub;
   }, []);
 
@@ -88,6 +181,8 @@ export const DataBaseProvider = ({ children }: Props) => {
         setNextShoppingDate(findNewDate.date);
       }
     );
+    console.log("ShoppingDates called");
+
     return unsub;
   }, []);
 
@@ -114,6 +209,8 @@ export const DataBaseProvider = ({ children }: Props) => {
               articleToInsert.name,
               articleToInsert.amount,
               articleToInsert.mart,
+              articleToInsert.done,
+              articleToInsert.price,
               articleToInsert.note && articleToInsert.note,
               articleToInsert.picture && articleToInsert.picture
             );
@@ -125,12 +222,14 @@ export const DataBaseProvider = ({ children }: Props) => {
             "UNDEFINED",
             0,
             "UNDEFINED",
+            false,
+            0,
             "UNDEFINED",
             "UNDEFINED"
           );
           articleAry.push(article);
         }
-        if (order.orderDone === "false" || !order.orderDone) {
+        if (order.orderDone === "true" || order.orderDone) {
           closedOrders.push(
             new Order(
               order.id,
@@ -170,21 +269,21 @@ export const DataBaseProvider = ({ children }: Props) => {
       setOpenOrders(newOrders);
       setClosedOrders(closedOrders);
     });
+    console.log("orders called");
     return unsub;
   }, [articles]);
-
-  const changeArticles = () => {
-    setArticles(null);
-  };
 
   return (
     <DataBaseContext.Provider
       value={{
-        articles: articles,
-        changeArticles,
         openOrders,
         closedOrders,
         nextShoppingDate,
+        martList,
+        serviceList,
+        userId,
+        handleUserId,
+        users,
       }}
     >
       {children}

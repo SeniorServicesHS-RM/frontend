@@ -8,21 +8,21 @@ import Order from "../data/Order";
 import React, { useEffect, useState, useContext } from "react";
 import { DataBaseContext, DataBaseProvider } from "../store/DataBaseContext";
 import Article from "../data/Article";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
-import FormGroup from "@mui/material/FormGroup/FormGroup";
-import Checkbox from "@mui/material/Checkbox/Checkbox";
 import AdditionalServicesDialog from "../components/AdditionalServicesDialog";
 import { Button } from "@mui/material";
+import { UserContext } from "../store/UserContext";
 
 interface Props {
   abort: () => void;
 }
 
 const ShoppingPage = (props: Props) => {
-  const seniorId = "s001"; //gemockte SeniorId! Richtige muss aus authcontext kommen
+  const { user } = useContext(UserContext);
+  const seniorId = user.seniorId;
+
+  //const seniorId = "s001"; //gemockte SeniorId! Richtige muss aus authcontext kommen
   const [isEditOpen, setEditOpen] = useState(false);
-  const { articles, changeArticles, openOrders } = useContext(DataBaseContext);
+  const { openOrders } = useContext(DataBaseContext);
   const [myOrder, setMyOrder] = useState<Order | null>(
     new Order(Date.now().toString(), seniorId, [], new Date(Date.now()))
   );
@@ -68,7 +68,6 @@ const ShoppingPage = (props: Props) => {
               description={article.note}
               amount={article.amount}
               mart={article.mart}
-              route={"/shopping"}
             ></ArticleCard>
           </CardActionArea>
         </Grid>

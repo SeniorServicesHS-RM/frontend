@@ -1,8 +1,7 @@
 import { Button, Grid } from "@mui/material";
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import GetUserOrders from "../data/GetUserOrders";
-import Order from "../data/Order";
-import { DataBaseContext } from "../store/DataBaseContext";
+import { UserContext } from "../store/UserContext";
 import OrderCard from "./OrderCard";
 
 interface Props {
@@ -10,7 +9,8 @@ interface Props {
 }
 
 const ShowOrders = (props: Props) => {
-  const seniorId = "s001"; //gemockte SeniorId! Richtige muss aus authcontext kommen
+  const { user } = useContext(UserContext);
+  const seniorId = user.seniorId;
   const userOrders = GetUserOrders(seniorId);
   console.log(userOrders);
 
@@ -18,8 +18,6 @@ const ShowOrders = (props: Props) => {
     <Grid container xs={12}>
       <Grid item xs={12}>
         <Button onClick={props.abort}>Zurueck</Button>
-      </Grid>
-      <Grid item xs={12}>
         {userOrders.map((order) => {
           return <OrderCard order={order}></OrderCard>;
         })}
