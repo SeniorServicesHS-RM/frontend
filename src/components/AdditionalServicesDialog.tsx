@@ -33,6 +33,7 @@ interface ValueHandler {
 
 function AdditionalServicesDialog(props: Props) {
   const { serviceList } = useContext(DataBaseContext);
+  const { nextShoppingDate } = useContext(DataBaseContext);
   const [services, setServices] = useState([""]);
   const [valueService, setValueService] = React.useState<ValueHandler>({
     newService: "",
@@ -57,8 +58,12 @@ function AdditionalServicesDialog(props: Props) {
     for (const singleArticle of props.orderToPush.articleList) {
       addArticleToDatabase(singleArticle);
     }
+    if (nextShoppingDate) {
+      props.orderToPush.planDate = nextShoppingDate;
+    }
     addOrderToDatabase(props.orderToPush);
   };
+
   const addToAry = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

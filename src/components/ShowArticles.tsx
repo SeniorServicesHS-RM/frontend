@@ -4,6 +4,7 @@ import Article from "../data/Article";
 import {
   updateArticleInDB,
   updateArticleListToDatabase,
+  updateEditableOrderInDB,
 } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
 import { UserContext } from "../store/UserContext";
@@ -46,6 +47,19 @@ const ShowArticles = (props: Props) => {
     updateArticleListToDatabase(props.order, newList);
     closeEditDialog();
   };
+  const checkEdit = () => {
+    if (props.order.editable) {
+      if (new Date().getTime() < props.order.planDate.getTime()) {
+        return true;
+      } else {
+        updateEditableOrderInDB(props.order, false);
+        return false;
+      }
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       {articles &&
@@ -79,7 +93,7 @@ const ShowArticles = (props: Props) => {
                 ) : (
                   <></>
                 )}
-                {selectedArticle && showEditDialog ? (
+                {selectedArticle && showEditDialog && checkEdit() ? (
                   <EditArticleDialog
                     article={selectedArticle}
                     handleClose={closeEditDialog}

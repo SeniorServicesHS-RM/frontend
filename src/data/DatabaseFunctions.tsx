@@ -73,6 +73,12 @@ export const updateArticleInDB = (article: Article) => {
     note: article.note,
   });
 };
+export const updateEditableOrderInDB = (order: Order, value: boolean) => {
+  const docRef = doc(firestore, "Order", order.id);
+  updateDoc(docRef, {
+    editable: value,
+  });
+};
 
 export const addOrderToDatabase = (order: Order) => {
   const getArticlesAsStringAry = () => {
@@ -92,11 +98,12 @@ export const addOrderToDatabase = (order: Order) => {
     date: order.date,
     employeeId: order.employeeId ? order.employeeId : "undefined",
     estimatedPrice: order.estimatedPrice ? order.estimatedPrice : 0,
-    planDate: order.planDate ? order.planDate : "undefined",
+    planDate: order.planDate,
     seniorId: order.seniorId,
     signDate: order.signDate ? order.signDate : "undefined",
     signature: order.signature ? order.signature : "undefined",
     orderDone: order.orderDone,
+    editable: order.editable ? order.editable : true,
   });
   for (const article of order.articleList) {
     addArticleToDatabase(article);

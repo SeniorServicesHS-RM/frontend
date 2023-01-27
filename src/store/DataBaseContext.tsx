@@ -25,19 +25,20 @@ interface ImportedOrder {
   seniorId: string;
   orderDone: string;
   articleList: string[];
-  date: Date;
+  date: Date | any;
   additionalServices?: string[];
-  planDate?: Date | string;
+  planDate?: Date | any;
   employeeId?: string;
   actualPrice?: number;
   estimatedPrice?: number;
   signDate?: Date;
   signature?: string;
+  editable?: boolean;
 }
 
 interface ImportedDate {
   id: string;
-  date: string;
+  date: Date | any;
 }
 interface ImportedMart {
   id: string;
@@ -51,7 +52,7 @@ interface ImportedService {
 interface DataBaseContextInterface {
   openOrders: Order[];
   closedOrders: Order[];
-  nextShoppingDate: string;
+  nextShoppingDate: Date;
   martList: string[];
   serviceList: string[];
   userId: string;
@@ -81,7 +82,7 @@ export const DataBaseContext =
 export const DataBaseProvider = ({ children }: Props) => {
   const [articles, setArticles] = useState<ImportedArticle[] | null>(null);
   const [openOrders, setOpenOrders] = useState<Order[] | null>(null);
-  const [nextShoppingDate, setNextShoppingDate] = useState<string | null>(null);
+  const [nextShoppingDate, setNextShoppingDate] = useState<Date | null>(null);
   const [closedOrders, setClosedOrders] = useState<Order[] | null>(null);
   const [martList, setMarts] = useState<string[] | null>(null);
   const [serviceList, setServiceList] = useState<string[] | null>(null);
@@ -178,7 +179,8 @@ export const DataBaseProvider = ({ children }: Props) => {
         const findNewDate = receivedDates.find((date) => {
           return date.id === "nextDate";
         });
-        setNextShoppingDate(findNewDate.date);
+        // console.log(findNewDate.date.toDate());
+        setNextShoppingDate(findNewDate.date.toDate());
       }
     );
     console.log("ShoppingDates called");
@@ -235,15 +237,16 @@ export const DataBaseProvider = ({ children }: Props) => {
               order.id,
               order.seniorId,
               articleAry,
-              order.date,
+              order.date.toDate(),
               order.additionalServices && order.additionalServices,
-              order.planDate instanceof Date && order.planDate,
+              order.planDate.toDate(),
               order.employeeId && order.employeeId,
               order.actualPrice && order.actualPrice,
               order.estimatedPrice && order.estimatedPrice,
               order.signDate && order.signDate,
               order.signature && order.signature,
-              false
+              false,
+              order.editable && order.editable
             )
           );
         } else {
@@ -252,15 +255,16 @@ export const DataBaseProvider = ({ children }: Props) => {
               order.id,
               order.seniorId,
               articleAry,
-              order.date,
+              order.date.toDate(),
               order.additionalServices && order.additionalServices,
-              order.planDate instanceof Date && order.planDate,
+              order.planDate.toDate(),
               order.employeeId && order.employeeId,
               order.actualPrice && order.actualPrice,
               order.estimatedPrice && order.estimatedPrice,
               order.signDate && order.signDate,
               order.signature && order.signature,
-              true
+              true,
+              order.editable && order.editable
             )
           );
         }

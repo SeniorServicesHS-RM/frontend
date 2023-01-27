@@ -4,6 +4,7 @@ import ShowOrders from "../components/ShowOrders";
 import { DataBaseContext } from "../store/DataBaseContext";
 import ShoppingPage from "./ShoppingPage";
 import Typography from "@mui/material/Typography";
+import { timeStamp } from "console";
 
 const ShoppingPageSelection = () => {
   const { nextShoppingDate } = useContext(DataBaseContext);
@@ -23,7 +24,7 @@ const ShoppingPageSelection = () => {
           <Typography>
             Naechstes Einkaufsdatum:{" "}
             {nextShoppingDate
-              ? nextShoppingDate
+              ? nextShoppingDate.toDateString()
               : "Ein Fehler ist aufgetreten, oh noes!"}
           </Typography>
           <Button onClick={orderSelectionHandler}>Neue Bestellung</Button>
