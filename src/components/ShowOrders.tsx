@@ -17,7 +17,7 @@ const ShowOrders = (props: Props) => {
   return (
     <>
       <Button onClick={props.abort}>Zurueck</Button>
-      {userOrders.map((order) => {
+      {userOrders.reverse().map((order) => {
         return <OrderCard order={order}></OrderCard>;
       })}
     </>
