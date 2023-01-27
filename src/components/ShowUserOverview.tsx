@@ -24,9 +24,12 @@ const ShowUserOverview = (props: Props) => {
     const newList = [] as string[];
     props.orderList.map((order: Order) => {
       order.additionalServices.map((service: string) => {
-        return newList.push(service);
+        if (!newList.includes(service)) {
+          return newList.push(service);
+        }
       });
     });
+    console.log(newList);
     return newList;
   };
 
