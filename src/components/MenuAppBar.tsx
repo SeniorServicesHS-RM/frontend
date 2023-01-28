@@ -22,12 +22,10 @@ interface Props {
 }
 
 export default function MenuAppBar(props: Props) {
-  //const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //setAuth(event.target.checked);
-  };
+  /*const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  };*/
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -59,7 +57,6 @@ export default function MenuAppBar(props: Props) {
         setAnchorEl(null);
         navigate('/login');
       }).catch((error) => {
-        // An error happened.
         console.log(error);
       });
     }
@@ -118,7 +115,6 @@ export default function MenuAppBar(props: Props) {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>

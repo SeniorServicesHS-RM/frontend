@@ -8,7 +8,7 @@ import User from "../data/User";
 
 interface ImportedArticle {
   id: string;
-  beginDate?: Date; //all 3 necessarz? -> one should be enough!
+  beginDate?: Date; //all 3 necessary? -> one should be enough!
   changeDate?: Date;
   endDate?: Date;
   name: string;
