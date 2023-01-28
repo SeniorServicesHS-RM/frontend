@@ -245,7 +245,7 @@ export const DataBaseProvider = ({ children }: Props) => {
               order.estimatedPrice && order.estimatedPrice,
               order.signDate && order.signDate,
               order.signature && order.signature,
-              false,
+              true,
               order.editable && order.editable
             )
           );
@@ -263,7 +263,7 @@ export const DataBaseProvider = ({ children }: Props) => {
               order.estimatedPrice && order.estimatedPrice,
               order.signDate && order.signDate,
               order.signature && order.signature,
-              true,
+              false,
               order.editable && order.editable
             )
           );
