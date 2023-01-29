@@ -200,7 +200,7 @@ export const DataBaseProvider = ({ children }: Props) => {
         const findNewDate = receivedDates.find((date) => {
           return date.id === "nextDate";
         });
-        setNextShoppingDate(findNewDate.date);
+        setNextShoppingDate(findNewDate.date.toDate());
       }
     );
     return unsub;

@@ -99,7 +99,6 @@ const ShoppingPage = (props: Props) => {
               orderToPush={myOrder}
             ></AdditionalServicesDialog>
             <Button onClick={props.abort}>Abbrechen</Button>
-            <Button onClick={props.abort}>Abbrechen</Button>
           </Grid>
           {mappedOrderList}
           {isEditOpen ? (
