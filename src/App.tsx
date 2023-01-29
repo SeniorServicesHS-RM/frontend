@@ -5,6 +5,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import MainPage from "./pages/MainPage";
 import { DataBaseProvider } from "./store/DataBaseContext";
 import seniorTheme from "./theme";
+import plannerTheme from "./theme";
+import ekhTheme from "./theme";
 import AuthContext from "./store/AuthContext";
 import { UserProvider } from "./store/UserContext";
 
@@ -12,7 +14,7 @@ function App() {
   return (
     <div>
       <UserProvider>
-        <ThemeProvider theme={seniorTheme}>
+        <ThemeProvider theme={ekhTheme}>
           <DataBaseProvider>
             <BrowserRouter>
               <MainPage></MainPage>
@@ -25,3 +27,5 @@ function App() {
 }
 
 export default App;
+//<ThemeProvider theme={plannerTheme}>
+//      <ThemeProvider theme={ekhTheme}>
