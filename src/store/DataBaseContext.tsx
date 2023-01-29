@@ -53,7 +53,7 @@ interface ImportedService {
 interface DataBaseContextInterface {
   openOrders: Order[];
   closedOrders: Order[];
-  nextShoppingDate: Date;
+  nextShoppingDate: Date | any;
   martList: string[];
   serviceList: string[];
   userId: string;
@@ -180,8 +180,8 @@ export const DataBaseProvider = ({ children }: Props) => {
         const findNewDate = receivedDates.find((date) => {
           return date.id === "nextDate";
         });
-        // console.log(findNewDate.date.toDate());
         setNextShoppingDate(findNewDate.date.toDate());
+        console.log("in DB: ", findNewDate.date.toDate());
       }
     );
     console.log("ShoppingDates called");

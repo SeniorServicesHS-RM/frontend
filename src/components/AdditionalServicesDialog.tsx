@@ -28,7 +28,6 @@ import { DataBaseContext } from "../store/DataBaseContext";
 interface Props {
   orderToPush: Order;
   abort: () => void;
-  abort: () => void;
 }
 interface ValueHandler {
   newService?: string;
@@ -101,8 +100,6 @@ function AdditionalServicesDialog(props: Props) {
   });
 
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
         Fertig

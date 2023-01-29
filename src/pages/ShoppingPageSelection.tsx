@@ -47,9 +47,12 @@ const ShoppingPageSelection = () => {
                 fontWeight: "bold",
               }}
             >
-              {nextShoppingDate
-                ? nextShoppingDate
-                : "Ein Fehler ist aufgetreten, oh noes!"}
+              <Typography>
+                {console.log(nextShoppingDate)}
+                {nextShoppingDate
+                  ? nextShoppingDate.toDateString()
+                  : "Ein Fehler ist aufgetreten, oh noes!"}
+              </Typography>
             </Paper>
           </Typography>
           <Button
