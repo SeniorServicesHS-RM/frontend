@@ -4,11 +4,11 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../store/UserContext";
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import FormHelperText from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -23,7 +23,7 @@ import { EmailAuthProvider, updatePassword, reauthenticateWithCredential, signOu
 
 const ProfilePage = () => {
    const { user } = useContext(UserContext);
-   const [open, setOpen] = React.useState(false);
+   const [open, setOpen] = useState(false);
    const [showOldPassword, setShowOldPassword] = useState(false);
    const [showNewPassword, setShowNewPassword] = useState(false);
    const [showNewConfPassword, setShowNewConfPassword] = useState(false);
@@ -34,6 +34,11 @@ const ProfilePage = () => {
    const handleClickShowNewPassword = () => setShowNewPassword(!showNewPassword);
    const handleClickShowNewConfPassword = () => setShowNewConfPassword(!showNewConfPassword);
    const userPW = auth.currentUser;
+   const [errorOldPW, setErrorOldPW] = useState(false);
+   const [errorNewPW, setErrorNewPW] = useState(false);
+   const [errorMessageOldPW, setErrorMessageOldPW] = useState('');
+   const [errorMessageNewPW, setErrorMessageNewPW] = useState('');
+
 
    const handleClickOpen = () => {
      setOpen(true);
@@ -41,32 +46,51 @@ const ProfilePage = () => {
  
    const handleClose = () => {
      setOpen(false);
+     setErrorOldPW(false);
+     setErrorNewPW(false);
+     setErrorMessageOldPW("");
+     setErrorMessageNewPW("");
      setShowOldPassword(false);
      setShowNewPassword(false);
      setShowNewConfPassword(false);
    };
 
+
+
    const changePassword = () => {
       // "re-provide" the sign-in credentials for auth check with oldpassword
+      setErrorOldPW(false);
+      setErrorNewPW(false);
+      setErrorMessageOldPW("");
+      setErrorMessageNewPW("");
+      
       const credential = EmailAuthProvider.credential(
          auth.currentUser.email,
          oldPassword
       )
       
       if (newPassword !== newConfPassword) {
+         setErrorNewPW(true);
+         setErrorMessageNewPW("Neue Passwörter stimmen nicht überein!");  
          console.log("Neue Passwörter stimmen nicht überein!");
          return;
       }
       else if (newPassword.length < 8 && newConfPassword.length < 8){
+         setErrorNewPW(true);
+         setErrorMessageNewPW("Neues Passwort muss mindestens 8 Zeichen lang sein!");  
          console.log("Neues Passwort muss mindestens 8 Zeichen lang sein!");
          return;
       }
       else{
+         setErrorNewPW(false);
+         setErrorMessageNewPW("");
          reauthenticateWithCredential(userPW, credential)
          .then(() => {
          // User re-authenticated succesfully, proceed to update password
          console.log("reauthenticate succesful");
-         const newPassword = newConfPassword;       
+         const newPassword = newConfPassword;
+         setErrorOldPW(false);
+         setErrorMessageOldPW("");       
             updatePassword(userPW, newPassword)
             .then(() => {
                // PW update successful.
@@ -84,6 +108,8 @@ const ProfilePage = () => {
             });
          })
          .catch((error: any) => {
+            setErrorOldPW(true);
+            setErrorMessageOldPW('Das alte Passwort ist inkorrekt!');
             console.error("Error re-authenticating the user: ", error);
          });
       }  
@@ -136,6 +162,8 @@ const ProfilePage = () => {
                   erratendes Passwort wie den Namen Ihres Haustiers.
                   </DialogContentText>
                   <TextField
+                     error={errorOldPW}
+                     helperText= {errorMessageOldPW}
                      autoFocus
                      margin="dense"
                      id="oldpassword"
@@ -158,7 +186,9 @@ const ProfilePage = () => {
                         )
                       }}
                   />
+                  
                   <TextField
+                     error={errorNewPW}
                      autoFocus
                      margin="dense"
                      id="newpassword"
@@ -182,6 +212,8 @@ const ProfilePage = () => {
                       }}
                   />
                   <TextField
+                     error={errorNewPW}
+                     helperText= {errorMessageNewPW}
                      autoFocus
                      margin="dense"
                      id="newconfpassword"

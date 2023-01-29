@@ -50,8 +50,12 @@ export default function LoginSide() {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const [errorPW, setErrorPW] = useState(false);
+  const [errorMessagePW, setErrorMessagePW] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setErrorPW(false);
+    setErrorMessagePW(""); 
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -70,6 +74,8 @@ export default function LoginSide() {
         // ...
       })
       .catch((error) => {
+        setErrorPW(true);
+        setErrorMessagePW("Die Anmeldeinformationen sind inkorrekt!");  
         console.log("wrong Email or password");
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -119,6 +125,7 @@ export default function LoginSide() {
               sx={{ mt: 1 }}
             >
               <TextField
+                error={errorPW}
                 margin="normal"
                 required
                 fullWidth
@@ -131,6 +138,8 @@ export default function LoginSide() {
                 value={email}
               />
               <TextField
+                error={errorPW}
+                helperText= {errorMessagePW}
                 margin="normal"
                 required
                 fullWidth
