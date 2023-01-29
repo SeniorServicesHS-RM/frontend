@@ -14,6 +14,8 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
+import { text } from "body-parser";
+import { abort } from "process";
 import React, { ChangeEvent, useContext } from "react";
 import { useState } from "react";
 import {
@@ -25,6 +27,7 @@ import { DataBaseContext } from "../store/DataBaseContext";
 
 interface Props {
   orderToPush: Order;
+  abort: () => void;
   abort: () => void;
 }
 interface ValueHandler {
@@ -52,6 +55,7 @@ function AdditionalServicesDialog(props: Props) {
     props.orderToPush.additionalServices = services.filter((e) => e);
     handlePush();
     handleClose();
+    props.abort();
     props.abort();
   };
   const handlePush = () => {
@@ -97,6 +101,8 @@ function AdditionalServicesDialog(props: Props) {
   });
 
   return (
+    <div>
+      <Button variant="outlined" onClick={handleClickOpen}>
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
         Fertig

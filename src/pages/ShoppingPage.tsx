@@ -25,8 +25,10 @@ const ShoppingPage = (props: Props) => {
   const { openOrders } = useContext(DataBaseContext);
   const [myOrder, setMyOrder] = useState<Order | null>(
     new Order(Date.now().toString(), seniorId, [], new Date(Date.now()))
+    new Order(Date.now().toString(), seniorId, [], new Date(Date.now()))
   );
   const [orderList, setOrderList] = useState<Article[] | null>(
+    myOrder.articleList ? myOrder.articleList : null
     myOrder.articleList ? myOrder.articleList : null
   );
   const [singleOrder, setSingleOrder] = useState<Article | null>(null);
@@ -96,8 +98,10 @@ const ShoppingPage = (props: Props) => {
             <AddArticleDialog addOrder={addArticle}></AddArticleDialog>
             <AdditionalServicesDialog
               abort={props.abort}
+              abort={props.abort}
               orderToPush={myOrder}
             ></AdditionalServicesDialog>
+            <Button onClick={props.abort}>Abbrechen</Button>
             <Button onClick={props.abort}>Abbrechen</Button>
           </Grid>
           {mappedOrderList}

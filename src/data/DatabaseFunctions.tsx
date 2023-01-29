@@ -20,6 +20,7 @@ export const addArticleToDatabase = (article: Article) => {
     mart: article.mart,
     name: article.name,
     note: article.note ? article.note : "undefined",
+
     picture: article.picture ? article.picture : "undefined",
     price: article.price,
   });

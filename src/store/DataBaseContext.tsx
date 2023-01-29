@@ -5,6 +5,7 @@ import { firestore } from "./Firebase";
 import Article from "../data/Article";
 import Order from "../data/Order";
 import User from "../data/User";
+import { closeSync } from "fs";
 
 interface ImportedArticle {
   id: string;
@@ -185,6 +186,23 @@ export const DataBaseProvider = ({ children }: Props) => {
     );
     console.log("ShoppingDates called");
 
+    return unsub;
+  }, []);
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(firestore, "ShoppingDates"),
+      (snapshot) => {
+        const receivedDates: ImportedDate[] = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })) as ImportedDate[];
+        const findNewDate = receivedDates.find((date) => {
+          return date.id === "nextDate";
+        });
+        setNextShoppingDate(findNewDate.date);
+      }
+    );
     return unsub;
   }, []);
 
