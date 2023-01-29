@@ -1,11 +1,21 @@
 import { createTheme } from "@mui/material/styles";
 
 const seniorTheme = createTheme({
+  typography: {
+    h2: {
+      color: "#ffffff",
+      background: "#ABC1C4",
+      textAlign: "center",
+    },
+  },
   palette: {
     primary: {
       main: "#00bcd4",
       dark: "#00838f",
       light: "#e0f7fa",
+    },
+    background: {
+      default: "#fff7c6",
     },
   },
   components: {
@@ -19,11 +29,11 @@ const seniorTheme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        containedPrimary: {
-          backgroundColor: "#00bcd4",
+        contained: {
+          background: "#00bcd4",
           color: "#ffffff",
           "&:hover": {
-            backgroundColor: "#42d5e5",
+            background: "#006c7a",
           },
         },
       },

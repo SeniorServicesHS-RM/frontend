@@ -1,11 +1,12 @@
-import { Button, Grid } from "@mui/material";
-import FlexBox from "../components/FlexBox";
+import { Button, Box } from "@mui/material";
+import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
 import { useContext } from "react";
 import { UserContext } from "../store/UserContext";
+import landingImg from "../assets/images/sharing-plate.jpeg";
+import { ThemeProvider } from "@mui/material/styles";
+import seniorTheme from "../theme";
 
 const LandingPage = () => {
   const { user, role } = useContext(UserContext);
@@ -16,19 +17,34 @@ const LandingPage = () => {
   };
 
   return (
-    <Paper component={Stack} direction="column" justifyContent="center">
-      <FlexBox>
+    <ThemeProvider theme={seniorTheme}>
+      <Box
+        style={{
+          backgroundImage: `url(${landingImg})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          width: "100vw",
+          minHeight: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         {role === 0 ? (
-          <Button variant="contained" onClick={routeChange}>
+          <Button
+            style={{ padding: "30px" }}
+            variant="contained"
+            onClick={routeChange}
+          >
             Zum Login
           </Button>
         ) : (
-          <Typography variant="h5" component="h3">
+          <Typography variant="h2" component="h3">
             Guten Tag {user.firstName} {user.lastName}
           </Typography>
         )}
-      </FlexBox>
-    </Paper>
+      </Box>
+    </ThemeProvider>
   );
 };
 
