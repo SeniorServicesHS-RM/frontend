@@ -18,28 +18,28 @@ import { auth } from "../store/Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { UserContext } from "../store/UserContext";
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+// function Copyright(props: any) {
+//   return (
+//     <Typography
+//       variant="body2"
+//       color="text.secondary"
+//       align="center"
+//       {...props}
+//     >
+//       {"Copyright © "}
+//       <Link color="inherit" href="https://mui.com/">
+//         Your Website
+//       </Link>{" "}
+//       {new Date().getFullYear()}
+//       {"."}
+//     </Typography>
+//   );
+// }
 
 export default function LoginSide() {
   //const [authenticated, setAuthenticated] = useState<boolean>(false);
@@ -51,11 +51,11 @@ export default function LoginSide() {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const [errorPW, setErrorPW] = useState(false);
-  const [errorMessagePW, setErrorMessagePW] = useState('');
+  const [errorMessagePW, setErrorMessagePW] = useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setErrorPW(false);
-    setErrorMessagePW(""); 
+    setErrorMessagePW("");
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -75,7 +75,7 @@ export default function LoginSide() {
       })
       .catch((error) => {
         setErrorPW(true);
-        setErrorMessagePW("Die Anmeldeinformationen sind inkorrekt!");  
+        setErrorMessagePW("Die Anmeldeinformationen sind inkorrekt!");
         console.log("wrong Email or password");
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -139,7 +139,7 @@ export default function LoginSide() {
               />
               <TextField
                 error={errorPW}
-                helperText= {errorMessagePW}
+                helperText={errorMessagePW}
                 margin="normal"
                 required
                 fullWidth
@@ -150,7 +150,7 @@ export default function LoginSide() {
                 autoComplete="current-password"
                 onChange={(event) => setPassword(event.target.value)}
                 value={password}
-                InputProps={{ 
+                InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
@@ -158,10 +158,14 @@ export default function LoginSide() {
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
                       >
-                        {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                        {showPassword ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
                       </IconButton>
                     </InputAdornment>
-                  )
+                  ),
                 }}
               />
               <FormControlLabel
@@ -178,14 +182,9 @@ export default function LoginSide() {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
+                <Grid item xs></Grid>
                 <Grid item></Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>
