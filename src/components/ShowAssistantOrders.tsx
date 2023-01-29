@@ -67,7 +67,7 @@ const ShowAsisstantOrders = (props: Props) => {
 
   return (
     <FlexBox>
-      <Grid container md={6} xs={12}>
+      <Grid container md={9} xs={12}>
         <Grid item xs={12}>
           <Grid item xs={12}>
             <Button

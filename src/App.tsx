@@ -1,5 +1,4 @@
 import { BrowserRouter } from "react-router-dom";
-import { blue, indigo, green, deepOrange, grey } from "@mui/material/colors";
 import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import MainPage from "./pages/MainPage";

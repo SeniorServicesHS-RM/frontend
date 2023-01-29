@@ -7,7 +7,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import Article from "../data/Article";
 import {
   updateArticleDoneInDB,
@@ -24,8 +24,6 @@ const ShowEmpDoneDialog = (props: Props) => {
   const [valuePrice, setValuePrice] = useState<number>(props.article.price);
   const [valueDone, setValueDone] = useState<boolean>(props.article.done);
   const handleDone = () => {
-    console.log(props.article);
-
     props.article.price = valuePrice;
     props.article.done = valueDone;
     updateArticleDoneInDB(props.article);
@@ -41,6 +39,7 @@ const ShowEmpDoneDialog = (props: Props) => {
     setValueDone(!valueDone);
     props.article.done = Boolean(event.target.checked);
   };
+
   const handleAbort = () => {
     setValuePrice(0);
     return props.abort();

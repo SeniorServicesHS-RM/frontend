@@ -1,36 +1,68 @@
-import { List, Grid } from "@mui/material";
+import {
+  List,
+  Grid,
+  FormControlLabel,
+  Checkbox,
+  TextField,
+} from "@mui/material";
+import { ChangeEvent, useReducer, useEffect, useState } from "react";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import logosArr from "../data/LogosArr";
+import Article from "../data/Article";
+import {
+  updateArticleDoneInDB,
+  updateArticlePriceInDB,
+} from "../data/DatabaseFunctions";
 interface Props {
-  title: string;
-  description?: string;
-  amount: number;
-  mart: String;
+  article: Article;
 }
 export default function OrdersListAssistant(props: Props) {
+  const [valuePrice, setValuePrice] = useState<number>(props.article.price);
+  const [valueDone, setValueDone] = useState<boolean>(props.article.done);
+  props.article.price = valuePrice;
+  props.article.done = valueDone;
+
+  const hanldeValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValuePrice(event.target.valueAsNumber);
+    props.article.price = event.target.valueAsNumber;
+    updateArticlePriceInDB(props.article);
+  };
+  const handleDoneChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValueDone(!valueDone);
+    props.article.done = Boolean(event.target.checked);
+    updateArticleDoneInDB(props.article);
+  };
   return (
-    <List sx={{ width: "100%", bgcolor: "primay.light" }}>
+    <List sx={{ width: "100%" }}>
       <ListItem
         sx={{
           display: "flex",
           flexDirection: "row",
+          borderRadius: 3,
+          bgcolor: "primary.light",
+          borderRight: valueDone ? "5px solid green" : "5px solid gray",
         }}
       >
         <ListItemAvatar>
           {logosArr.some((ele) => {
-            if (props.mart === ele.name) return ele.name;
+            if (props.article.mart === ele.name) return ele.name;
           }) ? (
             logosArr.map((item) => {
-              if (item.name === props.mart) {
+              if (item.name === props.article.mart) {
                 return (
                   <Avatar
                     alt={item.name}
                     src={item.url}
-                    sx={{ width: 50, height: 50, mr: 2, borderRadius: "0" }}
+                    sx={{
+                      width: 50,
+                      height: 50,
+                      mr: 2,
+                      borderRadius: "5px",
+                    }}
                   />
                 );
               }
@@ -45,17 +77,18 @@ export default function OrdersListAssistant(props: Props) {
               width="6rem"
               textAlign={"center"}
             >
-              {props.mart}
+              {props.article.mart}
             </Typography>
           )}
         </ListItemAvatar>
-        <Grid xs={12}>
+
+        <Grid item xs={6}>
           <Typography
             sx={{ textAlign: "left", width: "100%", fontWeight: "bold" }}
             component="p"
             color="text.primary"
           >
-            {props.title}
+            {props.article.name}
           </Typography>
           <Typography
             sx={{
@@ -67,29 +100,53 @@ export default function OrdersListAssistant(props: Props) {
             component="p"
             color="text.primary"
           >
-            {props.description}
+            {props.article.note}
           </Typography>
         </Grid>
-        <Grid sx={{ display: "flex" }}>
+
+        <Grid item sx={{ display: "flex" }} xs={4}>
           <Typography
-            sx={{ p: 2 }}
+            sx={{
+              p: 2,
+              bgcolor: "primary.light",
+            }}
             component="span"
             color="primary.dark"
-            bgcolor={"primary.light"}
           >
             Menge
           </Typography>
           <Typography
-            sx={{ p: 2, fontWeight: "bold" }}
+            sx={{
+              p: 2,
+              borderRadius: "5px",
+              fontWeight: "bold",
+            }}
             component="span"
             color="primary.dark"
-            bgcolor={"primary.light"}
           >
-            {props.amount}
+            {props.article.amount}
           </Typography>
         </Grid>
+        <Grid xs={5}>
+          <TextField
+            label="Artikel eingekauft"
+            type="number"
+            inputProps={{ step: 0.01 }}
+            value={props.article.price}
+            onChange={hanldeValueChange}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={props.article.done}
+                onChange={handleDoneChange}
+                name="eingekauft?"
+              />
+            }
+            label="eingekauft?"
+          />
+        </Grid>
       </ListItem>
-      <Divider variant="inset" component="li" />
     </List>
   );
 }
