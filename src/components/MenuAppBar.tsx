@@ -4,11 +4,12 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import { signOut } from "firebase/auth"
+import { signOut } from "firebase/auth";
 import { auth } from "../store/Firebase";
 import { useNavigate } from "react-router-dom";
 
@@ -37,33 +38,33 @@ export default function MenuAppBar(props: Props) {
 
   const navigate = useNavigate();
   const handleProfile = () => {
-    if (auth.currentUser !== null){
+    if (auth.currentUser !== null) {
       setAnchorEl(null);
-      navigate('/profile');
-    }
-    else{ 
-      console.log('no user logged in');
+      navigate("/profile");
+    } else {
+      console.log("no user logged in");
       setAnchorEl(null);
-      navigate('/login');
+      navigate("/login");
     }
   };
 
-  const handleLogout = () => {;
+  const handleLogout = () => {
     console.log(auth.currentUser);
-    if (auth.currentUser !== null){
-      signOut(auth).then(() => {
-        // Sign-out successful.
-        console.log('logout successful');
-        setAnchorEl(null);
-        navigate('/login');
-      }).catch((error) => {
-        console.log(error);
-      });
-    }
-    else{
+    if (auth.currentUser !== null) {
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+          console.log("logout successful");
+          setAnchorEl(null);
+          navigate("/login");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
       //prinzipiell unnötig weil man den Logout-Button verschwinden lassen sollte nach nem Logout, aber so werden
       //unnötige Datenbankabfragen erst mal eingeschränkt
-      console.log('no user logged in');
+      console.log("no user logged in");
       setAnchorEl(null);
     }
   };
@@ -99,6 +100,7 @@ export default function MenuAppBar(props: Props) {
               >
                 <AccountCircle />
               </IconButton>
+
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -114,7 +116,7 @@ export default function MenuAppBar(props: Props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleProfile}>Profile</MenuItem>
+                <MenuItem onClick={handleProfile}>My Profile</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
