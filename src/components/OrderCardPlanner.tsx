@@ -134,8 +134,8 @@ const OrderCardPlanner = (props: Props) => {
         </DialogContent>
 
         <DialogActions>
-          <Button>Speichern</Button>
-          <Button onClick={dialogOpenHandler}>Abbrechen</Button>
+          <Button></Button>
+          <Button onClick={dialogOpenHandler}>Ok</Button>
         </DialogActions>
       </Dialog>
       <OrderCard order={props.order} />

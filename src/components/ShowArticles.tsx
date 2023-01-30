@@ -39,7 +39,7 @@ const ShowArticles = (props: Props) => {
   };
   const deleteArticle = (articleToDelete: Article) => {
     const newList: string[] = [];
-    props.articles.map((article) => {
+    articles.map((article) => {
       if (article.id != articleToDelete.id) {
         newList.push(article.id);
       }

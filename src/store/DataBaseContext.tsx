@@ -231,7 +231,7 @@ export const DataBaseProvider = ({ children }: Props) => {
               articleToInsert.mart,
               articleToInsert.done,
               articleToInsert.price,
-              articleToInsert.note && articleToInsert.note,
+              articleToInsert.note === "undefined" ? "" : articleToInsert.note,
               articleToInsert.picture && articleToInsert.picture
             );
             articleAry.push(article);
