@@ -14,6 +14,10 @@ const planningTheme = createTheme({
       color: "white",
       fontfamily: "GrandView",
     },
+    h5: {
+      backgroundcolor: "rgba(0,0,0,.5)",
+      color: "white",
+    },
   },
   components: {
     MuiAppBar: {

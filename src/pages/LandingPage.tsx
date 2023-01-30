@@ -39,6 +39,7 @@ const LandingPage = () => {
       <Box
         style={{
           backgroundImage: `url(${landingImg})`,
+          opacity: "0.9",
           backgroundPosition: "center",
           backgroundSize: "cover",
           width: "100vw",
