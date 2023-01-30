@@ -1,5 +1,6 @@
 import { Theme } from "@mui/material";
 import ekhTheme from "./ekhTheme";
+import normalTheme from "./normalTheme";
 import planningTheme from "./planningTheme";
 import seniorTheme from "./seniorTheme";
 
@@ -11,4 +12,5 @@ const themeMap: { [key: string]: Theme } = {
   ekhTheme,
   planningTheme,
   seniorTheme,
+  normalTheme,
 };
