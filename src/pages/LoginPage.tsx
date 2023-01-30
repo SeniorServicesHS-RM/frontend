@@ -35,7 +35,6 @@ export default function LoginSide() {
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const [errorPW, setErrorPW] = useState(false);
   const [errorMessagePW, setErrorMessagePW] = useState("");
-  const { currentTheme, setTheme } = useContext(CustomThemeContext);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setErrorPW(false);
@@ -65,19 +64,6 @@ export default function LoginSide() {
         const errorMessage = error.message;
       });
   };
-
-  function switchTheme() {
-    switch (user.role) {
-      case 1:
-        return setTheme("planningTheme");
-      case 2:
-        return setTheme("ekhTheme");
-      case 3:
-        return setTheme("seniorTheme");
-      default:
-        return setTheme("");
-    }
-  }
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -173,7 +159,6 @@ export default function LoginSide() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => switchTheme()}
             >
               Sign In
             </Button>
