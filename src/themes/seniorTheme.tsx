@@ -14,6 +14,13 @@ const seniorTheme = createTheme({
       main: "#69f0ae",
     },
   },
+  typography: {
+    h3: {
+      fontWeight: "bold",
+      color: "white",
+      fontfamily: "GrandView",
+    },
+  },
   components: {
     MuiAppBar: {
       styleOverrides: {

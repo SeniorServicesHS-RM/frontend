@@ -8,6 +8,13 @@ const planningTheme = createTheme({
       light: "#C0EDCC",
     },
   },
+  typography: {
+    h3: {
+      fontWeight: "bold",
+      color: "white",
+      fontfamily: "GrandView",
+    },
+  },
   components: {
     MuiAppBar: {
       styleOverrides: {

@@ -7,6 +7,7 @@ import { UserContext } from "../store/UserContext";
 import { CustomThemeContext } from "../themes/themeContext";
 import landingImg from "../assets/images/sharing-plate.jpeg";
 import { Stack } from "@mui/system";
+import Grid from "@mui/material/Grid";
 
 const LandingPage = () => {
   const { user, role } = useContext(UserContext);
@@ -42,24 +43,41 @@ const LandingPage = () => {
           backgroundSize: "cover",
           width: "100vw",
           minHeight: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
         }}
       >
-        {role === 0 ? (
-          <Button
-            style={{ padding: "30px" }}
-            variant="contained"
-            onClick={routeChange}
+        <Grid item xs={2}>
+          <Grid item xs={2} display="flex" justifyContent="center">
+            <Typography align="center" variant="h3" component="h1">
+              WELCOME TO OUR SMARTSERVICES VISION
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            xs={4}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
           >
-            Zum Login
-          </Button>
-        ) : (
-          <Typography variant="h5" component="h3" color={"white"}>
-            Guten Tag {getFullName()}
-          </Typography>
-        )}
+            {role === 0 ? (
+              <Button
+                style={{ padding: "30px" }}
+                variant="contained"
+                onClick={routeChange}
+              >
+                Zum Login
+              </Button>
+            ) : (
+              <Typography
+                align="center"
+                variant="h5"
+                component="h3"
+                color={"white"}
+              >
+                Guten Tag {getFullName()}
+              </Typography>
+            )}
+          </Grid>
+        </Grid>
       </Box>
     </Paper>
   );

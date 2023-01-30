@@ -8,6 +8,13 @@ const normalTheme = createTheme({
       light: "#ADD3FF",
     },
   },
+  typography: {
+    h3: {
+      fontWeight: "bold",
+      color: "white",
+      fontfamily: "GrandView",
+    },
+  },
   components: {
     MuiAppBar: {
       styleOverrides: {

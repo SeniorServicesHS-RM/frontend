@@ -7,6 +7,13 @@ const ekhTheme = createTheme({
       light: "#EFA9A9",
     },
   },
+  typography: {
+    h3: {
+      fontWeight: "bold",
+      color: "white",
+      fontfamily: "GrandView",
+    },
+  },
   components: {
     MuiAppBar: {
       styleOverrides: {
