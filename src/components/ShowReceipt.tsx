@@ -1,4 +1,6 @@
 import { Typography } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import Article from "../data/Article";
 import { updateActualPriceOfOrderInDB } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
@@ -26,24 +28,26 @@ const ShowReceipt = (props: Props) => {
     return summe;
   };
   return (
-    <>
-      <Typography
-        variant="h3"
-        sx={{ p: 1, fontSize: 22, fontWeight: "bold" }}
-        color="text.secondary"
-        gutterBottom
-      >
-        {props.senior.seniorId +
-          ": " +
-          props.senior.firstName +
-          " " +
-          props.senior.lastName}
-      </Typography>
-      <Typography>Datum: {new Date().toDateString()}</Typography>
-      <Typography sx={{ p: 1, mb: 1.5 }} color="text.secondary">
-        Gesamt: {showSum(props.senior)}€
-      </Typography>
-    </>
+    <Card>
+      <CardContent>
+        <Typography
+          variant="h3"
+          sx={{ p: 1, fontSize: 22, fontWeight: "bold" }}
+          color="text.secondary"
+          gutterBottom
+        >
+          {props.senior.seniorId +
+            ": " +
+            props.senior.firstName +
+            " " +
+            props.senior.lastName}
+        </Typography>
+        <Typography>Datum: {new Date().toDateString()}</Typography>
+        <Typography sx={{ p: 1, mb: 1.5 }} color="text.secondary">
+          Gesamt: {showSum(props.senior)}€
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 export default ShowReceipt;
