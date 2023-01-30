@@ -48,6 +48,7 @@ const ShowArticles = (props: Props) => {
     closeEditDialog();
   };
   const checkEdit = () => {
+    console.log(props.order);
     if (props.order.editable) {
       if (new Date().getTime() < props.order.planDate.getTime()) {
         return true;

@@ -183,7 +183,7 @@ const OrderCard = (props: Props) => {
         </CardContent>
       </Card>
       {showArticles ? (
-        <ShowArticles articles={order.articleList}></ShowArticles>
+        <ShowArticles articles={order.articleList} order={order}></ShowArticles>
       ) : (
         <></>
       )}
