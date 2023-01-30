@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material/styles";
-
 const ekhTheme = createTheme({
   palette: {
     primary: {
