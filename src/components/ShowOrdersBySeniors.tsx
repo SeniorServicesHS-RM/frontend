@@ -46,7 +46,7 @@ const ShowOrdersBySeniors = (props: Props) => {
       });
     });
 
-    return newList;
+    return newList.sort((a, b) => a.name.localeCompare(b.name));
   };
   const getEmpOrdersBySenior = () => {
     return props.orderList.filter((order) => {
