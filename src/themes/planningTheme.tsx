@@ -1,24 +1,18 @@
 import { createTheme } from "@mui/material/styles";
 
-const seniorTheme = createTheme({
+const planningTheme = createTheme({
   palette: {
     primary: {
-      main: "#00bcd4",
-      dark: "#00838f",
-      light: "#e0f7fa",
-    },
-    error: {
-      main: "#ef5350",
-    },
-    success: {
-      main: "#69f0ae",
+      main: "#72D58E",
+      dark: "#0D3017",
+      light: "#C0EDCC",
     },
   },
   components: {
     MuiAppBar: {
       styleOverrides: {
         colorDefault: {
-          backgroundColor: "#00bcd4",
+          backgroundColor: "#72D58E",
           color: "#ffffff",
         },
       },
@@ -26,10 +20,10 @@ const seniorTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         containedPrimary: {
-          backgroundColor: "#00bcd4",
+          backgroundColor: "#72D58E",
           color: "#ffffff",
           "&:hover": {
-            backgroundColor: "#42d5e5",
+            backgroundColor: "#C0EDCC",
           },
         },
       },
@@ -37,14 +31,15 @@ const seniorTheme = createTheme({
     MuiAvatar: {
       styleOverrides: {
         colorDefault: {
-          backgroundColor: "#00bcd4",
+          backgroundColor: "#72D58E",
           color: "#ffffff",
           "&:hover": {
-            backgroundColor: "#42d5e5",
+            backgroundColor: "#C0EDCC",
           },
         },
       },
     },
   },
 });
-export default seniorTheme;
+
+export default planningTheme;
