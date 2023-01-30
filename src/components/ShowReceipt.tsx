@@ -41,7 +41,7 @@ const ShowReceipt = (props: Props) => {
       </Typography>
       <Typography>Datum: {new Date().toDateString()}</Typography>
       <Typography sx={{ p: 1, mb: 1.5 }} color="text.secondary">
-        Gesammt: {showSum(props.senior)}€
+        Gesamt: {showSum(props.senior)}€
       </Typography>
     </>
   );
