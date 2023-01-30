@@ -1,4 +1,4 @@
-import { Button, Box } from "@mui/material";
+import { Button, Box, Paper } from "@mui/material";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { UserContext } from "../store/UserContext";
 import { CustomThemeContext } from "../themes/themeContext";
 import landingImg from "../assets/images/sharing-plate.jpeg";
+import { Stack } from "@mui/system";
 
 const LandingPage = () => {
   const { user, role } = useContext(UserContext);
