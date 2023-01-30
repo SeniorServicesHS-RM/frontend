@@ -56,7 +56,7 @@ const LandingPage = () => {
             Zum Login
           </Button>
         ) : (
-          <Typography variant="h5" component="h3">
+          <Typography variant="h5" component="h3" color={"white"}>
             Guten Tag {getFullName()}
           </Typography>
         )}
