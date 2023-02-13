@@ -45,11 +45,6 @@ const GetEmployeeOrders = (employeeId: string) => {
         return order.employeeId === employeeId;
       })
     : testOrders;
-  const closedUserOrders = closedOrders
-    ? closedOrders.filter((order) => {
-        return order.employeeId === employeeId;
-      })
-    : [];
   return openUserOrders;
 };
 

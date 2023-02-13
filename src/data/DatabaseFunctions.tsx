@@ -10,12 +10,14 @@ import {
 import { firestore } from "../store/Firebase";
 import Order from "./Order";
 import User from "./User";
+import User from "./User";
 
 export const addArticleToDatabase = (article: Article) => {
   //const newId = Math.floor(Math.random() * (9999 - 0 + 1) + 0); //We need logic to generate keys!
   const docRef = doc(firestore, "Article", article.id);
   setDoc(docRef, {
     amount: article.amount,
+    done: article.done,
     done: article.done,
     mart: article.mart,
     name: article.name,
@@ -55,6 +57,36 @@ export const updateEmployeeInOrderToDatabase = (order: Order, user: User) => {
     employeeId: user ? user.empID : "undefined",
   });
 };
+export const updateActualPriceOfOrderInDB = (order: Order, price: number) => {
+  const docRef = doc(firestore, "Order", order.id);
+  updateDoc(docRef, {
+    actualPrice: price && price >= 0 ? price : 0,
+  });
+};
+export const updateArticleListToDatabase = (
+  order: Order,
+  articleList: string[]
+) => {
+  const docRef = doc(firestore, "Order", order.id);
+  updateDoc(docRef, {
+    articleList: articleList,
+  });
+};
+export const updateArticleInDB = (article: Article) => {
+  const docRef = doc(firestore, "Article", article.id);
+  updateDoc(docRef, {
+    amount: article.amount,
+    mart: article.mart,
+    name: article.name,
+    note: article.note,
+  });
+};
+export const updateEditableOrderInDB = (order: Order, value: boolean) => {
+  const docRef = doc(firestore, "Order", order.id);
+  updateDoc(docRef, {
+    editable: value,
+  });
+};
 
 export const addOrderToDatabase = (order: Order) => {
   const getArticlesAsStringAry = () => {
@@ -74,11 +106,12 @@ export const addOrderToDatabase = (order: Order) => {
     date: order.date,
     employeeId: order.employeeId ? order.employeeId : "undefined",
     estimatedPrice: order.estimatedPrice ? order.estimatedPrice : 0,
-    planDate: order.planDate ? order.planDate : "undefined",
+    planDate: order.planDate,
     seniorId: order.seniorId,
     signDate: order.signDate ? order.signDate : "undefined",
     signature: order.signature ? order.signature : "undefined",
     orderDone: order.orderDone,
+    editable: order.editable ? order.editable : true,
   });
   for (const article of order.articleList) {
     addArticleToDatabase(article);

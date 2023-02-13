@@ -13,7 +13,8 @@ class Order {
     private _estimatedPrice?: number,
     private _signDate?: Date,
     private _signature?: string, //hier muss das Base64-Bild rein
-    private _orderDone?: boolean
+    private _orderDone?: boolean,
+    private _editable?: boolean
   ) {
     if (this._orderDone === undefined) {
       this._orderDone = false;
@@ -31,26 +32,12 @@ class Order {
   public set seniorId(seniorId: string) {
     this._seniorId = seniorId;
   }
-  public get orderDone() {
-    return this._orderDone;
-  }
-  public set orderDone(orderDone: boolean) {
-    this._orderDone = orderDone;
-  }
   public get articleList(): Article[] {
     return this._articleList;
   }
   public set articleList(value: Article[]) {
     this._articleList = value;
   }
-
-  // public get amount() {
-  //   return this._amount;
-  // }
-
-  // public set amount(amount: number) {
-  //   this._amount = amount;
-  // }
 
   public get date() {
     return this._date;
@@ -60,12 +47,6 @@ class Order {
     this._date = date;
   }
 
-  // public get mart() {
-  //   return this._mart;
-  // }
-  // public set mart(mart: string) {
-  //   this._mart = mart;
-  // }
   public get additionalServices() {
     return this._additionalServices;
   }
@@ -108,6 +89,18 @@ class Order {
   }
   public set signature(value: string) {
     this._signature = value;
+  }
+  public get orderDone() {
+    return this._orderDone;
+  }
+  public set orderDone(orderDone: boolean) {
+    this._orderDone = orderDone;
+  }
+  public get editable(): boolean {
+    return this._editable;
+  }
+  public set editable(value: boolean) {
+    this._editable = value;
   }
 }
 

@@ -3,9 +3,9 @@ import { createTheme } from "@mui/material";
 const seniorTheme = createTheme({
   palette: {
     primary: {
-      main: "#00bcd4",
+      main: "#3392FF",
       dark: "#00838f",
-      light: "#e0f7fa",
+      light: "#ADD3FF",
     },
     secondary: {
       main: "#00e676",
@@ -38,7 +38,7 @@ const seniorTheme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         colorDefault: {
-          backgroundColor: "#00bcd4",
+          backgroundColor: "#3392FF",
           color: "#ffffff",
         },
       },
@@ -46,10 +46,10 @@ const seniorTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         containedPrimary: {
-          backgroundColor: "#00bcd4",
+          backgroundColor: "#3392FF",
           color: "#ffffff",
           "&:hover": {
-            backgroundColor: "#42d5e5",
+            backgroundColor: "#ADD3FF",
           },
         },
       },
@@ -57,14 +57,15 @@ const seniorTheme = createTheme({
     MuiAvatar: {
       styleOverrides: {
         colorDefault: {
-          backgroundColor: "#00bcd4",
+          backgroundColor: "#3392FF",
           color: "#ffffff",
           "&:hover": {
-            backgroundColor: "#42d5e5",
+            backgroundColor: "#ADD3FF",
           },
         },
       },
     },
   },
 });
+
 export default seniorTheme;

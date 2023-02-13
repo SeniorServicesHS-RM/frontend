@@ -10,9 +10,11 @@ const PlanningPageOpenOrders = () => {
   return (
     <>
       {openOrders &&
-        openOrders.map((order) => {
-          return <OrderCardPlanner order={order} />;
-        })}
+        openOrders
+          .map((order) => {
+            return <OrderCardPlanner order={order} />;
+          })
+          .reverse()}
     </>
   );
 };

@@ -1,8 +1,18 @@
-import { Card, CardActionArea, Grid, Typography } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  Dialog,
+  DialogActions,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
+import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent/CardContent";
 import { useState } from "react";
 import Article from "../data/Article";
 import Order from "../data/Order";
+import FlexBox from "./FlexBox";
 import ShowArticles from "./ShowArticles";
 import ShowUserOverview from "./ShowUserOverview";
 
@@ -36,7 +46,7 @@ const ShowOrdersBySeniors = (props: Props) => {
       });
     });
 
-    return newList;
+    return newList.sort((a, b) => a.name.localeCompare(b.name));
   };
   const getEmpOrdersBySenior = () => {
     return props.orderList.filter((order) => {
@@ -48,12 +58,9 @@ const ShowOrdersBySeniors = (props: Props) => {
     <Grid container xs={12}>
       {props.showSorted ? (
         <Grid item xs={12}>
-          <Card variant="outlined" sx={{ width: "100%" }}>
+          <Card variant="outlined">
             <CardContent>
-              <CardActionArea
-                onClick={openSeniorOverview}
-                sx={{ bgcolor: "primary.main", borderRadius: 3, p: 1 }}
-              >
+              <CardActionArea onClick={openSeniorOverview}>
                 <Typography
                   variant="h3"
                   sx={{ p: 1, fontSize: 22, fontWeight: "bold" }}

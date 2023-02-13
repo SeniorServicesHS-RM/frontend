@@ -71,6 +71,7 @@ const OrderCardPlanner = (props: Props) => {
     newList[arrayIndex] = newOrder;
     props.order.articleList = newList;
   };
+  const deleteOrder = () => {};
 
   console.log(props.order);
 
@@ -123,17 +124,18 @@ const OrderCardPlanner = (props: Props) => {
             })}
             {isEditArticleDialogOpen && (
               <EditArticleDialog
-                order={article}
+                article={article}
                 handleClose={editArticleDialogHandler}
                 editOrder={editOrder}
+                deleteArticle={deleteOrder}
               ></EditArticleDialog>
             )}
           </>
         </DialogContent>
 
         <DialogActions>
-          <Button>Speichern</Button>
-          <Button onClick={dialogOpenHandler}>Abbrechen</Button>
+          <Button></Button>
+          <Button onClick={dialogOpenHandler}>Ok</Button>
         </DialogActions>
       </Dialog>
       <OrderCard order={props.order} />

@@ -5,8 +5,6 @@ import firebase from "firebase/app";
 import { auth } from "../store/Firebase";
 import { UserContext } from "./UserContext";
 
-//https://github.com/joeythelantern/React-Firebase-9/blob/main/src/components/AuthRoute.tsx
-
 type Props = {
   children?: React.ReactNode;
 };

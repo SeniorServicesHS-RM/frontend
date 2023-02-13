@@ -1,4 +1,10 @@
-import { Button, Checkbox, FormControlLabel, Grid, Paper } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Grid,
+} from "@mui/material";
 import { ChangeEvent, useContext, useState } from "react";
 import {
   updateAvailabilityInDB,
@@ -6,6 +12,7 @@ import {
 } from "../data/DatabaseFunctions";
 import { DataBaseContext } from "../store/DataBaseContext";
 import { UserContext } from "../store/UserContext";
+import FlexBox from "./FlexBox";
 
 interface Props {
   abort: () => void;
@@ -71,26 +78,23 @@ const ShowEmployeeAvailability = (props: Props) => {
         justifyContent: "center",
       }}
     >
-      <Grid item xs={12}>
-        <Button variant="outlined" sx={{ p: 2, m: 1 }} onClick={props.abort}>
-          Zurück
-        </Button>
+      <Grid item xs={12}>>
+        <Button onClick={props.abort}>Menü</Button>
       </Grid>
-
       <Paper sx={{ width: "100%" }}>
-        <Grid item xs={9} sx={{ p: 5 }}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={!isAvailable}
-                onChange={handleAvailabilityChange}
-                name="available"
-              />
-            }
-            label="available"
-          />
-        </Grid>
-        <Grid
+      <Grid item xs={9} sx={{ p: 5 }}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={isAvailable}
+              onChange={handleAvailabilityChange}
+              name="available"
+            />
+          }
+          label="available"
+        />
+      </Grid>
+      <Grid
           xs={9}
           item
           sx={{
@@ -98,14 +102,11 @@ const ShowEmployeeAvailability = (props: Props) => {
             mb: 5,
           }}
         >
-          {!isAvailable ? mappedMartAvailability : <></>}
-        </Grid>
+      {isAvailable ? mappedMartAvailability : <></>}
+      </Grid>
       </Paper>
       <Grid item xs={12}>
-        <Button variant="contained" sx={{ p: 2, m: 1 }} onClick={handleDone}>
-          Speichern
-        </Button>
-      </Grid>
+      <Button onClick={handleDone}>Speichern</Button></Grid>
     </Grid>
   );
 };

@@ -13,11 +13,13 @@ import {
 import * as React from "react";
 import Article from "../data/Article";
 import { DataBaseContext } from "../store/DataBaseContext";
+import { DataBaseContext } from "../store/DataBaseContext";
 
 interface Props {
-  order: Article;
+  article: Article;
   handleClose: () => void;
   editOrder: (newOrder: Article, oldOrder: Article) => void;
+  deleteArticle: (article: Article) => void;
 }
 interface ValueHandler {
   newId?: string;
@@ -29,19 +31,19 @@ interface ValueHandler {
 
 function EditArticleDialog(props: Props) {
   const { martList } = React.useContext(DataBaseContext);
-  const [order, setOrder] = React.useState<Article>(props.order);
+  const [order, setOrder] = React.useState<Article>(props.article);
 
   const [valueName, setValueName] = React.useState<ValueHandler>({
-    newName: props.order.name,
+    newName: props.article.name,
   });
   const [valueNote, setValueNote] = React.useState<ValueHandler>({
-    newNote: props.order.note,
+    newNote: props.article.note,
   });
   const [valueAmount, setValueAmount] = React.useState<ValueHandler>({
-    newAmount: props.order.amount,
+    newAmount: props.article.amount,
   });
   const [valueMart, setValueMart] = React.useState<ValueHandler>({
-    newMart: props.order.mart,
+    newMart: props.article.mart,
   });
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValueName({ newName: event.target.value });
@@ -63,10 +65,16 @@ function EditArticleDialog(props: Props) {
       valueMart.newMart,
       false,
       0,
+      false,
+      0,
       valueNote.newNote
     );
 
     props.editOrder(orderReturn, order);
+    props.handleClose();
+  };
+  const handleDelete = () => {
+    props.deleteArticle(props.article);
     props.handleClose();
   };
   const mappedMartList = martList.map((mart: String) => {
@@ -114,7 +122,9 @@ function EditArticleDialog(props: Props) {
           </Select>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDone}>Fertig</Button>
+          <Button onClick={handleDelete}>Löschen</Button>
+          <Button onClick={handleDone}>Speichern</Button>
+          <Button onClick={props.handleClose}>Abbrechen</Button>
         </DialogActions>
       </Dialog>
     </div>

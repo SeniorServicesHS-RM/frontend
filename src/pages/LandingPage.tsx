@@ -1,55 +1,67 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Box, Paper } from "@mui/material";
+import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { useContext } from "react";
 import { UserContext } from "../store/UserContext";
-import bg from "../assets/images/einkaufshilfe.jpeg";
+import { CustomThemeContext } from "../themes/themeContext";
+import landingImg from "../assets/images/sharing-plate.jpeg";
+import { Stack } from "@mui/system";
+
 const LandingPage = () => {
   const { user, role } = useContext(UserContext);
+  const { setTheme } = useContext(CustomThemeContext);
+
   let navigate = useNavigate();
   const routeChange = () => {
     let path = "/login";
     navigate(path);
   };
-
+  const switchTheme = () => {
+    switch (user.role) {
+      case 1:
+        return setTheme("planningTheme");
+      case 2:
+        return setTheme("ekhTheme");
+      case 3:
+        return setTheme("seniorTheme");
+      default:
+        return setTheme("");
+    }
+  };
+  const getFullName = () => {
+    switchTheme();
+    return user.firstName + " " + user.lastName;
+  };
   return (
-    <Grid container xs={12}>
-      <Grid
-        item
-        xs={12}
-        sx={{
-          p: 3,
+    <Paper component={Stack} direction="column" justifyContent="center">
+      <Box
+        style={{
+          backgroundImage: `url(${landingImg})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          width: "100vw",
+          minHeight: "100vh",
           display: "flex",
           justifyContent: "center",
-          alignItem: "center",
-          mt: 2,
+          alignItems: "center",
         }}
       >
         {role === 0 ? (
-          <Button variant="contained" onClick={routeChange}>
+          <Button
+            style={{ padding: "30px" }}
+            variant="contained"
+            onClick={routeChange}
+          >
             Zum Login
           </Button>
         ) : (
-          <Typography variant="h5" component="h3">
-            Guten Tag {user.firstName} {user.lastName}
+          <Typography variant="h5" component="h3" color={"white"}>
+            Guten Tag {getFullName()}
           </Typography>
         )}
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        sx={{
-          minHeight: "600px",
-          backgroundImage: "url(" + `${bg}` + ")",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          mt: 3,
-        }}
-      >
-        {" "}
-      </Grid>
-    </Grid>
+      </Box>
+    </Paper>
   );
 };
 

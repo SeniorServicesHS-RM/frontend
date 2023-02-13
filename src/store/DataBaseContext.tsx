@@ -5,10 +5,11 @@ import { firestore } from "./Firebase";
 import Article from "../data/Article";
 import Order from "../data/Order";
 import User from "../data/User";
+import { closeSync } from "fs";
 
 interface ImportedArticle {
   id: string;
-  beginDate?: Date; //all 3 necessarz? -> one should be enough!
+  beginDate?: Date; //all 3 necessary? -> one should be enough!
   changeDate?: Date;
   endDate?: Date;
   name: string;
@@ -25,19 +26,28 @@ interface ImportedOrder {
   seniorId: string;
   orderDone: string;
   articleList: string[];
-  date: Date;
+  date: Date | any;
   additionalServices?: string[];
-  planDate?: Date | string;
+  planDate?: Date | any;
   employeeId?: string;
   actualPrice?: number;
   estimatedPrice?: number;
   signDate?: Date;
   signature?: string;
+  editable?: boolean;
 }
 
 interface ImportedDate {
   id: string;
-  date: string;
+  date: Date | any;
+}
+interface ImportedMart {
+  id: string;
+  name: string;
+}
+interface ImportedService {
+  id: string;
+  desc: string;
 }
 interface ImportedMart {
   id: string;
@@ -51,7 +61,7 @@ interface ImportedService {
 interface DataBaseContextInterface {
   openOrders: Order[];
   closedOrders: Order[];
-  nextShoppingDate: string;
+  nextShoppingDate: Date | any;
   martList: string[];
   serviceList: string[];
   userId: string;
@@ -81,7 +91,7 @@ export const DataBaseContext =
 export const DataBaseProvider = ({ children }: Props) => {
   const [articles, setArticles] = useState<ImportedArticle[] | null>(null);
   const [openOrders, setOpenOrders] = useState<Order[] | null>(null);
-  const [nextShoppingDate, setNextShoppingDate] = useState<string | null>(null);
+  const [nextShoppingDate, setNextShoppingDate] = useState<Date | null>(null);
   const [closedOrders, setClosedOrders] = useState<Order[] | null>(null);
   const [martList, setMarts] = useState<string[] | null>(null);
   const [serviceList, setServiceList] = useState<string[] | null>(null);
@@ -178,7 +188,27 @@ export const DataBaseProvider = ({ children }: Props) => {
         const findNewDate = receivedDates.find((date) => {
           return date.id === "nextDate";
         });
-        setNextShoppingDate(findNewDate.date);
+        setNextShoppingDate(findNewDate.date.toDate());
+        console.log("in DB: ", findNewDate.date.toDate());
+      }
+    );
+    console.log("ShoppingDates called");
+
+    return unsub;
+  }, []);
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(firestore, "ShoppingDates"),
+      (snapshot) => {
+        const receivedDates: ImportedDate[] = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })) as ImportedDate[];
+        const findNewDate = receivedDates.find((date) => {
+          return date.id === "nextDate";
+        });
+        setNextShoppingDate(findNewDate.date.toDate());
       }
     );
     console.log("ShoppingDates called");
@@ -211,7 +241,7 @@ export const DataBaseProvider = ({ children }: Props) => {
               articleToInsert.mart,
               articleToInsert.done,
               articleToInsert.price,
-              articleToInsert.note && articleToInsert.note,
+              articleToInsert.note === "undefined" ? "" : articleToInsert.note,
               articleToInsert.picture && articleToInsert.picture
             );
             articleAry.push(article);
@@ -235,15 +265,16 @@ export const DataBaseProvider = ({ children }: Props) => {
               order.id,
               order.seniorId,
               articleAry,
-              order.date,
+              order.date.toDate(),
               order.additionalServices && order.additionalServices,
-              order.planDate instanceof Date && order.planDate,
+              order.planDate.toDate(),
               order.employeeId && order.employeeId,
               order.actualPrice && order.actualPrice,
               order.estimatedPrice && order.estimatedPrice,
               order.signDate && order.signDate,
               order.signature && order.signature,
-              false
+              true,
+              order.editable && order.editable
             )
           );
         } else {
@@ -252,15 +283,16 @@ export const DataBaseProvider = ({ children }: Props) => {
               order.id,
               order.seniorId,
               articleAry,
-              order.date,
+              order.date.toDate(),
               order.additionalServices && order.additionalServices,
-              order.planDate instanceof Date && order.planDate,
+              order.planDate.toDate(),
               order.employeeId && order.employeeId,
               order.actualPrice && order.actualPrice,
               order.estimatedPrice && order.estimatedPrice,
               order.signDate && order.signDate,
               order.signature && order.signature,
-              true
+              false,
+              order.editable && order.editable
             )
           );
         }

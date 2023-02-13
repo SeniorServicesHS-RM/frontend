@@ -70,13 +70,7 @@ const ShowAsisstantOrders = (props: Props) => {
       <Grid container md={9} xs={12}>
         <Grid item xs={12}>
           <Grid item xs={12}>
-            <Button
-              variant="outlined"
-              sx={{ p: 2, m: 1 }}
-              onClick={props.abort}
-            >
-              Zurück
-            </Button>
+            <Button onClick={props.abort}>Menü</Button>
           </Grid>
           <Switch defaultChecked onChange={handleSeniorChange}></Switch>
           <Select
@@ -87,9 +81,6 @@ const ShowAsisstantOrders = (props: Props) => {
             <InputLabel>Supermarkt</InputLabel>
             {mappedMartList}
           </Select>
-        </Grid>
-        <Grid item xs={12}>
-          {" "}
           {mappedArticleList}
         </Grid>
       </Grid>

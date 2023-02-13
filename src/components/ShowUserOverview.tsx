@@ -29,7 +29,6 @@ const ShowUserOverview = (props: Props) => {
         }
       });
     });
-    console.log(newList);
     return newList;
   };
 
@@ -45,7 +44,6 @@ const ShowUserOverview = (props: Props) => {
   );
   const sumAllPrices = () => {
     let sum = 0;
-    console.log(props.orderList);
     props.orderList.map((order) => {
       order.articleList.map((article) => {
         sum = sum + article.price;

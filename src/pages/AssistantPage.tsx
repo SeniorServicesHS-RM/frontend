@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import FlexBox from "../components/FlexBox";
 import ShowAsisstantOrders from "../components/ShowAssistantOrders";
@@ -8,6 +9,7 @@ import ShowSeniorReciept from "../components/ShowSeniorReciept";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import CalculateIcon from "@mui/icons-material/Calculate";
+
 const AssistantPage = () => {
   const [shoppingListSelection, setShoppingListSelection] = useState(false);
   const [showEmployeeAvailability, setShowEmployeeAvailability] =
@@ -27,8 +29,9 @@ const AssistantPage = () => {
       {!shoppingListSelection &&
         !showEmployeeAvailability &&
         !showSeniorReciept && (
-          <Typography sx={{ p: 5 }}>
+          <Typography>
             <Button
+              onClick={shoppingListHandler}
               variant="contained"
               sx={{
                 display: "flex",
@@ -37,7 +40,6 @@ const AssistantPage = () => {
                 width: "100%",
                 p: 1.5,
               }}
-              onClick={shoppingListHandler}
               size="large"
               startIcon={<FactCheckIcon />}
             >
