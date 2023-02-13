@@ -2,7 +2,6 @@ import { Button, Grid } from "@mui/material";
 import { useContext } from "react";
 import GetUserOrders from "../data/GetUserOrders";
 import { UserContext } from "../store/UserContext";
-import { UserContext } from "../store/UserContext";
 import OrderCard from "./OrderCard";
 
 interface Props {
@@ -10,8 +9,6 @@ interface Props {
 }
 
 const ShowOrders = (props: Props) => {
-  const { user } = useContext(UserContext);
-  const seniorId = user.seniorId;
   const { user } = useContext(UserContext);
   const seniorId = user.seniorId;
   const userOrders = GetUserOrders(seniorId);

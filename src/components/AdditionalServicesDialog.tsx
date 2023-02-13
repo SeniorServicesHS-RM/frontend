@@ -24,7 +24,6 @@ import {
 } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
 import { DataBaseContext } from "../store/DataBaseContext";
-import { DataBaseContext } from "../store/DataBaseContext";
 
 interface Props {
   orderToPush: Order;
@@ -71,12 +70,9 @@ function AdditionalServicesDialog(props: Props) {
   const addToAry = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-  ) => {
     setValueService({ newService: event.target.value });
   };
-  };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       services.push(event.target.name);
@@ -93,7 +89,6 @@ function AdditionalServicesDialog(props: Props) {
         <></>
       );
     }
-  };
   };
   const mappedServices = serviceList.map((singleServ: string) => {
     return (

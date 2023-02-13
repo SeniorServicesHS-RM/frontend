@@ -13,7 +13,6 @@ import {
 import * as React from "react";
 import Article from "../data/Article";
 import { DataBaseContext } from "../store/DataBaseContext";
-import { DataBaseContext } from "../store/DataBaseContext";
 
 interface Props {
   article: Article;
@@ -64,10 +63,7 @@ function EditArticleDialog(props: Props) {
       valueAmount.newAmount,
       valueMart.newMart,
       false,
-      0,
-      false,
-      0,
-      valueNote.newNote
+      0
     );
 
     props.editOrder(orderReturn, order);
