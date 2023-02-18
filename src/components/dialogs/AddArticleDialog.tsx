@@ -29,9 +29,6 @@ interface ValueHandler {
 
 function AddArticleDialog(props: Props) {
   const { martList } = useContext(DataBaseContext);
-  const [valueID, setValueID] = useState<ValueHandler>({
-    newId: "",
-  });
   const [valueName, setValueName] = useState<ValueHandler>({
     newName: "",
   });
@@ -76,7 +73,6 @@ function AddArticleDialog(props: Props) {
       )
     );
     setValueName({ newName: "" });
-    setValueID({ newId: "" });
     setValueNote({ newNote: "" });
     setValueAmount({ newAmount: 1 });
     setOpen(false);

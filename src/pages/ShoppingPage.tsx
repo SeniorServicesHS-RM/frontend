@@ -5,8 +5,7 @@ import ArticleCard from "../components/cards/ArticleCard";
 import EditArticleDialog from "../components/dialogs/EditArticleDialog";
 import FlexBox from "../components/FlexBox";
 import Order from "../data/Order";
-import React, { useEffect, useState, useContext } from "react";
-import { DataBaseContext, DataBaseProvider } from "../store/DataBaseContext";
+import { useState, useContext } from "react";
 import Article from "../data/Article";
 import AdditionalServicesDialog from "../components/dialogs/AdditionalServicesDialog";
 import { Button } from "@mui/material";
@@ -22,8 +21,7 @@ const ShoppingPage = (props: Props) => {
 
   //const seniorId = "s001"; //gemockte SeniorId! Richtige muss aus authcontext kommen
   const [isEditOpen, setEditOpen] = useState(false);
-  const { openOrders } = useContext(DataBaseContext);
-  const [myOrder, setMyOrder] = useState<Order | null>(
+  const [myOrder] = useState<Order | null>(
     new Order(Date.now().toString(), seniorId, [], new Date(Date.now()))
   );
   const [orderList, setOrderList] = useState<Article[] | null>(
@@ -49,7 +47,7 @@ const ShoppingPage = (props: Props) => {
   const deleteOrder = (articleToDelete: Article) => {
     setOrderList(
       orderList.filter((article) => {
-        return article.id != articleToDelete.id;
+        return article.id !== articleToDelete.id;
       })
     );
   };

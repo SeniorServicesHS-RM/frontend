@@ -5,19 +5,11 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  FormControl,
   FormControlLabel,
   FormGroup,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import { text } from "body-parser";
-import { abort } from "process";
-import React, { ChangeEvent, useContext } from "react";
-import { useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import {
   addArticleToDatabase,
   addOrderToDatabase,
@@ -36,7 +28,7 @@ interface ValueHandler {
 function AdditionalServicesDialog(props: Props) {
   const { serviceList } = useContext(DataBaseContext);
   const { nextShoppingDate } = useContext(DataBaseContext);
-  const [services, setServices] = useState([""]);
+  const [services] = useState([""]);
   const [valueService, setValueService] = React.useState<ValueHandler>({
     newService: "",
   });

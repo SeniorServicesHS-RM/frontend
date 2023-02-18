@@ -7,9 +7,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { flexbox } from "@mui/system";
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import { deleteOrder } from "../../data/DatabaseFunctions";
 import Order from "../../data/Order";
 import ShowArticles from "../ShowArticles";

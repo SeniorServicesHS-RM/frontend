@@ -1,20 +1,10 @@
-import {
-  Card,
-  CardActionArea,
-  Dialog,
-  DialogActions,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
-import Button from "@mui/material/Button";
+import { Card, CardActionArea, Grid, Typography } from "@mui/material";
 import CardContent from "@mui/material/CardContent/CardContent";
 import { useState } from "react";
 import Article from "../../data/Article";
 import Order from "../../data/Order";
-import FlexBox from "../FlexBox";
-import ShowArticles from "../ShowArticles";
 import SeniorSumServicesDialog from "../dialogs/SeniorSumServicesDialog";
+import ShowArticles from "../ShowArticles";
 
 interface Props {
   senior: string;
@@ -35,8 +25,8 @@ const SwitchableSeniorCard = (props: Props) => {
 
   const getEmpArticlesBySeniorAndMart = () => {
     const newList = [] as Article[];
-    props.orderList.map((order) => {
-      order.articleList.map((article) => {
+    props.orderList.forEach((order) => {
+      order.articleList.forEach((article) => {
         if (
           order.seniorId === props.senior &&
           article.mart === props.selectedMart

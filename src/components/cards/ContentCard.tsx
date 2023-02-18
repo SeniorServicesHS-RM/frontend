@@ -33,7 +33,7 @@ const ContentCard = (props: Props) => {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {props.description}
         </Typography>
-        <img src={`${props.picture}`} width={200} />
+        <img src={`${props.picture}`} width={200} alt="Bild" />
         {props.picture !== undefined ? <></> : props.picture}
       </CardContent>
       <CardActions>

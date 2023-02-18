@@ -30,7 +30,7 @@ interface ValueHandler {
 
 function EditArticleDialog(props: Props) {
   const { martList } = React.useContext(DataBaseContext);
-  const [order, setOrder] = React.useState<Article>(props.article);
+  const [order] = React.useState<Article>(props.article);
 
   const [valueName, setValueName] = React.useState<ValueHandler>({
     newName: props.article.name,

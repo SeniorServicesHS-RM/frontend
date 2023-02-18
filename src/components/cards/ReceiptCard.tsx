@@ -14,9 +14,9 @@ interface Props {
 const ReceiptCard = (props: Props) => {
   const showSum = (senior: User) => {
     let summe = 0;
-    props.empOrdersBySenior.map((order: Order) => {
+    props.empOrdersBySenior.forEach((order: Order) => {
       let subsum = 0;
-      order.articleList.map((article: Article) => {
+      order.articleList.forEach((article: Article) => {
         subsum = subsum + article.price;
       });
       if (order.aktualPrice !== subsum) {

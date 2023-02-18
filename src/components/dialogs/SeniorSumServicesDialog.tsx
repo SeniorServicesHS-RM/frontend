@@ -7,9 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import Button from "@mui/material/Button";
-import { useContext, useState } from "react";
 import Order from "../../data/Order";
-import { DataBaseContext } from "../../store/DataBaseContext";
 
 interface Props {
   abort: () => void;
@@ -18,11 +16,10 @@ interface Props {
   orderList: Order[];
 }
 const SeniorSumServicesDialog = (props: Props) => {
-  const { serviceList } = useContext(DataBaseContext);
   const getAllAdditionalServices = () => {
     const newList = [] as string[];
-    props.orderList.map((order: Order) => {
-      order.additionalServices.map((service: string) => {
+    props.orderList.forEach((order: Order) => {
+      order.additionalServices.forEach((service: string) => {
         if (!newList.includes(service)) {
           return newList.push(service);
         }
@@ -43,8 +40,8 @@ const SeniorSumServicesDialog = (props: Props) => {
   );
   const sumAllPrices = () => {
     let sum = 0;
-    props.orderList.map((order) => {
-      order.articleList.map((article) => {
+    props.orderList.forEach((order) => {
+      order.articleList.forEach((article) => {
         sum = sum + article.price;
       });
     });

@@ -1,7 +1,5 @@
 import { useContext } from "react";
 import { DataBaseContext } from "../store/DataBaseContext";
-import Article from "./Article";
-import Order from "./Order";
 
 const GetEmployeeOrders = (employeeId: string) => {
   const { openOrders } = useContext(DataBaseContext);
