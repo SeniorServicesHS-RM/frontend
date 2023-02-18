@@ -39,8 +39,8 @@ const ShowArticles = (props: Props) => {
   };
   const deleteArticle = (articleToDelete: Article) => {
     const newList: string[] = [];
-    articles.map((article) => {
-      if (article.id != articleToDelete.id) {
+    articles.forEach((article) => {
+      if (article.id !== articleToDelete.id) {
         newList.push(article.id);
       }
     });
@@ -48,7 +48,7 @@ const ShowArticles = (props: Props) => {
     closeEditDialog();
   };
   const checkEdit = () => {
-    console.log(props.order);
+    // console.log(props.order);
     if (props.order.editable) {
       if (new Date().getTime() < props.order.planDate.getTime()) {
         return true;
