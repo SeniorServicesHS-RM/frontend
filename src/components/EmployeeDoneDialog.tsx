@@ -8,11 +8,11 @@ import {
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { ChangeEvent, useState } from "react";
-import Article from "../../data/Article";
+import Article from "../data/Article";
 import {
   updateArticleDoneInDB,
   updateArticlePriceInDB,
-} from "../../data/DatabaseFunctions";
+} from "../data/DatabaseFunctions";
 
 interface Props {
   abort: () => void;

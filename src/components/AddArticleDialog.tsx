@@ -14,8 +14,8 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import { useContext, useState } from "react";
-import Article from "../../data/Article";
-import { DataBaseContext } from "../../store/DataBaseContext";
+import Article from "../data/Article";
+import { DataBaseContext } from "../store/DataBaseContext";
 interface Props {
   addOrder: (article: Article) => void;
 }

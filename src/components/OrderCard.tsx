@@ -8,9 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { deleteOrder } from "../../data/DatabaseFunctions";
-import Order from "../../data/Order";
-import ShowArticles from "../ShowArticles";
+import { deleteOrder } from "../data/DatabaseFunctions";
+import Order from "../data/Order";
+import ShowArticles from "./ShowArticles";
 
 interface Props {
   order: Order;

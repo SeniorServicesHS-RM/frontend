@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 import { CardMedia, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import logosArr from "../../data/LogosArr";
+import logosArr from "../data/LogosArr";
 interface Props {
   title: string;
   description?: string;

@@ -4,7 +4,7 @@ import { updateEmployeeInOrderToDatabase } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
 import User from "../data/User";
 import { DataBaseContext } from "../store/DataBaseContext";
-import OrderCard from "./cards/OrderCard";
+import OrderCard from "./OrderCard";
 import EmployeeDropDownMenu from "./EmployeeDropDownMenu";
 
 interface Props {

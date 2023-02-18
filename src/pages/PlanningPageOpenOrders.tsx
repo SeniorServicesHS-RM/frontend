@@ -3,9 +3,9 @@ import ShowOrdersForPlanner from "../components/ShowOrdersForPlanner";
 import { DataBaseContext } from "../store/DataBaseContext";
 
 const PlanningPageOpenOrders = () => {
-  const { openOrders, userId } = useContext(DataBaseContext);
-  console.log(openOrders);
-  console.log("pp: ", userId);
+  const { openOrders } = useContext(DataBaseContext);
+  // console.log(openOrders);
+  // console.log("pp: ", userId);
   return (
     <>
       {openOrders &&

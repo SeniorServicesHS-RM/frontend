@@ -1,10 +1,10 @@
 import { Card, CardActionArea, Grid, Typography } from "@mui/material";
 import CardContent from "@mui/material/CardContent/CardContent";
 import { useState } from "react";
-import Article from "../../data/Article";
-import Order from "../../data/Order";
-import SeniorSumServicesDialog from "../dialogs/SeniorSumServicesDialog";
-import ShowArticles from "../ShowArticles";
+import Article from "../data/Article";
+import Order from "../data/Order";
+import SeniorSumServicesDialog from "./SeniorSumServicesDialog";
+import ShowArticles from "./ShowArticles";
 
 interface Props {
   senior: string;

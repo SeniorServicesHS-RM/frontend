@@ -5,7 +5,7 @@ import Order from "../data/Order";
 import User from "../data/User";
 import { DataBaseContext } from "../store/DataBaseContext";
 import { UserContext } from "../store/UserContext";
-import ReceiptCard from "./cards/ReceiptCard";
+import ReceiptCard from "./ReceiptCard";
 import FlexBox from "./FlexBox";
 
 interface Props {

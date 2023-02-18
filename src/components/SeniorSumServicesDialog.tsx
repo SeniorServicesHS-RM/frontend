@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import Button from "@mui/material/Button";
-import Order from "../../data/Order";
+import Order from "../data/Order";
 
 interface Props {
   abort: () => void;

@@ -13,7 +13,7 @@ import Order from "../data/Order";
 import User from "../data/User";
 import { DataBaseContext } from "../store/DataBaseContext";
 import { UserContext } from "../store/UserContext";
-import SwitchableSeniorCard from "./cards/SwitchableSeniorCard";
+import SwitchableSeniorCard from "./SwitchableSeniorCard";
 import FlexBox from "./FlexBox";
 
 interface Props {

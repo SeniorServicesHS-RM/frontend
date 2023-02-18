@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import ContentCard from "../components/cards/ContentCard";
+import ContentCard from "../components/ContentCard";
 import FlexBox from "../components/FlexBox";
 import ServiceData from "../data/ServiceData";
 

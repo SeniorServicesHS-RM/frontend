@@ -1,10 +1,10 @@
 import { Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Article from "../../data/Article";
-import { updateActualPriceOfOrderInDB } from "../../data/DatabaseFunctions";
-import Order from "../../data/Order";
-import User from "../../data/User";
+import Article from "../data/Article";
+import { updateActualPriceOfOrderInDB } from "../data/DatabaseFunctions";
+import Order from "../data/Order";
+import User from "../data/User";
 
 interface Props {
   senior: User;

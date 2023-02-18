@@ -63,9 +63,9 @@ interface DataBaseContextInterface {
   nextShoppingDate: Date | any;
   martList: string[];
   serviceList: string[];
-  userId: string;
+  // userId: string;
   users: User[];
-  handleUserId: (userId: string) => void;
+  // handleUserId: (userId: string) => void;
 }
 
 interface Props {
@@ -94,12 +94,12 @@ export const DataBaseProvider = ({ children }: Props) => {
   const [closedOrders, setClosedOrders] = useState<Order[] | null>(null);
   const [martList, setMarts] = useState<string[] | null>(null);
   const [serviceList, setServiceList] = useState<string[] | null>(null);
-  const [userId, setUserId] = useState<string | null>(null);
+  // const [userId, setUserId] = useState<string | null>(null);
   const [users, setUsers] = useState<User[] | null>(null);
 
-  const handleUserId = (userId: string) => {
-    setUserId(userId);
-  };
+  // const handleUserId = (userId: string) => {
+  //   setUserId(userId);
+  // };
 
   useEffect(() => {
     const unsub = onSnapshot(collection(firestore, "users"), (snapshot) => {
@@ -312,8 +312,8 @@ export const DataBaseProvider = ({ children }: Props) => {
         nextShoppingDate,
         martList,
         serviceList,
-        userId,
-        handleUserId,
+        // userId,
+        // handleUserId,
         users,
       }}
     >

@@ -8,9 +8,9 @@ import {
 } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
 import { UserContext } from "../store/UserContext";
-import ArticleCard from "./cards/ArticleCard";
-import EditArticleDialog from "./dialogs/EditArticleDialog";
-import EmployeeDoneDialog from "./dialogs/EmployeeDoneDialog";
+import ArticleCard from "./ArticleCard";
+import EditArticleDialog from "./EditArticleDialog";
+import EmployeeDoneDialog from "./EmployeeDoneDialog";
 interface Props {
   articles: Article[];
   order?: Order;
