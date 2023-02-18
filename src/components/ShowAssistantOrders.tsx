@@ -35,9 +35,7 @@ const ShowAsisstantOrders = (props: Props) => {
     selectedMart: martList ? martList[0] : "",
   });
   const [showSorted, setShowSorted] = useState(true);
-  const [orderList, setOrderList] = useState<Order[] | null>(
-    GetEmployeeOrders(employee)
-  );
+  const [orderList] = useState<Order[] | null>(GetEmployeeOrders(employee));
 
   const mappedMartList =
     martList &&

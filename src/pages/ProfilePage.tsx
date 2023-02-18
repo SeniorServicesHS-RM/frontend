@@ -120,16 +120,15 @@ const ProfilePage = () => {
   };
 
   function showRoleName() {
-    var rolename: string;
     switch (user.role) {
       case 1:
-        return (rolename = "Einkaufsplaner");
+        return "Einkaufsplaner";
       case 2:
-        return (rolename = "Einkaufshelfer");
+        return "Einkaufshelfer";
       case 3:
-        return (rolename = "Senior");
+        return "Senior";
       default:
-        return (rolename = " ");
+        return " ";
     }
   }
 
