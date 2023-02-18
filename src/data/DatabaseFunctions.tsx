@@ -64,6 +64,8 @@ export const updateArticleListToDatabase = (
   });
 };
 export const updateArticleInDB = (article: Article) => {
+  console.log("updateArticle called");
+  console.log(article);
   const docRef = doc(firestore, "Article", article.id);
   updateDoc(docRef, {
     amount: article.amount,

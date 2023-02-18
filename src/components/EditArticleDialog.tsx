@@ -63,7 +63,8 @@ function EditArticleDialog(props: Props) {
       valueAmount.newAmount,
       valueMart.newMart,
       false,
-      0
+      0,
+      valueNote.newNote
     );
 
     props.editOrder(orderReturn, order);
