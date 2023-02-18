@@ -29,6 +29,8 @@ const ShowArticles = (props: Props) => {
     setShowEditDialog(false);
   };
   const editOrder = (newArticle: Article, oldArticle: Article) => {
+    console.log("edit Article called");
+    console.log([newArticle, oldArticle]);
     articles[
       articles.findIndex((localArticle) => {
         return localArticle === oldArticle;
@@ -38,6 +40,8 @@ const ShowArticles = (props: Props) => {
     closeEditDialog();
   };
   const deleteArticle = (articleToDelete: Article) => {
+    console.log("delete Article called");
+    console.log(articleToDelete);
     const newList: string[] = [];
     articles.forEach((article) => {
       if (article.id !== articleToDelete.id) {
@@ -48,7 +52,6 @@ const ShowArticles = (props: Props) => {
     closeEditDialog();
   };
   const checkEdit = () => {
-    // console.log(props.order);
     if (props.order.editable) {
       if (new Date().getTime() < props.order.planDate.getTime()) {
         return true;
