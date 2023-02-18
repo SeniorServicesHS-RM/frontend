@@ -11,7 +11,7 @@ interface Props {
   order: Order;
 }
 
-const AssignEmployee = (props: Props) => {
+const ShowOrdersForPlanner = (props: Props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { users } = useContext(DataBaseContext);
   const employees = users.filter((user) => {
@@ -58,4 +58,4 @@ const AssignEmployee = (props: Props) => {
   );
 };
 
-export default AssignEmployee;
+export default ShowOrdersForPlanner;
