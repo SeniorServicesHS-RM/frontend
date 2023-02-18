@@ -14,7 +14,7 @@ import User from "../data/User";
 import { DataBaseContext } from "../store/DataBaseContext";
 import { UserContext } from "../store/UserContext";
 import FlexBox from "./FlexBox";
-import ShowOrdersBySeniors from "./ShowOrdersBySeniors";
+import SwitchableSeniorCard from "./cards/SwitchableSeniorCard";
 
 interface Props {
   abort: () => void;
@@ -50,12 +50,12 @@ const ShowAsisstantOrders = (props: Props) => {
     seniorList.length > 0 &&
     seniorList.map((myUser: User) => {
       return (
-        <ShowOrdersBySeniors
+        <SwitchableSeniorCard
           senior={myUser.seniorId}
           orderList={orderList}
           selectedMart={valueMart.selectedMart}
           showSorted={showSorted}
-        ></ShowOrdersBySeniors>
+        />
       );
     });
   const handleMartChange = (event: SelectChangeEvent) => {

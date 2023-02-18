@@ -8,11 +8,11 @@ import {
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { ChangeEvent, useState } from "react";
-import Article from "../data/Article";
+import Article from "../../data/Article";
 import {
   updateArticleDoneInDB,
   updateArticlePriceInDB,
-} from "../data/DatabaseFunctions";
+} from "../../data/DatabaseFunctions";
 
 interface Props {
   abort: () => void;
@@ -20,7 +20,7 @@ interface Props {
   article: Article;
 }
 
-const ShowEmpDoneDialog = (props: Props) => {
+const EmployeeDoneDialog = (props: Props) => {
   const [valuePrice, setValuePrice] = useState<number>(props.article.price);
   const [valueDone, setValueDone] = useState<boolean>(props.article.done);
   const handleDone = () => {
@@ -76,4 +76,4 @@ const ShowEmpDoneDialog = (props: Props) => {
     </div>
   );
 };
-export default ShowEmpDoneDialog;
+export default EmployeeDoneDialog;

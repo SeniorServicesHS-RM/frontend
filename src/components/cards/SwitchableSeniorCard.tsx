@@ -10,11 +10,11 @@ import {
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent/CardContent";
 import { useState } from "react";
-import Article from "../data/Article";
-import Order from "../data/Order";
-import FlexBox from "./FlexBox";
-import ShowArticles from "./ShowArticles";
-import ShowUserOverview from "./ShowUserOverview";
+import Article from "../../data/Article";
+import Order from "../../data/Order";
+import FlexBox from "../FlexBox";
+import ShowArticles from "../ShowArticles";
+import SeniorSumServicesDialog from "../dialogs/SeniorSumServicesDialog";
 
 interface Props {
   senior: string;
@@ -23,7 +23,7 @@ interface Props {
   showSorted: boolean;
 }
 
-const ShowOrdersBySeniors = (props: Props) => {
+const SwitchableSeniorCard = (props: Props) => {
   const [showSeniorOverview, setShowSeniorOverview] = useState(false);
 
   const openSeniorOverview = () => {
@@ -71,7 +71,7 @@ const ShowOrdersBySeniors = (props: Props) => {
                 </Typography>
               </CardActionArea>
 
-              <ShowUserOverview
+              <SeniorSumServicesDialog
                 abort={closeSeniorOverview}
                 open={showSeniorOverview}
                 seniorId={props.senior}
@@ -90,4 +90,4 @@ const ShowOrdersBySeniors = (props: Props) => {
   );
 };
 
-export default ShowOrdersBySeniors;
+export default SwitchableSeniorCard;

@@ -1,14 +1,14 @@
 import CardActionArea from "@mui/material/CardActionArea";
 import Grid from "@mui/material/Grid";
-import AddArticleDialog from "../components/AddArticleDialog";
-import ArticleCard from "../components/ArticleCard";
-import EditArticleDialog from "../components/EditArticleDialog";
+import AddArticleDialog from "../components/dialogs/AddArticleDialog";
+import ArticleCard from "../components/cards/ArticleCard";
+import EditArticleDialog from "../components/dialogs/EditArticleDialog";
 import FlexBox from "../components/FlexBox";
 import Order from "../data/Order";
 import React, { useEffect, useState, useContext } from "react";
 import { DataBaseContext, DataBaseProvider } from "../store/DataBaseContext";
 import Article from "../data/Article";
-import AdditionalServicesDialog from "../components/AdditionalServicesDialog";
+import AdditionalServicesDialog from "../components/dialogs/AdditionalServicesDialog";
 import { Button } from "@mui/material";
 import { UserContext } from "../store/UserContext";
 

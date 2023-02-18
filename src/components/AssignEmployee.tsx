@@ -4,14 +4,14 @@ import { updateEmployeeInOrderToDatabase } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
 import User from "../data/User";
 import { DataBaseContext } from "../store/DataBaseContext";
-import DropDownUserMenu from "./DropDownUserMenu";
-import OrderCard from "./OrderCard";
+import EmployeeDropDownMenu from "./EmployeeDropDownMenu";
+import OrderCard from "./cards/OrderCard";
 
 interface Props {
   order: Order;
 }
 
-const AssignAssistant = (props: Props) => {
+const AssignEmployee = (props: Props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { users } = useContext(DataBaseContext);
   const employees = users.filter((user) => {
@@ -44,7 +44,7 @@ const AssignAssistant = (props: Props) => {
           : "noch nicht zugewiesen"}
       </Typography>
       <Button onClick={handleClickDropDown}>Einkaufshelfer zuweisen</Button>
-      <DropDownUserMenu
+      <EmployeeDropDownMenu
         userList={employees}
         isOpen={Boolean(anchorEl)}
         handleClose={dropDownClosingHandler}
@@ -58,4 +58,4 @@ const AssignAssistant = (props: Props) => {
   );
 };
 
-export default AssignAssistant;
+export default AssignEmployee;

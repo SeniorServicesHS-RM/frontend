@@ -21,9 +21,9 @@ import { useState } from "react";
 import {
   addArticleToDatabase,
   addOrderToDatabase,
-} from "../data/DatabaseFunctions";
-import Order from "../data/Order";
-import { DataBaseContext } from "../store/DataBaseContext";
+} from "../../data/DatabaseFunctions";
+import Order from "../../data/Order";
+import { DataBaseContext } from "../../store/DataBaseContext";
 
 interface Props {
   orderToPush: Order;

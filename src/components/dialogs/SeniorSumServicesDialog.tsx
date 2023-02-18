@@ -3,14 +3,13 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
   FormControlLabel,
   TextField,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useContext, useState } from "react";
-import Order from "../data/Order";
-import { DataBaseContext } from "../store/DataBaseContext";
+import Order from "../../data/Order";
+import { DataBaseContext } from "../../store/DataBaseContext";
 
 interface Props {
   abort: () => void;
@@ -18,7 +17,7 @@ interface Props {
   open: boolean;
   orderList: Order[];
 }
-const ShowUserOverview = (props: Props) => {
+const SeniorSumServicesDialog = (props: Props) => {
   const { serviceList } = useContext(DataBaseContext);
   const getAllAdditionalServices = () => {
     const newList = [] as string[];
@@ -70,4 +69,4 @@ const ShowUserOverview = (props: Props) => {
     </div>
   );
 };
-export default ShowUserOverview;
+export default SeniorSumServicesDialog;

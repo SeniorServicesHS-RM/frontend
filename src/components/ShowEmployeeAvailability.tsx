@@ -13,7 +13,6 @@ import {
 } from "../data/DatabaseFunctions";
 import { DataBaseContext } from "../store/DataBaseContext";
 import { UserContext } from "../store/UserContext";
-import FlexBox from "./FlexBox";
 
 interface Props {
   abort: () => void;

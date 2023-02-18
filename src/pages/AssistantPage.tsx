@@ -5,7 +5,7 @@ import { useState } from "react";
 import FlexBox from "../components/FlexBox";
 import ShowAsisstantOrders from "../components/ShowAssistantOrders";
 import ShowEmployeeAvailability from "../components/ShowEmployeeAvailability";
-import ShowSeniorReciept from "../components/ShowSeniorReciept";
+import SeniorReceipts from "../components/SeniorReceipts";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import CalculateIcon from "@mui/icons-material/Calculate";
@@ -83,7 +83,7 @@ const AssistantPage = () => {
       {showEmployeeAvailability && (
         <ShowEmployeeAvailability abort={employeeAvailabiliyHandler} />
       )}
-      {showSeniorReciept && <ShowSeniorReciept abort={seniorRecieptHandler} />}
+      {showSeniorReciept && <SeniorReceipts abort={seniorRecieptHandler} />}
     </FlexBox>
   );
 };

@@ -7,12 +7,12 @@ import User from "../data/User";
 import { DataBaseContext } from "../store/DataBaseContext";
 import { UserContext } from "../store/UserContext";
 import FlexBox from "./FlexBox";
-import ShowReceipt from "./ShowReceipt";
+import ReceiptCard from "./cards/ReceiptCard";
 
 interface Props {
   abort: () => void;
 }
-const ShowSeniorReciept = (props: Props) => {
+const SeniorReceipts = (props: Props) => {
   const { user } = useContext(UserContext);
   const { users } = useContext(DataBaseContext);
   const employee = user.empID;
@@ -34,7 +34,7 @@ const ShowSeniorReciept = (props: Props) => {
     seniorList.map((senior: User) => {
       return (
         <Grid>
-          <ShowReceipt
+          <ReceiptCard
             senior={senior}
             employee={employee}
             empOrdersBySenior={getEmpOrdersBySenior(senior)}
@@ -51,4 +51,4 @@ const ShowSeniorReciept = (props: Props) => {
     </FlexBox>
   );
 };
-export default ShowSeniorReciept;
+export default SeniorReceipts;

@@ -8,9 +8,9 @@ import {
 } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
 import { UserContext } from "../store/UserContext";
-import ArticleCard from "./ArticleCard";
-import EditArticleDialog from "./EditArticleDialog";
-import ShowEmpDoneDialog from "./ShowEmpDoneDialog";
+import ArticleCard from "./cards/ArticleCard";
+import EditArticleDialog from "./dialogs/EditArticleDialog";
+import EmployeeDoneDialog from "./dialogs/EmployeeDoneDialog";
 interface Props {
   articles: Article[];
   order?: Order;
@@ -86,7 +86,7 @@ const ShowArticles = (props: Props) => {
                   />
                 </CardActionArea>
                 {selectedArticle ? (
-                  <ShowEmpDoneDialog
+                  <EmployeeDoneDialog
                     abort={closeEmpDone}
                     open={showEmpDone}
                     article={selectedArticle}

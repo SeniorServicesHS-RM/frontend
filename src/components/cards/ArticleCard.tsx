@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 
 import Typography from "@mui/material/Typography";
 import { Grid, CardMedia } from "@mui/material";
-import logosArr from "../data/LogosArr";
+import logosArr from "../../data/LogosArr";
 interface Props {
   title: string;
   description?: string;

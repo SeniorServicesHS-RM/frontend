@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import OrderCard from "../components/OrderCard";
-import AssignAssistant from "../components/AssignAssistant";
+import AssignEmployee from "../components/AssignEmployee";
 import { DataBaseContext } from "../store/DataBaseContext";
 
 const PlanningPageOpenOrders = () => {
@@ -12,7 +12,7 @@ const PlanningPageOpenOrders = () => {
       {openOrders &&
         openOrders
           .map((order) => {
-            return <AssignAssistant order={order} />;
+            return <AssignEmployee order={order} />;
           })
           .reverse()}
     </>

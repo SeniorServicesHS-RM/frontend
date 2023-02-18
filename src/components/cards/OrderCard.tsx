@@ -10,9 +10,9 @@ import {
 import { flexbox } from "@mui/system";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { deleteOrder } from "../data/DatabaseFunctions";
-import Order from "../data/Order";
-import ShowArticles from "./ShowArticles";
+import { deleteOrder } from "../../data/DatabaseFunctions";
+import Order from "../../data/Order";
+import ShowArticles from "../ShowArticles";
 
 interface Props {
   order: Order;

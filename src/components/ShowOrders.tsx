@@ -2,7 +2,7 @@ import { Button, Grid } from "@mui/material";
 import { useContext } from "react";
 import GetUserOrders from "../data/GetUserOrders";
 import { UserContext } from "../store/UserContext";
-import OrderCard from "./OrderCard";
+import OrderCard from "./cards/OrderCard";
 
 interface Props {
   abort: () => void;

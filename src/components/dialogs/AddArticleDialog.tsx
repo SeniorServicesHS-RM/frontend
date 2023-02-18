@@ -11,11 +11,11 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import Article from "../data/Article";
+import Article from "../../data/Article";
 import * as React from "react";
 import { useContext, useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { DataBaseContext } from "../store/DataBaseContext";
+import { DataBaseContext } from "../../store/DataBaseContext";
 interface Props {
   addOrder: (article: Article) => void;
 }

@@ -11,8 +11,8 @@ import {
   TextField,
 } from "@mui/material";
 import * as React from "react";
-import Article from "../data/Article";
-import { DataBaseContext } from "../store/DataBaseContext";
+import Article from "../../data/Article";
+import { DataBaseContext } from "../../store/DataBaseContext";
 
 interface Props {
   article: Article;

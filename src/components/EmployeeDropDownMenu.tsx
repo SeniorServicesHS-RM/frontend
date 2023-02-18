@@ -11,7 +11,7 @@ interface Props {
   anchorElement: HTMLElement;
 }
 
-export default function DropDownUserMenu(props: Props) {
+export default function EmployeeDropDownMenu(props: Props) {
   return (
     <Menu
       id="basic-menu"
