@@ -1,14 +1,7 @@
-import FlexBox from "../components/FlexBox";
-import { auth } from "../store/Firebase";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../store/UserContext";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import FormHelperText from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -16,14 +9,20 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import {
   EmailAuthProvider,
-  updatePassword,
   reauthenticateWithCredential,
   signOut,
+  updatePassword,
 } from "firebase/auth";
+import { useContext, useState } from "react";
+import FlexBox from "../components/FlexBox";
+import { auth } from "../store/Firebase";
+import { UserContext } from "../store/UserContext";
 
 const ProfilePage = () => {
   const { user } = useContext(UserContext);

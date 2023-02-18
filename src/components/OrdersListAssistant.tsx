@@ -1,22 +1,21 @@
 import {
-  List,
-  Grid,
-  FormControlLabel,
   Checkbox,
+  FormControlLabel,
+  Grid,
+  List,
   TextField,
 } from "@mui/material";
-import { ChangeEvent, useReducer, useEffect, useState } from "react";
-import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Typography from "@mui/material/Typography";
-import logosArr from "../data/LogosArr";
+import { ChangeEvent, useState } from "react";
 import Article from "../data/Article";
 import {
   updateArticleDoneInDB,
   updateArticlePriceInDB,
 } from "../data/DatabaseFunctions";
+import logosArr from "../data/LogosArr";
 interface Props {
   article: Article;
 }

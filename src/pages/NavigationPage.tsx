@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import LandingPage from "./LandingPage";
-import ServicesPage from "./ServicesPage";
-import PlanningPage from "./PlanningPage";
-import LoginPage from "./LoginPage";
-import ShoppingPageSelection from "./ShoppingPageSelection";
-import AssistantPage from "./AssistantPage";
-import ProfilePage from "./ProfilePage";
 import AuthContext from "../store/AuthContext";
+import AssistantPage from "./AssistantPage";
+import LandingPage from "./LandingPage";
+import LoginPage from "./LoginPage";
+import PlanningPage from "./PlanningPage";
 import PlanningPageOpenOrders from "./PlanningPageOpenOrders";
+import ProfilePage from "./ProfilePage";
+import ServicesPage from "./ServicesPage";
+import ShoppingPageSelection from "./ShoppingPageSelection";
 
 const NavigationPage = () => {
   return (

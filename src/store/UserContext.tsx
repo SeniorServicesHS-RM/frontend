@@ -1,7 +1,7 @@
-import React, { ReactNode, useEffect, useState } from "react";
 import { collection, onSnapshot } from "@firebase/firestore";
-import { firestore } from "./Firebase";
+import React, { ReactNode, useEffect, useState } from "react";
 import User from "../data/User";
+import { firestore } from "./Firebase";
 
 interface UserContextInterface {
   userId: string;

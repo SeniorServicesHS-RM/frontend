@@ -1,13 +1,13 @@
+import AddTaskIcon from "@mui/icons-material/AddTask";
+import CalculateIcon from "@mui/icons-material/Calculate";
+import FactCheckIcon from "@mui/icons-material/FactCheck";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import FlexBox from "../components/FlexBox";
+import SeniorReceipts from "../components/SeniorReceipts";
 import ShowAsisstantOrders from "../components/ShowAssistantOrders";
 import ShowEmployeeAvailability from "../components/ShowEmployeeAvailability";
-import SeniorReceipts from "../components/SeniorReceipts";
-import FactCheckIcon from "@mui/icons-material/FactCheck";
-import AddTaskIcon from "@mui/icons-material/AddTask";
-import CalculateIcon from "@mui/icons-material/Calculate";
 
 const AssistantPage = () => {
   const [shoppingListSelection, setShoppingListSelection] = useState(false);

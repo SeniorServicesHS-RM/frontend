@@ -1,7 +1,6 @@
+import { onAuthStateChanged } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import firebase from "firebase/app";
 import { auth } from "../store/Firebase";
 import { UserContext } from "./UserContext";
 

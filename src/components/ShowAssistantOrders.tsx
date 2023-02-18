@@ -13,8 +13,8 @@ import Order from "../data/Order";
 import User from "../data/User";
 import { DataBaseContext } from "../store/DataBaseContext";
 import { UserContext } from "../store/UserContext";
-import FlexBox from "./FlexBox";
 import SwitchableSeniorCard from "./cards/SwitchableSeniorCard";
+import FlexBox from "./FlexBox";
 
 interface Props {
   abort: () => void;

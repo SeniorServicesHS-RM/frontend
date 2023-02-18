@@ -1,9 +1,9 @@
 import { Button, Grid, Paper } from "@mui/material";
-import React, { useContext, useState } from "react";
+import Typography from "@mui/material/Typography";
+import { useContext, useState } from "react";
 import ShowOrders from "../components/ShowOrders";
 import { DataBaseContext } from "../store/DataBaseContext";
 import ShoppingPage from "./ShoppingPage";
-import Typography from "@mui/material/Typography";
 
 const ShoppingPageSelection = () => {
   const { nextShoppingDate } = useContext(DataBaseContext);

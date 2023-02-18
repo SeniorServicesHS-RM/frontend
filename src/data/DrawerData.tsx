@@ -1,11 +1,10 @@
-import HouseIcon from "@mui/icons-material/House";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccessibleIcon from "@mui/icons-material/Accessible";
-import LoginIcon from "@mui/icons-material/Login";
-import BlindIcon from "@mui/icons-material/Blind";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import HouseIcon from "@mui/icons-material/House";
+import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useContext, ReactNode } from "react";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ReactNode, useContext } from "react";
 import { UserContext } from "../store/UserContext";
 
 const DrawerData = [

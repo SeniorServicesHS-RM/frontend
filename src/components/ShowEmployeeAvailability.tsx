@@ -1,11 +1,4 @@
-import {
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  Grid,
-  Paper,
-} from "@mui/material";
+import { Button, Checkbox, FormControlLabel, Grid, Paper } from "@mui/material";
 import { ChangeEvent, useContext, useState } from "react";
 import {
   updateAvailabilityInDB,
