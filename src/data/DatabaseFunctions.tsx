@@ -18,46 +18,55 @@ export const addArticleToDatabase = (article: Article) => {
   });
 };
 export const updateArticlePriceInDB = (article: Article) => {
+  console.log("updateArticlePrice called");
+  console.log(article.id);
   const docRef = doc(firestore, "Article", article.id);
   updateDoc(docRef, {
     price: article.price,
   });
 };
 export const updateArticleDoneInDB = (article: Article) => {
+  console.log("updateArticleDone called");
+  console.log(article.id);
   const docRef = doc(firestore, "Article", article.id);
   updateDoc(docRef, {
     done: article.done,
   });
 };
 export const updateAvailabilityInDB = (available: boolean, userId: string) => {
+  console.log("updateAvailability called");
   const docRef = doc(firestore, "users", userId);
   updateDoc(docRef, {
     available: available,
   });
 };
 export const updateAvailableMartsInDB = (marts: string[], userId: string) => {
+  console.log("updateAvailableMarts called");
   const docRef = doc(firestore, "users", userId);
   updateDoc(docRef, {
     marts: marts,
   });
 };
 
-export const updateEmployeeInOrderToDatabase = (order: Order, user: User) => {
+export const updateEmployeeInOrderInDB = (order: Order, user: User) => {
+  console.log("updateEmployeeInOrder called");
+  console.log(order.id);
   const docRef = doc(firestore, "Order", order.id);
   updateDoc(docRef, {
     employeeId: user ? user.empID : "undefined",
   });
 };
 export const updateActualPriceOfOrderInDB = (order: Order, price: number) => {
+  console.log("updateActualPriceOfOrder called");
+  console.log(order.id);
   const docRef = doc(firestore, "Order", order.id);
   updateDoc(docRef, {
     actualPrice: price && price >= 0 ? price : 0,
   });
 };
-export const updateArticleListToDatabase = (
-  order: Order,
-  articleList: string[]
-) => {
+export const updateArticleListInDB = (order: Order, articleList: string[]) => {
+  console.log("updateArticleList called");
+  console.log(order.id);
   const docRef = doc(firestore, "Order", order.id);
   updateDoc(docRef, {
     articleList: articleList,
@@ -65,7 +74,7 @@ export const updateArticleListToDatabase = (
 };
 export const updateArticleInDB = (article: Article) => {
   console.log("updateArticle called");
-  console.log(article);
+  console.log(article.id);
   const docRef = doc(firestore, "Article", article.id);
   updateDoc(docRef, {
     amount: article.amount,
@@ -75,6 +84,8 @@ export const updateArticleInDB = (article: Article) => {
   });
 };
 export const updateEditableOrderInDB = (order: Order, value: boolean) => {
+  console.log("updateEditableOrder called");
+  console.log(order.id);
   const docRef = doc(firestore, "Order", order.id);
   updateDoc(docRef, {
     editable: value,
@@ -82,6 +93,8 @@ export const updateEditableOrderInDB = (order: Order, value: boolean) => {
 };
 
 export const addOrderToDatabase = (order: Order) => {
+  console.log("addOrderToDatabase called");
+  console.log(order.id);
   const getArticlesAsStringAry = () => {
     const newAry: String[] = [];
     for (const article of order.articleList) {
@@ -112,7 +125,7 @@ export const addOrderToDatabase = (order: Order) => {
 };
 
 export const deleteOrder = (order: Order) => {
-  console.log("delOrder entered");
+  console.log("delOrder called");
   console.log(order.id);
   console.log(deleteDoc(doc(firestore, "Order", order.id)));
 };

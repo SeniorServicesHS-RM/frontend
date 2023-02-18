@@ -1,6 +1,6 @@
 import { Button, Divider, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import { updateEmployeeInOrderToDatabase } from "../data/DatabaseFunctions";
+import { updateEmployeeInOrderInDB } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
 import User from "../data/User";
 import { DataBaseContext } from "../store/DataBaseContext";
@@ -24,10 +24,10 @@ const ShowOrdersForPlanner = (props: Props) => {
 
   const dropDownClosingHandler = (user?: User) => {
     if (user) {
-      updateEmployeeInOrderToDatabase(props.order, user);
+      updateEmployeeInOrderInDB(props.order, user);
       console.log(user.empID);
     } else if (user === null) {
-      updateEmployeeInOrderToDatabase(props.order, null);
+      updateEmployeeInOrderInDB(props.order, null);
     }
     setAnchorEl(null);
   };

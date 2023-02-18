@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import Article from "../data/Article";
 import {
   updateArticleInDB,
-  updateArticleListToDatabase,
+  updateArticleListInDB,
   updateEditableOrderInDB,
 } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
@@ -48,7 +48,7 @@ const ShowArticles = (props: Props) => {
         newList.push(article.id);
       }
     });
-    updateArticleListToDatabase(props.order, newList);
+    updateArticleListInDB(props.order, newList);
     closeEditDialog();
   };
   const checkEdit = () => {
