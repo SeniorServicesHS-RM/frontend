@@ -56,9 +56,7 @@ export default function LoginSide() {
       .catch((error) => {
         setErrorPW(true);
         setErrorMessagePW("Die Anmeldeinformationen sind inkorrekt!");
-        console.log("wrong Email or password");
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        alert("Error: " + error.code + " Message: " + error.message);
       });
   };
 

@@ -25,6 +25,7 @@ interface Props {
   children?: ReactNode | ReactNode[];
 }
 
+//Context provides and stores userdata
 export const UserContext = React.createContext<UserContextInterface | null>(
   null
 );

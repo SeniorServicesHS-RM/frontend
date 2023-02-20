@@ -65,7 +65,7 @@ const OrderCard = (props: Props) => {
                 color="text.secondary"
                 gutterBottom
               >
-                {order.id}
+                Bestellnummer: {order.id}
               </Typography>
             </Grid>
             <Grid item lg={2} md={2} sm={6} xs={6}>

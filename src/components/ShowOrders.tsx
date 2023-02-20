@@ -12,7 +12,6 @@ const ShowOrders = (props: Props) => {
   const { user } = useContext(UserContext);
   const seniorId = user.seniorId;
   const userOrders = GetUserOrders(seniorId);
-  // console.log(userOrders);
 
   return (
     <Grid container xs={12}>

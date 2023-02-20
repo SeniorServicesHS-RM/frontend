@@ -9,6 +9,7 @@ interface Props {
   children?: ReactNode | ReactNode[];
 }
 
+//Context stores and provides local data about Orders
 export const OrdersContext = React.createContext<OrdersContextInterface | null>(
   null
 );

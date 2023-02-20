@@ -8,16 +8,13 @@ import { firestore } from "./Firebase";
 
 interface ImportedArticle {
   id: string;
-  beginDate?: Date; //all 3 necessary? -> one should be enough!
-  changeDate?: Date;
-  endDate?: Date;
   name: string;
   note: string;
   amount: number;
   mart: string;
   done: boolean;
   price: number;
-  picture?: string; //Datatype? gotta check!
+  picture?: string;
 }
 
 interface ImportedOrder {
@@ -63,9 +60,7 @@ interface DataBaseContextInterface {
   nextShoppingDate: Date | any;
   martList: string[];
   serviceList: string[];
-  // userId: string;
   users: User[];
-  // handleUserId: (userId: string) => void;
 }
 
 interface Props {
@@ -83,7 +78,7 @@ interface UserInterface {
   lastName?: string;
   available?: boolean;
 }
-
+//Context provides data received from the firestore database
 export const DataBaseContext =
   React.createContext<DataBaseContextInterface | null>(null);
 
@@ -94,13 +89,9 @@ export const DataBaseProvider = ({ children }: Props) => {
   const [closedOrders, setClosedOrders] = useState<Order[] | null>(null);
   const [martList, setMarts] = useState<string[] | null>(null);
   const [serviceList, setServiceList] = useState<string[] | null>(null);
-  // const [userId, setUserId] = useState<string | null>(null);
   const [users, setUsers] = useState<User[] | null>(null);
 
-  // const handleUserId = (userId: string) => {
-  //   setUserId(userId);
-  // };
-
+  //subscribes to the "users" collection in our firestore and updates the users state
   useEffect(() => {
     const unsub = onSnapshot(collection(firestore, "users"), (snapshot) => {
       const receivedUsers: UserInterface[] = snapshot.docs.map((doc) => ({
@@ -126,6 +117,7 @@ export const DataBaseProvider = ({ children }: Props) => {
     return unsub;
   }, []);
 
+  //subscribes to the "Article" collection in our firestore and updates the articles state
   useEffect(() => {
     const unsub = onSnapshot(collection(firestore, "Article"), (snapshot) => {
       const receivedArticles: ImportedArticle[] = snapshot.docs.map((doc) => ({
@@ -138,6 +130,7 @@ export const DataBaseProvider = ({ children }: Props) => {
     return unsub;
   }, []);
 
+  //subscribes to the "Marts" collection in our firestore and updates the marts state
   useEffect(() => {
     const unsub = onSnapshot(collection(firestore, "Marts"), (snapshot) => {
       const recievedMarts: ImportedMart[] = snapshot.docs.map((doc) => ({
@@ -154,6 +147,8 @@ export const DataBaseProvider = ({ children }: Props) => {
 
     return unsub;
   }, []);
+
+  //subscribes to the "AdditionalServices" collection in our firestore and updates the ServiceList state
   useEffect(() => {
     const unsub = onSnapshot(
       collection(firestore, "AdditionalServices"),
@@ -176,26 +171,7 @@ export const DataBaseProvider = ({ children }: Props) => {
     return unsub;
   }, []);
 
-  useEffect(() => {
-    const unsub = onSnapshot(
-      collection(firestore, "ShoppingDates"),
-      (snapshot) => {
-        const receivedDates: ImportedDate[] = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        })) as ImportedDate[];
-        const findNewDate = receivedDates.find((date) => {
-          return date.id === "nextDate";
-        });
-        setNextShoppingDate(findNewDate.date.toDate());
-        console.log("in DB: ", findNewDate.date.toDate());
-      }
-    );
-    console.log("ShoppingDates called");
-
-    return unsub;
-  }, []);
-
+  //subscribes to the "ShoppingDates" collection in our firestore and updates the nextShopppingDate state
   useEffect(() => {
     const unsub = onSnapshot(
       collection(firestore, "ShoppingDates"),
@@ -215,6 +191,7 @@ export const DataBaseProvider = ({ children }: Props) => {
     return unsub;
   }, []);
 
+  //subscribes to the "Order" collection in our firestore and updates the orders state
   useEffect(() => {
     const unsub = onSnapshot(collection(firestore, "Order"), (snapshot) => {
       const receivedOrders: ImportedOrder[] = snapshot.docs.map((doc) => ({
@@ -312,8 +289,6 @@ export const DataBaseProvider = ({ children }: Props) => {
         nextShoppingDate,
         martList,
         serviceList,
-        // userId,
-        // handleUserId,
         users,
       }}
     >

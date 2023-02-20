@@ -5,7 +5,6 @@ import Order from "./Order";
 import User from "./User";
 
 export const addArticleToDatabase = (article: Article) => {
-  //const newId = Math.floor(Math.random() * (9999 - 0 + 1) + 0); //We need logic to generate keys!
   const docRef = doc(firestore, "Article", article.id);
   setDoc(docRef, {
     amount: article.amount,

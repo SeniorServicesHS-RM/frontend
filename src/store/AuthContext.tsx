@@ -4,16 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../store/Firebase";
 import { UserContext } from "./UserContext";
 
+//only Props are children nodes
 type Props = {
   children?: React.ReactNode;
 };
 
+//handles Authentication across the Application - old Context Syntax
 const AuthContext: React.FunctionComponent<Props> = (props) => {
   const { children } = props;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { handleUserId } = useContext(UserContext);
-  //const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     const AuthCheck = onAuthStateChanged(auth, (user) => {
