@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { deleteOrder } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
+import FlexBox from "./FlexBox";
 import ShowArticles from "./ShowArticles";
 
 interface Props {
@@ -179,7 +180,14 @@ const OrderCard = (props: Props) => {
         </CardContent>
       </Card>
       {showArticles ? (
-        <ShowArticles articles={order.articleList} order={order}></ShowArticles>
+        <FlexBox>
+          <Grid container spacing={{ xs: 2 }}>
+            <ShowArticles
+              articles={order.articleList}
+              order={order}
+            ></ShowArticles>
+          </Grid>
+        </FlexBox>
       ) : (
         <></>
       )}
