@@ -64,10 +64,7 @@ const OrderCard = (props: Props) => {
           >
             <Grid
               item
-              lg={2}
-              md={2}
-              sm={6}
-              xs={6}
+              xs={2}
               sx={{
                 display: "flex",
                 justifyItems: "center",
@@ -84,7 +81,7 @@ const OrderCard = (props: Props) => {
                 Bestellnummer: {order.id}
               </Typography>
             </Grid>
-            <Grid item lg={2} md={2} sm={6} xs={6}>
+            <Grid item xs={2}>
               <Typography
                 sx={{ p: 1.5, m: 1.5, fontSize: 18, fontWeight: "bold" }}
                 color="text.secondary"
@@ -96,10 +93,7 @@ const OrderCard = (props: Props) => {
             </Grid>
             <Grid
               item
-              lg={3}
-              md={3}
-              sm={6}
-              xs={6}
+              xs={2}
               sx={{
                 display: "flex",
                 justifyItems: "center",
@@ -128,7 +122,7 @@ const OrderCard = (props: Props) => {
                 })}
               </Typography>
             </Grid>
-            <Grid item lg={2} md={2} sm={6} xs={6}>
+            <Grid item xs={2}>
               <Typography
                 sx={{
                   p: 1,
@@ -166,7 +160,7 @@ const OrderCard = (props: Props) => {
               </Typography>
             </Grid>
             {order.orderDone ? (
-              <Grid item lg={2} md={2} sm={6} xs={6}>
+              <Grid item lg={2} md={2} sm={2} xs={2}>
                 <Typography
                   sx={{
                     p: 1,
@@ -188,10 +182,7 @@ const OrderCard = (props: Props) => {
             )}
             <Grid
               item
-              lg={3}
-              md={3}
-              sm={12}
-              xs={12}
+              xs={2}
               sx={{
                 display: "flex",
                 alignContent: "center",
