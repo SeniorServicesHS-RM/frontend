@@ -182,10 +182,7 @@ const OrderCard = (props: Props) => {
       {showArticles ? (
         <FlexBox>
           <Grid container spacing={{ xs: 2 }}>
-            <ShowArticles
-              articles={order.articleList}
-              order={order}
-            ></ShowArticles>
+            <ShowArticles articles={order.articleList} order={order} />
           </Grid>
         </FlexBox>
       ) : (
