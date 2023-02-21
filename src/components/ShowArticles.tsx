@@ -80,13 +80,7 @@ const ShowArticles = (props: Props) => {
                       : setShowEditDialog(true);
                   }}
                 >
-                  <ArticleCard
-                    title={article.name}
-                    description={article.note && article.note}
-                    amount={article.amount}
-                    mart={article.mart}
-                    picture={article.picture && article.picture}
-                  />
+                  <ArticleCard article={article} />
                 </CardActionArea>
                 {selectedArticle ? (
                   <EmployeeDoneDialog

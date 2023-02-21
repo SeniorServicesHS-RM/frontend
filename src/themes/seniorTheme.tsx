@@ -4,7 +4,7 @@ const seniorTheme = createTheme({
   palette: {
     primary: {
       main: "#3392FF",
-      dark: "#00838f",
+      dark: "#D3D3D3",
       light: "#ADD3FF",
     },
     secondary: {
