@@ -30,13 +30,15 @@ const SeniorReceipts = (props: Props) => {
     seniorList.length > 0 &&
     seniorList.map((senior: User) => {
       return (
-        <Grid>
-          <ReceiptCard
-            senior={senior}
-            employee={employee}
-            empOrdersBySenior={getEmpOrdersBySenior(senior)}
-          />
-        </Grid>
+        <FlexBox>
+          <Grid item lg={3} md={4} sm={6} xs={12}>
+            <ReceiptCard
+              senior={senior}
+              employee={employee}
+              empOrdersBySenior={getEmpOrdersBySenior(senior)}
+            />
+          </Grid>
+        </FlexBox>
       );
     });
   return (

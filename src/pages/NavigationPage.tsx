@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AuthContext from "../store/AuthContext";
-import AssistantPage from "./AssistantPage";
+import EmployeePage from "./EmployeePage";
 import LandingPage from "./LandingPage";
 import LoginPage from "./LoginPage";
 import PlanningPage from "./PlanningPage";
@@ -66,7 +66,7 @@ const NavigationPage = () => {
           element={
             <AuthContext>
               {" "}
-              <AssistantPage />{" "}
+              <EmployeePage />{" "}
             </AuthContext>
           }
         />
