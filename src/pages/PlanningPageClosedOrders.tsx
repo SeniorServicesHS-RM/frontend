@@ -2,12 +2,12 @@ import { useContext } from "react";
 import ShowOrdersForPlanner from "../components/ShowOrdersForPlanner";
 import { DataBaseContext } from "../store/DataBaseContext";
 
-const PlanningPageOpenOrders = () => {
-  const { openOrders } = useContext(DataBaseContext);
+const PlanningPageClosedOrders = () => {
+  const { closedOrders } = useContext(DataBaseContext);
   return (
     <>
-      {openOrders &&
-        openOrders
+      {closedOrders &&
+        closedOrders
           .map((order) => {
             return <ShowOrdersForPlanner order={order} />;
           })
@@ -16,4 +16,4 @@ const PlanningPageOpenOrders = () => {
   );
 };
 
-export default PlanningPageOpenOrders;
+export default PlanningPageClosedOrders;

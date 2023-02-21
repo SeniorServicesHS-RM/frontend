@@ -31,8 +31,6 @@ const OrderCard = (props: Props) => {
         return;
       }
     });
-    console.log(done);
-    console.log(props.order.orderDone);
     if (done !== props.order.orderDone) {
       updateOrderDoneInDB(props.order, done);
     }
@@ -199,7 +197,7 @@ const OrderCard = (props: Props) => {
                   onClick={() => deleteOrder(order)}
                   sx={{ bgcolor: "error.main", color: "#ffffff" }}
                 >
-                  Loeschen
+                  Löschen
                 </Button>
               </CardActionArea>
             </Grid>

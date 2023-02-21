@@ -43,13 +43,19 @@ const ShowOrdersForPlanner = (props: Props) => {
           ? props.order.employeeId
           : "noch nicht zugewiesen"}
       </Typography>
-      <Button onClick={handleClickDropDown}>Einkaufshelfer zuweisen</Button>
-      <EmployeeDropDownMenu
-        userList={employees}
-        isOpen={Boolean(anchorEl)}
-        handleClose={dropDownClosingHandler}
-        anchorElement={anchorEl}
-      />
+      {props.order.orderDone ? (
+        <></>
+      ) : (
+        <>
+          <Button onClick={handleClickDropDown}>Einkaufshelfer zuweisen</Button>
+          <EmployeeDropDownMenu
+            userList={employees}
+            isOpen={Boolean(anchorEl)}
+            handleClose={dropDownClosingHandler}
+            anchorElement={anchorEl}
+          />
+        </>
+      )}
       <OrderCard order={props.order} />
       <br />
       <Divider variant="middle" />

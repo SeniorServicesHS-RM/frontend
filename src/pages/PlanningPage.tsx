@@ -8,6 +8,9 @@ const PlanningPage = () => {
       <NavLink to="/planning/openorders">
         <Button>Offene Bestellungen Ueberpruefen</Button>
       </NavLink>
+      <NavLink to="/planning/closedorders">
+        <Button>Vergangene Bestellungen einsehen</Button>
+      </NavLink>
     </FlexBox>
   );
 };

@@ -5,6 +5,7 @@ import EmployeePage from "./EmployeePage";
 import LandingPage from "./LandingPage";
 import LoginPage from "./LoginPage";
 import PlanningPage from "./PlanningPage";
+import PlanningPageClosedOrders from "./PlanningPageClosedOrders";
 import PlanningPageOpenOrders from "./PlanningPageOpenOrders";
 import ProfilePage from "./ProfilePage";
 import ServicesPage from "./ServicesPage";
@@ -58,6 +59,15 @@ const NavigationPage = () => {
             <AuthContext>
               {" "}
               <PlanningPageOpenOrders />{" "}
+            </AuthContext>
+          }
+        />
+        <Route
+          path="/planning/closedorders"
+          element={
+            <AuthContext>
+              {" "}
+              <PlanningPageClosedOrders />{" "}
             </AuthContext>
           }
         />
