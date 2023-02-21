@@ -39,7 +39,7 @@ function AddArticleDialog(props: Props) {
     newAmount: 1,
   });
   const [valueMart, setValueMart] = useState<ValueHandler>({
-    newMart: "",
+    newMart: martList[0],
   });
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -61,20 +61,22 @@ function AddArticleDialog(props: Props) {
     setValueMart({ newMart: event.target.value as string });
   };
   const handleDone = () => {
-    props.addOrder(
-      new Article(
-        Date.now().toString(),
-        valueName.newName,
-        valueAmount.newAmount,
-        valueMart.newMart,
-        false,
-        0,
-        valueNote.newNote
-      )
-    );
-    setValueName({ newName: "" });
-    setValueNote({ newNote: "" });
-    setValueAmount({ newAmount: 1 });
+    if (valueName.newName !== "") {
+      props.addOrder(
+        new Article(
+          Date.now().toString(),
+          valueName.newName,
+          valueAmount.newAmount,
+          valueMart.newMart,
+          false,
+          0,
+          valueNote.newNote
+        )
+      );
+      setValueName({ newName: "" });
+      setValueNote({ newNote: "" });
+      setValueAmount({ newAmount: 1 });
+    }
     setOpen(false);
   };
   const mappedMartList = martList.map((mart: String) => {
