@@ -165,6 +165,27 @@ const OrderCard = (props: Props) => {
                 )}
               </Typography>
             </Grid>
+            {order.orderDone ? (
+              <Grid item lg={2} md={2} sm={6} xs={6}>
+                <Typography
+                  sx={{
+                    p: 1,
+                    mb: 1.5,
+                    textAlign: "center",
+                    fontSize: 18,
+                    fontWeight: "bold",
+                  }}
+                  color="text.secondary"
+                >
+                  Summe:
+                  <Paper sx={{ padding: 1.5, margin: 1 }}>
+                    {order.aktualPrice} €
+                  </Paper>
+                </Typography>
+              </Grid>
+            ) : (
+              <></>
+            )}
             <Grid
               item
               lg={3}
