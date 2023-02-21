@@ -51,7 +51,7 @@ const EmployeeDoneDialog = (props: Props) => {
       <Dialog open={props.open} onClose={handleAbort}>
         <DialogContent>
           <TextField
-            label="Artikel eingekauft"
+            label="Preis"
             type="number"
             inputProps={{ step: 0.01 }}
             value={props.article.price}

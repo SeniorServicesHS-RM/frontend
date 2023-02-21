@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { deleteOrder } from "../data/DatabaseFunctions";
+import { deleteOrder, updateOrderDoneInDB } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
 import ShowArticles from "./ShowArticles";
 
@@ -22,6 +22,21 @@ const OrderCard = (props: Props) => {
   const showArticlesHandler = () => {
     setShowArticles(!showArticles);
   };
+  const checkDone = () => {
+    let done = true;
+    props.order.articleList.some((article) => {
+      if (article.done === false) {
+        done = false;
+        return;
+      }
+    });
+    console.log(done);
+    console.log(props.order.orderDone);
+    if (done !== props.order.orderDone) {
+      updateOrderDoneInDB(props.order, done);
+    }
+  };
+  checkDone();
   return (
     <>
       <Card
