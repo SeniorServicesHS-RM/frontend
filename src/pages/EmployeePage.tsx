@@ -6,8 +6,8 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import FlexBox from "../components/FlexBox";
 import SeniorReceipts from "../components/SeniorReceipts";
-import ShowEmployeeOrders from "../components/ShowEmployeeOrders";
-import ShowEmployeeAvailability from "../components/ShowEmployeeAvailability";
+import EmployeeOrders from "../components/EmployeeOrders";
+import EmployeeAvailability from "../components/EmployeeAvailability";
 
 const EmployeePage = () => {
   const [shoppingListSelection, setShoppingListSelection] = useState(false);
@@ -76,11 +76,9 @@ const EmployeePage = () => {
             </Button>
           </Typography>
         )}
-      {shoppingListSelection && (
-        <ShowEmployeeOrders abort={shoppingListHandler} />
-      )}
+      {shoppingListSelection && <EmployeeOrders abort={shoppingListHandler} />}
       {showEmployeeAvailability && (
-        <ShowEmployeeAvailability abort={employeeAvailabiliyHandler} />
+        <EmployeeAvailability abort={employeeAvailabiliyHandler} />
       )}
       {showSeniorReciept && <SeniorReceipts abort={seniorRecieptHandler} />}
     </FlexBox>

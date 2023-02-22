@@ -22,7 +22,7 @@ interface Props {
 interface ValueHandler {
   selectedMart: string;
 }
-const ShowEmployeeOrders = (props: Props) => {
+const EmployeeOrders = (props: Props) => {
   const { user } = useContext(UserContext);
   const { users } = useContext(DataBaseContext);
   const employee = user.empID;
@@ -85,4 +85,4 @@ const ShowEmployeeOrders = (props: Props) => {
     </FlexBox>
   );
 };
-export default ShowEmployeeOrders;
+export default EmployeeOrders;
