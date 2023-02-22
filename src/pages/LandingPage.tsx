@@ -63,6 +63,7 @@ const LandingPage = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              border: 1,
               borderRadius: "16px",
             }}
           >
