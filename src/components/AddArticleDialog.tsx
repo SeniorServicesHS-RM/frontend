@@ -95,7 +95,7 @@ function AddArticleDialog(props: Props) {
       </Button>
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add new Article</DialogTitle>
+        <DialogTitle>Neuen Artikel hinzufügen</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
