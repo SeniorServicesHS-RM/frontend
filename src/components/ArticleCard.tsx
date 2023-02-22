@@ -5,18 +5,15 @@ import { ReactNode } from "react";
 import { CardMedia, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import logosArr from "../data/LogosArr";
+import Article from "../data/Article";
 interface Props {
-  title: string;
-  description?: string;
-  amount: number;
-  mart: String;
-  picture?: ReactNode;
+  article: Article;
 }
 
 const ArticleCard = (props: Props) => {
   const showLogo = () => {
     let index = logosArr.findIndex((element) => {
-      return props.mart === element.name;
+      return props.article.mart === element.name;
     });
     if (logosArr[index]) {
       return (
@@ -40,7 +37,7 @@ const ArticleCard = (props: Props) => {
           width="6rem"
           textAlign={"center"}
         >
-          {props.mart}
+          {props.article.mart}
         </Typography>
       );
     }
@@ -48,7 +45,11 @@ const ArticleCard = (props: Props) => {
   return (
     <Card
       variant="outlined"
-      sx={{ maxHeight: 200, height: 200, backgroundColor: "primary.light" }}
+      sx={{
+        maxHeight: 200,
+        height: 200,
+        backgroundColor: props.article.done ? "primary.light" : "primary.dark",
+      }}
     >
       <CardContent>
         <Typography
@@ -57,11 +58,11 @@ const ArticleCard = (props: Props) => {
           color="text.secondary"
           gutterBottom
         >
-          {props.title}
+          {props.article.name}
         </Typography>
         <Typography variant="h5" component="div"></Typography>
         <Typography sx={{ p: 1, mb: 1.5 }} color="text.secondary">
-          {props.description}
+          {props.article.note}
         </Typography>
         <Grid
           display={"flex"}
@@ -79,10 +80,10 @@ const ArticleCard = (props: Props) => {
             width="6rem"
             textAlign={"center"}
           >
-            Menge {props.amount}
+            Menge {props.article.amount}
           </Typography>
         </Grid>
-        {props.picture !== undefined ? <></> : props.picture}
+        {props.article.picture !== undefined ? <></> : props.article.picture}
       </CardContent>
     </Card>
   );

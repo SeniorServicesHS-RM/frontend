@@ -4,7 +4,7 @@ const planningTheme = createTheme({
   palette: {
     primary: {
       main: "#72D58E",
-      dark: "#0D3017",
+      dark: "#D3D3D3",
       light: "#C0EDCC",
     },
   },

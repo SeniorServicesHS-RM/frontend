@@ -11,7 +11,7 @@ interface Props {
   abort: () => void;
 }
 
-const ShowEmployeeAvailability = (props: Props) => {
+const EmployeeAvailability = (props: Props) => {
   const { martList } = useContext(DataBaseContext);
   const { user } = useContext(UserContext);
   const [selectedMarts, setSelectedMart] = useState<string[]>(user.marts);
@@ -104,4 +104,4 @@ const ShowEmployeeAvailability = (props: Props) => {
     </Grid>
   );
 };
-export default ShowEmployeeAvailability;
+export default EmployeeAvailability;

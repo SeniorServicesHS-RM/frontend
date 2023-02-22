@@ -1,5 +1,6 @@
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -134,9 +135,16 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Paper component={Stack} direction="column" justifyContent="center">
+      <Paper
+        component={Stack}
+        direction="column"
+        justifyContent="center"
+        sx={{
+          backgroundColor: "primary.dark",
+        }}
+      >
         <FlexBox>
-          <Typography variant="h5" component="h3">
+          <Typography variant="h3" component="h3">
             Profile Information
           </Typography>
         </FlexBox>
@@ -166,7 +174,7 @@ const ProfilePage = () => {
         </FlexBox>
 
         <FlexBox>
-          <Button variant="outlined" onClick={handleClickOpen}>
+          <Button variant="contained" onClick={handleClickOpen}>
             Passwort ändern
           </Button>
           <Dialog open={open} onClose={handleClose}>

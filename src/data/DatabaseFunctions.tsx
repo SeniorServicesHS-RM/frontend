@@ -90,7 +90,12 @@ export const updateEditableOrderInDB = (order: Order, value: boolean) => {
     editable: value,
   });
 };
-
+export const updateOrderDoneInDB = (order: Order, value: boolean) => {
+  console.log("updateOrderDone called");
+  console.log(order.id);
+  const docRef = doc(firestore, "Order", order.id);
+  updateDoc(docRef, { orderDone: value });
+};
 export const addOrderToDatabase = (order: Order) => {
   console.log("addOrderToDatabase called");
   console.log(order.id);

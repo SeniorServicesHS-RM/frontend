@@ -67,13 +67,7 @@ const ShoppingPage = (props: Props) => {
               editHandler(article);
             }}
           >
-            <ArticleCard
-              key={article.id}
-              title={article.name}
-              description={article.note}
-              amount={article.amount}
-              mart={article.mart}
-            ></ArticleCard>
+            <ArticleCard article={article}></ArticleCard>
           </CardActionArea>
         </Grid>
       );

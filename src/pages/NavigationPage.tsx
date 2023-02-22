@@ -1,10 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AuthContext from "../store/AuthContext";
-import AssistantPage from "./AssistantPage";
+import EmployeePage from "./EmployeePage";
 import LandingPage from "./LandingPage";
 import LoginPage from "./LoginPage";
 import PlanningPage from "./PlanningPage";
+import PlanningPageClosedOrders from "./PlanningPageClosedOrders";
 import PlanningPageOpenOrders from "./PlanningPageOpenOrders";
 import ProfilePage from "./ProfilePage";
 import ServicesPage from "./ServicesPage";
@@ -62,11 +63,20 @@ const NavigationPage = () => {
           }
         />
         <Route
+          path="/planning/closedorders"
+          element={
+            <AuthContext>
+              {" "}
+              <PlanningPageClosedOrders />{" "}
+            </AuthContext>
+          }
+        />
+        <Route
           path="/assistant"
           element={
             <AuthContext>
               {" "}
-              <AssistantPage />{" "}
+              <EmployeePage />{" "}
             </AuthContext>
           }
         />

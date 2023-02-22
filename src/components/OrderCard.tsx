@@ -8,8 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { deleteOrder } from "../data/DatabaseFunctions";
+import { deleteOrder, updateOrderDoneInDB } from "../data/DatabaseFunctions";
 import Order from "../data/Order";
+import FlexBox from "./FlexBox";
 import ShowArticles from "./ShowArticles";
 
 interface Props {
@@ -22,6 +23,19 @@ const OrderCard = (props: Props) => {
   const showArticlesHandler = () => {
     setShowArticles(!showArticles);
   };
+  const checkDone = () => {
+    let done = true;
+    props.order.articleList.some((article) => {
+      if (article.done === false) {
+        done = false;
+        return;
+      }
+    });
+    if (done !== props.order.orderDone) {
+      updateOrderDoneInDB(props.order, done);
+    }
+  };
+  checkDone();
   return (
     <>
       <Card
@@ -48,10 +62,7 @@ const OrderCard = (props: Props) => {
           >
             <Grid
               item
-              lg={2}
-              md={2}
-              sm={6}
-              xs={6}
+              xs={2}
               sx={{
                 display: "flex",
                 justifyItems: "center",
@@ -68,7 +79,7 @@ const OrderCard = (props: Props) => {
                 Bestellnummer: {order.id}
               </Typography>
             </Grid>
-            <Grid item lg={2} md={2} sm={6} xs={6}>
+            <Grid item xs={2}>
               <Typography
                 sx={{ p: 1.5, m: 1.5, fontSize: 18, fontWeight: "bold" }}
                 color="text.secondary"
@@ -80,10 +91,7 @@ const OrderCard = (props: Props) => {
             </Grid>
             <Grid
               item
-              lg={3}
-              md={3}
-              sm={6}
-              xs={6}
+              xs={2}
               sx={{
                 display: "flex",
                 justifyItems: "center",
@@ -112,7 +120,7 @@ const OrderCard = (props: Props) => {
                 })}
               </Typography>
             </Grid>
-            <Grid item lg={2} md={2} sm={6} xs={6}>
+            <Grid item xs={2}>
               <Typography
                 sx={{
                   p: 1,
@@ -149,12 +157,30 @@ const OrderCard = (props: Props) => {
                 )}
               </Typography>
             </Grid>
+            {order.orderDone ? (
+              <Grid item lg={2} md={2} sm={2} xs={2}>
+                <Typography
+                  sx={{
+                    p: 1,
+                    mb: 1.5,
+                    textAlign: "center",
+                    fontSize: 18,
+                    fontWeight: "bold",
+                  }}
+                  color="text.secondary"
+                >
+                  Summe:
+                  <Paper sx={{ padding: 1.5, margin: 1 }}>
+                    {order.aktualPrice} €
+                  </Paper>
+                </Typography>
+              </Grid>
+            ) : (
+              <></>
+            )}
             <Grid
               item
-              lg={3}
-              md={3}
-              sm={12}
-              xs={12}
+              xs={2}
               sx={{
                 display: "flex",
                 alignContent: "center",
@@ -171,7 +197,7 @@ const OrderCard = (props: Props) => {
                   onClick={() => deleteOrder(order)}
                   sx={{ bgcolor: "error.main", color: "#ffffff" }}
                 >
-                  Loeschen
+                  Löschen
                 </Button>
               </CardActionArea>
             </Grid>
@@ -179,7 +205,11 @@ const OrderCard = (props: Props) => {
         </CardContent>
       </Card>
       {showArticles ? (
-        <ShowArticles articles={order.articleList} order={order}></ShowArticles>
+        <FlexBox>
+          <Grid container spacing={{ xs: 2 }}>
+            <ShowArticles articles={order.articleList} order={order} />
+          </Grid>
+        </FlexBox>
       ) : (
         <></>
       )}

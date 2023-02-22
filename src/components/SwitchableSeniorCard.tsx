@@ -3,6 +3,7 @@ import CardContent from "@mui/material/CardContent/CardContent";
 import { useState } from "react";
 import Article from "../data/Article";
 import Order from "../data/Order";
+import FlexBox from "./FlexBox";
 import SeniorSumServicesDialog from "./SeniorSumServicesDialog";
 import ShowArticles from "./ShowArticles";
 
@@ -67,14 +68,22 @@ const SwitchableSeniorCard = (props: Props) => {
                 seniorId={props.senior}
                 orderList={getEmpOrdersBySenior()}
               />
-              <ShowArticles
-                articles={getEmpArticlesBySeniorAndMart()}
-              ></ShowArticles>
+              <FlexBox>
+                <Grid container spacing={{ xs: 2 }}>
+                  <ShowArticles articles={getEmpArticlesBySeniorAndMart()} />
+                </Grid>
+              </FlexBox>
             </CardContent>
           </Card>
         </Grid>
       ) : (
-        <ShowArticles articles={getEmpArticlesBySeniorAndMart()} />
+        <FlexBox>
+          <Grid container spacing={{ xs: 2 }}>
+            <ShowArticles
+              articles={getEmpArticlesBySeniorAndMart()}
+            ></ShowArticles>
+          </Grid>
+        </FlexBox>
       )}
     </Grid>
   );
