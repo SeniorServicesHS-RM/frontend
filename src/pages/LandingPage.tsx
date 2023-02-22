@@ -57,21 +57,22 @@ const LandingPage = () => {
         ) : (
           <Box
             sx={{
-              width: 300,
+              width: 350,
               height: 50,
               backgroundColor: "primary.light",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              borderRadius: "16px",
             }}
           >
             <Typography
               variant="h5"
               component="h3"
-              color={"white"}
+              color={"black"}
               sx={{ fontWeight: "bold" }}
             >
-              Guten Tag {getFullName()}
+              Guten Tag, {getFullName()}
             </Typography>
           </Box>
         )}
