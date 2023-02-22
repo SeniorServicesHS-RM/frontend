@@ -33,7 +33,7 @@ const ReceiptCard = (props: Props) => {
         <Typography
           variant="h3"
           sx={{ p: 1, fontSize: 22, fontWeight: "bold" }}
-          color="text.secondary"
+          color="primary"
           gutterBottom
         >
           {props.senior.seniorId +
