@@ -13,7 +13,7 @@ interface Props {
   route: string;
 }
 
-const ContentCard = (props: Props) => {
+const ServiceCard = (props: Props) => {
   return (
     <Card sx={{ minWidth: 275 }} variant="outlined">
       <CardContent>
@@ -52,4 +52,4 @@ const ContentCard = (props: Props) => {
   );
 };
 
-export default ContentCard;
+export default ServiceCard;
