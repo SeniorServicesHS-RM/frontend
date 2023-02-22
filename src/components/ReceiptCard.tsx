@@ -42,9 +42,32 @@ const ReceiptCard = (props: Props) => {
             " " +
             props.senior.lastName}
         </Typography>
-        <Typography>Datum: {new Date().toDateString()}</Typography>
-        <Typography sx={{ p: 1, mb: 1.5 }} color="text.secondary">
-          Gesamt: {showSum(props.senior)}€
+        <Typography
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            pb: 1,
+            mb: 2,
+          }}
+        >
+          Datum:{" "}
+          <span style={{ color: "primary", fontWeight: 700 }}>
+            {new Date().toDateString()}
+          </span>
+        </Typography>
+        <Typography
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            pb: 1,
+            mb: 2,
+          }}
+          color="text.secondary"
+        >
+          Gesamt:{" "}
+          <span style={{ color: "primary", fontWeight: 700 }}>
+            {showSum(props.senior)} €
+          </span>
         </Typography>
       </CardContent>
     </Card>
