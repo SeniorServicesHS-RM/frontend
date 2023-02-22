@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import FlexBox from "../components/FlexBox";
-import SeniorReceipts from "../components/SeniorReceipts";
+import EmployeeReceipts from "../components/EmployeeReceipts";
 import EmployeeOrders from "../components/EmployeeOrders";
 import EmployeeAvailability from "../components/EmployeeAvailability";
 
@@ -80,7 +80,7 @@ const EmployeePage = () => {
       {showEmployeeAvailability && (
         <EmployeeAvailability abort={employeeAvailabiliyHandler} />
       )}
-      {showSeniorReciept && <SeniorReceipts abort={seniorRecieptHandler} />}
+      {showSeniorReciept && <EmployeeReceipts abort={seniorRecieptHandler} />}
     </FlexBox>
   );
 };

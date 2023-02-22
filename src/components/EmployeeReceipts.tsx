@@ -11,7 +11,7 @@ import FlexBox from "./FlexBox";
 interface Props {
   abort: () => void;
 }
-const SeniorReceipts = (props: Props) => {
+const EmployeeReceipts = (props: Props) => {
   const { user } = useContext(UserContext);
   const { users } = useContext(DataBaseContext);
   const employee = user.empID;
@@ -50,4 +50,4 @@ const SeniorReceipts = (props: Props) => {
     </FlexBox>
   );
 };
-export default SeniorReceipts;
+export default EmployeeReceipts;
