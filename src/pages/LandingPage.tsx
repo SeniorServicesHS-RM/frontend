@@ -55,9 +55,25 @@ const LandingPage = () => {
             Zum Login
           </Button>
         ) : (
-          <Typography variant="h5" component="h3" color={"white"}>
-            Guten Tag {getFullName()}
-          </Typography>
+          <Box
+            sx={{
+              width: 300,
+              height: 50,
+              backgroundColor: "primary.light",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="h5"
+              component="h3"
+              color={"white"}
+              sx={{ fontWeight: "bold" }}
+            >
+              Guten Tag {getFullName()}
+            </Typography>
+          </Box>
         )}
       </Box>
     </Paper>
