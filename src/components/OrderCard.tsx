@@ -186,20 +186,24 @@ const OrderCard = (props: Props) => {
                 alignContent: "center",
               }}
             >
-              <CardActionArea sx={{ textAlign: "end" }}>
+              <Grid>
                 <Button
                   onClick={showArticlesHandler}
                   sx={{ bgcolor: "primary.main", color: "#ffffff", margin: 1 }}
                 >
                   {showArticles ? "Weniger Anzeigen" : "Mehr Anzeigen"}
                 </Button>
-                <Button
-                  onClick={() => deleteOrder(order)}
-                  sx={{ bgcolor: "error.main", color: "#ffffff" }}
-                >
-                  Löschen
-                </Button>
-              </CardActionArea>
+                {!order.orderDone ? (
+                  <Button
+                    onClick={() => deleteOrder(order)}
+                    sx={{ bgcolor: "error.main", color: "#ffffff" }}
+                  >
+                    Löschen
+                  </Button>
+                ) : (
+                  <></>
+                )}
+              </Grid>
             </Grid>
           </Grid>
         </CardContent>

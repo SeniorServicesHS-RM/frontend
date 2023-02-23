@@ -53,7 +53,7 @@ const ShowArticles = (props: Props) => {
   };
   const checkEdit = () => {
     if (props.order.editable) {
-      if (new Date().getTime() < props.order.planDate.getTime()) {
+      if (!props.order.orderDone) {
         return true;
       } else {
         updateEditableOrderInDB(props.order, false);
@@ -91,7 +91,10 @@ const ShowArticles = (props: Props) => {
                 ) : (
                   <></>
                 )}
-                {selectedArticle && showEditDialog && checkEdit() ? (
+                {selectedArticle &&
+                showEditDialog &&
+                checkEdit() &&
+                !selectedArticle.done ? (
                   <EditArticleDialog
                     article={selectedArticle}
                     handleClose={closeEditDialog}
