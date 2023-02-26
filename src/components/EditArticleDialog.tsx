@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import Article from "../data/Article";
+import { useState } from "react";
 import { DataBaseContext } from "../store/DataBaseContext";
 
 interface Props {
@@ -31,6 +32,8 @@ interface ValueHandler {
 function EditArticleDialog(props: Props) {
   const { martList } = React.useContext(DataBaseContext);
   const [order] = React.useState<Article>(props.article);
+  const [errorArticleName, setErrorArticleName] = useState(false);
+  const [errorMessageArticleName, setErrorMessageArticleName] = useState("");
 
   const [valueName, setValueName] = React.useState<ValueHandler>({
     newName: props.article.name,
@@ -57,18 +60,23 @@ function EditArticleDialog(props: Props) {
     setValueMart({ newMart: event.target.value as string });
   };
   const handleDone = () => {
-    const orderReturn = new Article(
-      order.id,
-      valueName.newName,
-      valueAmount.newAmount,
-      valueMart.newMart,
-      false,
-      0,
-      valueNote.newNote
-    );
-
+    if (valueName.newName !== "") {
+      const orderReturn = new Article(
+        order.id,
+        valueName.newName,
+        valueAmount.newAmount,
+        valueMart.newMart,
+        false,
+        0,
+        valueNote.newNote
+      );
     props.editOrder(orderReturn, order);
     props.handleClose();
+    }
+    else {
+      setErrorArticleName(true);
+      setErrorMessageArticleName("Es muss eine Produktbezeichnung angegeben werden!");
+    }
   };
   const handleDelete = () => {
     props.deleteArticle(props.article);
@@ -83,6 +91,8 @@ function EditArticleDialog(props: Props) {
         <DialogTitle>Bearbeiten</DialogTitle>
         <DialogContent>
           <TextField
+            error={errorArticleName}
+            helperText={errorMessageArticleName}
             autoFocus
             margin="normal"
             label="Produktbezeichnung"
