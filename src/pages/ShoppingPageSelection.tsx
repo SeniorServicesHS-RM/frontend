@@ -17,7 +17,9 @@ const ShoppingPageSelection = () => {
   };
 
   function dateConverter (date: Date): string {
-    let dateString: string = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear(); 
+    let dateString: string = ('0' + date.getDate()).slice(-2) + '-'
+    + ('0' + (date.getMonth()+1)).slice(-2) + '-'
+    + date.getFullYear();
     return dateString;
   }
 
