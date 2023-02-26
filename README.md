@@ -44,3 +44,10 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+Projektziel
+Ziel des Projekts ist die Entwicklung einer Dienstleistungsanwendung, die innerhalb von Wohneinrichtungen für Senior:innen eingesetzt wird. Nötig ist die Abgrenzung gegenüber Heimen, die die vollständige Pflege, Betreuung und Versorgung übernehmen. Der für das Projekt relevante Einrichtungstyp ist eine Wohnanlage für Senior:innen, in denen die Bewohner:innen selbständig in eigenen, altersgerechten Wohnungen leben und sich selbst versorgen.
+Die Anwendung soll die Vermittlung und Erbringung von Dienstleistungen, die dafür normalerweise nötigen Absprachen und die Abrechnung der erbrachten Leistungen vereinfachen. 
+Die Umsetzung im Rahmen des Projekts beschränkt sich vom Auftraggeber gewünscht auf die Umsetzung einer Einkaufsdienstleistung als beispielhafte Dienstleistung. Es soll eine funktionstaugliche Anwendung entwickelt werden, die sowohl zielgruppenorientierte Benutzerfreundlichkeit als auch Design bietet.
+
