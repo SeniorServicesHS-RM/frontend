@@ -29,6 +29,8 @@ interface ValueHandler {
 
 function AddArticleDialog(props: Props) {
   const { martList } = useContext(DataBaseContext);
+  const [errorArticleName, setErrorArticleName] = useState(false);
+  const [errorMessageArticleName, setErrorMessageArticleName] = useState("");
   const [valueName, setValueName] = useState<ValueHandler>({
     newName: "",
   });
@@ -46,6 +48,8 @@ function AddArticleDialog(props: Props) {
     setOpen(true);
   };
   const handleClose = () => {
+    setErrorArticleName(false);
+    setErrorMessageArticleName("");
     setOpen(false);
   };
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,8 +80,14 @@ function AddArticleDialog(props: Props) {
       setValueName({ newName: "" });
       setValueNote({ newNote: "" });
       setValueAmount({ newAmount: 1 });
+      setErrorArticleName(false);
+      setErrorMessageArticleName("");
+      setOpen(false);
     }
-    setOpen(false);
+    else {
+      setErrorArticleName(true);
+      setErrorMessageArticleName("Es muss eine Produktbezeichnung angegeben werden!");
+    }
   };
   const mappedMartList = martList.map((mart: String) => {
     return <MenuItem value={mart as string}>{mart}</MenuItem>;
@@ -98,6 +108,8 @@ function AddArticleDialog(props: Props) {
         <DialogTitle>Neuen Artikel hinzufügen</DialogTitle>
         <DialogContent>
           <TextField
+            error={errorArticleName}
+            helperText={errorMessageArticleName}
             autoFocus
             margin="normal"
             label="Produktbezeichnung"
