@@ -16,6 +16,11 @@ const ShoppingPageSelection = () => {
     setShowOrderSelection(!showOrderSelection);
   };
 
+  function dateConverter (date: Date): string {
+    let dateString: string = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear(); 
+    return dateString;
+  }
+
   return (
     <Grid
       container
@@ -47,11 +52,10 @@ const ShoppingPageSelection = () => {
                 fontWeight: "bold",
               }}
             >
-              <Typography>
-                {console.log(nextShoppingDate)}
+              <Typography variant="h5">
                 {nextShoppingDate
-                  ? nextShoppingDate.toDateString()
-                  : "Ein Fehler ist aufgetreten, oh noes!"}
+                  ? dateConverter(nextShoppingDate)
+                  : "Ein Fehler beim Abruf des Datums ist aufgetreten!"}
               </Typography>
             </Paper>
           </Typography>
